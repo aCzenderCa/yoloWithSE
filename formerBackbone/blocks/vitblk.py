@@ -5,10 +5,11 @@ from ultralytics_local.ultralytics.nn.modules import CBAM
 
 
 class ViTBlock(nn.Module):
-    def __init__(self, in_channel, out_channel):
+    def __init__(self, in_channel, out_channel, stride=None):
         super().__init__()
         ch_scale = out_channel / in_channel
-        stride = int(ch_scale) if ch_scale >= 1 else 1
+        if not stride:
+            stride = int(ch_scale) if ch_scale >= 1 else 1
 
         self.dwconv = nn.Conv2d(in_channel, in_channel, kernel_size=3, stride=1, padding=1, groups=in_channel)
         self.cbam = CBAM(in_channel)
