@@ -50,13 +50,13 @@ head:
   - [-1, 2, ViTBlock, [256]] # 16 (P3/8-small)
 
 #  - [-1, 1, Conv, [256, 3, 2]]
-  - [-1, 1, ViTBlock, [256]]
+  - [-1, 1, ViTBlock, [512]]
   - [[-1, 13], 1, Concat, [1]] # cat head P4
 #  - [-1, 2, C3k2, [512, False]] # 19 (P4/16-medium)
   - [-1, 2, ViTBlock, [512]] # 19 (P4/16-medium)
 
 #  - [-1, 1, Conv, [512, 3, 2]]
-  - [-1, 1, ViTBlock, [512]]
+  - [-1, 1, ViTBlock, [1024]]
   - [[-1, 10], 1, Concat, [1]] # cat head P5
 #  - [-1, 2, C3k2, [1024, True]] # 22 (P5/32-large)
   - [-1, 2, ViTBlock, [1024]] # 22 (P5/32-large)
