@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 args = ArgumentParser()
 
 args.add_argument('--resume', type=str, default='')
-args.add_argument('--epoch', type=int, default=2)
+args.add_argument('--epoch', type=int, default=50)
 args.add_argument('--model', type=str, default='yolo11-obb-withTransform.yaml')
 args.add_argument('--scale', type=str, default='n')
 args.add_argument('--imgsz', type=int, default=640)
@@ -17,10 +17,17 @@ args.model = str.replace(args.model, 'yolo12', 'yolo12{0}', 1)
 if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
 
-    resutls = model.train(data='DOTAv1.yaml', epochs=args.epoch, imgsz=args.imgsz)
-    print(resutls)
+    results = model.train(data='DOTAv1.yaml', epochs=args.epoch, imgsz=args.imgsz)
 else:
     model = YOLO(args.resume)
 
-    resutls = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz)
-    print(resutls)
+    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz)
+
+if model.trainer.best:
+    model.best = model.trainer.best
+else:
+    model.best = model.trainer.last
+
+modelBest = YOLO(model.best)
+results = modelBest.val(data="DOTAv1.yaml", imgsz=640)
+print(results.box.map)
