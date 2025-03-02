@@ -21,6 +21,8 @@ class ViTBlock(nn.Module):
         self.ch_scale = ch_scale
         self.stride = stride
         self.bn1 = nn.BatchNorm2d(int(in_channel * ch_scale))
+        if self.ch_scale != 1 or self.stride != 1:
+            self.avgpool = nn.AdaptiveAvgPool2d(self.stride)
 
     def forward(self, x: torch.Tensor):
         x = self.dwconv(x)
@@ -32,7 +34,7 @@ class ViTBlock(nn.Module):
         if self.ch_scale == 1 and self.stride == 1:
             y = y + x
         else:
-            x = F.adaptive_avg_pool2d(x, self.stride)
+            x = self.avgpool(x)
             x = einops.reduce(x, "n c s1 s2 -> n (c s1) 1 1", reduction="mean")
             if self.ch_scale < 1:
                 x = einops.reduce(x, f"n (c {int(1 / self.ch_scale)}) 1 1 -> n c 1 1", reduction="mean")
