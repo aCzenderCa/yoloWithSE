@@ -1,6 +1,4 @@
-import einops
 import torch
-import torch.nn.functional as F
 from torch import nn
 
 from ultralytics_local.ultralytics.nn.modules import CBAM
@@ -21,23 +19,15 @@ class ViTBlock(nn.Module):
         self.ch_scale = ch_scale
         self.stride = stride
         self.bn1 = nn.BatchNorm2d(int(in_channel * ch_scale))
-        if self.ch_scale != 1 or self.stride != 1:
-            self.avgpool = nn.AdaptiveAvgPool2d(self.stride)
 
     def forward(self, x: torch.Tensor):
+        raw_x = x
         x = self.dwconv(x)
         x = self.cbam(x)
+        x = x + raw_x
         x = self.bn0(x)
         x = self.act(x)
 
         y = self.conv(x)
-        if self.ch_scale == 1 and self.stride == 1:
-            y = y + x
-        else:
-            x = self.avgpool(x)
-            x = einops.reduce(x, "n c s1 s2 -> n (c s1) 1 1", reduction="mean")
-            if self.ch_scale < 1:
-                x = einops.reduce(x, f"n (c {int(1 / self.ch_scale)}) 1 1 -> n c 1 1", reduction="mean")
-            y = x * y
         y = self.bn1(y)
         return y

@@ -110,7 +110,7 @@ def test_classify():
     overrides = {"data": "cifar10", "model": "yolo11n-cls-withTransform.yaml", "imgsz": 32, "epochs": 5, "save": False,
                  "batch": 128}
     cfg = get_cfg(DEFAULT_CFG)
-    cfg.data = "cifar10"
+    cfg.data = "imagenet10"
     cfg.imgsz = 32
     cfg.device = "cpu"
     # YOLO(CFG_SEG).train(**overrides)  # works
@@ -153,5 +153,5 @@ def test_model():
 
 
 if __name__ == '__main__':
-    # test_classify()
-    test_model()
+    test_classify()
+    # test_model()
