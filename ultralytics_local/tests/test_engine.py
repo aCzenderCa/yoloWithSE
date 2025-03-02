@@ -138,7 +138,7 @@ def test_classify():
 def test_model():
     """Test image classification including training, validation, and prediction phases."""
     # overrides = {"data": "imagenet10", "model": "yolo11n-cls.yaml", "imgsz": 32, "epochs": 1, "save": False}
-    overrides = {"data": "imagenet10", "model": "yolo11-obb.yaml", "imgsz": 32, "epochs": 1,
+    overrides = {"data": "imagenet10", "model": "yolo11n-obb-withTransform.yaml", "imgsz": 32, "epochs": 1,
                  "save": False}   #2,071,707 parameters
     # overrides = {"data": "imagenet10", "model": "yolo11n-obb.yaml", "imgsz": 32, "epochs": 1, "save": False}   #2,628,739 parameters
     cfg = get_cfg(DEFAULT_CFG)
@@ -153,5 +153,5 @@ def test_model():
 
 
 if __name__ == '__main__':
-    test_classify()
-    # test_model()
+    # test_classify()
+    test_model()

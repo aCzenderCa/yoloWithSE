@@ -1,0 +1,1 @@
+python train.py --resume ~/yoloWithSE/runs/obb/train18/weights/last.pt --multi_scale True
