@@ -28,6 +28,3 @@ if model.trainer.best:
 else:
     model.best = model.trainer.last
 
-modelBest = YOLO(model.best)
-results = modelBest.val(data="DOTAv1.yaml", imgsz=640)
-print(results.box.map)
