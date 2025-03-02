@@ -2,7 +2,6 @@ import torch
 from torch import nn
 
 from ultralytics_local.ultralytics.nn.modules import CBAM
-from ultralytics_local.ultralytics.nn.modules.activation import AGLU
 
 
 class ViTBlock(nn.Module):
@@ -15,7 +14,7 @@ class ViTBlock(nn.Module):
         self.cbam = CBAM(in_channel)
         self.bn0 = nn.BatchNorm2d(in_channel)
         self.conv = nn.Conv2d(in_channel, int(in_channel * ch_scale), kernel_size=1, stride=stride)
-        self.act = AGLU()
+        self.act = nn.GELU()
         self.ch_scale = ch_scale
         self.stride = stride
         self.bn1 = nn.BatchNorm2d(int(in_channel * ch_scale))
