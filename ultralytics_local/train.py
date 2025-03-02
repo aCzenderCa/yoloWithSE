@@ -18,12 +18,12 @@ args.model = str.replace(args.model, 'yolo12', 'yolo12{0}', 1)
 if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
 
-    results = model.train(data='DOTAv1.yaml', epochs=args.epoch, imgsz=args.imgsz, batch=0.8,
+    results = model.train(data='DOTAv1.yaml', epochs=args.epoch, imgsz=args.imgsz, batch=0.75,
                           multi_scale=args.multi_scale)
 else:
     model = YOLO(args.resume)
 
-    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz, batch=0.8, multi_scale=args.multi_scale)
+    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz, batch=0.75, multi_scale=args.multi_scale)
 
 if model.trainer.best:
     model.best = model.trainer.best
