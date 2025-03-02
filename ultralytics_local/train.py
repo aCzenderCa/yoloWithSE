@@ -5,11 +5,12 @@ args = ArgumentParser()
 
 args.add_argument('--resume', type=str, default='')
 args.add_argument('--epoch', type=int, default=2)
+args.add_argument('--model', type=str, default='yolo11-obb-withTransform.yaml')
 
 args = args.parse_args()
 
 if len(args.resume) == 0:
-    model = YOLO('yolo11-obb-withTransform.yaml')
+    model = YOLO(args.model)
 
     resutls = model.train(data='DOTAv1.yaml', epochs=args.epoch)
     print(resutls)
