@@ -2,9 +2,9 @@
 
 from copy import copy
 
-from ultralytics_local.ultralytics.models import yolo
-from ultralytics_local.ultralytics.nn.tasks import OBBModel
-from ultralytics_local.ultralytics.utils import DEFAULT_CFG, RANK
+from ultralytics.models import yolo
+from ultralytics.nn.tasks import OBBModel
+from ultralytics.utils import DEFAULT_CFG, RANK
 
 
 class OBBTrainer(yolo.detect.DetectionTrainer):
@@ -13,7 +13,7 @@ class OBBTrainer(yolo.detect.DetectionTrainer):
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.models.yolo.obb import OBBTrainer
+        from ultralytics.models.yolo.obb import OBBTrainer
 
         args = dict(model="yolo11n-obb.pt", data="dota8.yaml", epochs=3)
         trainer = OBBTrainer(overrides=args)

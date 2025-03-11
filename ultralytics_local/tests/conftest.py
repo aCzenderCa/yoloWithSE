@@ -3,7 +3,7 @@
 import shutil
 from pathlib import Path
 
-from ultralytics_local.tests import TMP
+from tests import TMP
 
 
 def pytest_addoption(parser):
@@ -48,7 +48,7 @@ def pytest_sessionstart(session):
     Returns:
         (None)
     """
-    from ultralytics_local.ultralytics.utils.torch_utils import init_seeds
+    from ultralytics.utils.torch_utils import init_seeds
 
     init_seeds()
     shutil.rmtree(TMP, ignore_errors=True)  # delete any existing tests/tmp directory
@@ -70,7 +70,7 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
     Returns:
         (None)
     """
-    from ultralytics_local.ultralytics.utils import WEIGHTS_DIR
+    from ultralytics.utils import WEIGHTS_DIR
 
     # Remove files
     models = [path for x in ["*.onnx", "*.torchscript"] for path in WEIGHTS_DIR.rglob(x)]

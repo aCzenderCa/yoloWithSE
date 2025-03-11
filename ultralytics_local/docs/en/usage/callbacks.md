@@ -26,7 +26,7 @@ Ultralytics framework supports callbacks as entry points in strategic stages of 
 In this example, we want to return the original frame with each result object. Here's how we can do that
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 
 def on_predict_batch_end(predictor):
@@ -109,7 +109,7 @@ Here are all supported callbacks. See callbacks [source code](https://github.com
 To use a callback, you can define a function and then add it to the model with the `add_callback` method. Here's an example of how to return additional information during prediction:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 
 def on_predict_batch_end(predictor):
@@ -132,7 +132,7 @@ To customize your Ultralytics training routine using callbacks, you can inject y
 Here's an example of how to freeze BatchNorm statistics when freezing layers with callbacks:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 
 # Add a callback to put the frozen layers in eval mode to prevent BN values from changing
@@ -163,7 +163,7 @@ For instance, you might want to plot all the validation batches, instead of just
 ```python
 import inspect
 
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 
 def plot_samples(validator):
@@ -187,7 +187,7 @@ To attach a custom callback for the **prediction mode** in Ultralytics YOLO, you
 Here is an example where a custom callback is used to save predictions based on whether an object of a particular class is present:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 model = YOLO("yolo11n.pt")
 
@@ -222,7 +222,7 @@ Ultralytics YOLO supports various practical implementations of callbacks to enha
 Example: Combining frames with prediction results during prediction using `on_predict_batch_end`:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 
 def on_predict_batch_end(predictor):

@@ -53,7 +53,7 @@ Here's how you can use these formats to train your model:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -106,7 +106,7 @@ You can easily convert labels from the popular COCO dataset format to the YOLO f
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics.data.converter import convert_coco
+        from ultralytics.data.converter import convert_coco
 
         convert_coco(labels_dir="path/to/coco/annotations/")
         ```
@@ -140,7 +140,7 @@ Labels are saved in `*.txt` files with one file per image, formatted as `class x
 You can convert a COCO dataset to the YOLO format using the Ultralytics conversion tools. Here's a quick method:
 
 ```python
-from ultralytics_local.ultralytics.data.converter import convert_coco
+from ultralytics.data.converter import convert_coco
 
 convert_coco(labels_dir="path/to/coco/annotations/")
 ```
@@ -170,7 +170,7 @@ To start training a YOLO11 model, ensure your dataset is formatted correctly and
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")  # Load a pretrained model
         results = model.train(data="path/to/your_dataset.yaml", epochs=100, imgsz=640)

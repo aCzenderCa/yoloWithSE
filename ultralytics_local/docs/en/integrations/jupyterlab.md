@@ -126,7 +126,7 @@ To train a YOLO11 model using JupyterLab:
 3. Import the YOLO model and load a pretrained model:
 
     ```python
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     ```
@@ -141,7 +141,7 @@ To train a YOLO11 model using JupyterLab:
 
     ```ipython
     %matplotlib inline
-    from ultralytics_local.ultralytics.utils.plotting import plot_results
+    from ultralytics.utils.plotting import plot_results
     plot_results(results)
     ```
 
@@ -167,7 +167,7 @@ To optimize YOLO11 model performance in JupyterLab:
 1. Use the autobatch feature to determine the optimal batch size:
 
     ```python
-    from ultralytics_local.ultralytics.utils.autobatch import autobatch
+    from ultralytics.utils.autobatch import autobatch
 
     optimal_batch_size = autobatch(model)
     ```
@@ -175,7 +175,7 @@ To optimize YOLO11 model performance in JupyterLab:
 2. Implement [hyperparameter tuning](../guides/hyperparameter-tuning.md) using libraries like Ray Tune:
 
     ```python
-    from ultralytics_local.ultralytics.utils.tuner import run_ray_tune
+    from ultralytics.utils.tuner import run_ray_tune
 
     best_results = run_ray_tune(model, data="path/to/data.yaml")
     ```
@@ -183,7 +183,7 @@ To optimize YOLO11 model performance in JupyterLab:
 3. Visualize and analyze model metrics using JupyterLab's plotting capabilities:
 
     ```python
-    from ultralytics_local.ultralytics.utils.plotting import plot_results
+    from ultralytics.utils.plotting import plot_results
 
     plot_results(results.results_dict)
     ```

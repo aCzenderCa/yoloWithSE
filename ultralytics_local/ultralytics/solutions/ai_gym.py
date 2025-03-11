@@ -1,7 +1,7 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from ultralytics_local.ultralytics.solutions.solutions import BaseSolution
-from ultralytics_local.ultralytics.utils.plotting import Annotator
+from ultralytics.solutions.solutions import BaseSolution
+from ultralytics.utils.plotting import Annotator
 
 
 class AIGym(BaseSolution):

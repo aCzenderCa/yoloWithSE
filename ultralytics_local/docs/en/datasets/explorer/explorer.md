@@ -117,7 +117,7 @@ Image.fromarray(plt)
 # plot
 from PIL import Image
 
-from ultralytics_local.ultralytics.data.explorer import plot_query_result
+from ultralytics.data.explorer import plot_query_result
 
 plt = plot_query_result(exp.ask_ai("show me 10 images containing exactly 2 persons"))
 Image.fromarray(plt)

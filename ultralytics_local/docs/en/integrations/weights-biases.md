@@ -86,7 +86,7 @@ Before diving into the usage instructions for YOLO11 model training with Weights
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO model
         model = YOLO("yolo11n.pt")
@@ -187,7 +187,7 @@ To integrate Weights & Biases with Ultralytics YOLO11:
 3. Train your YOLO11 model with W&B logging enabled:
 
     ```python
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     model.train(data="coco8.yaml", epochs=5, project="ultralytics", name="yolo11n")

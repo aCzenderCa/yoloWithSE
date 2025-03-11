@@ -50,7 +50,7 @@ To train a YOLO11n model on the African wildlife dataset for 100 [epochs](https:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -71,7 +71,7 @@ To train a YOLO11n model on the African wildlife dataset for 100 [epochs](https:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/best.pt")  # load a brain-tumor fine-tuned model
@@ -116,7 +116,7 @@ You can train a YOLO11 model on the African Wildlife Dataset by using the `afric
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

@@ -11,7 +11,7 @@ from urllib import parse, request
 import requests
 import torch
 
-from ultralytics_local.ultralytics.utils import LOGGER, TQDM, checks, clean_url, emojis, is_online, url2file
+from ultralytics.utils import LOGGER, TQDM, checks, clean_url, emojis, is_online, url2file
 
 # Define Ultralytics GitHub assets maintained at https://github.com/ultralytics/assets
 GITHUB_ASSETS_REPO = "ultralytics/assets"
@@ -75,7 +75,7 @@ def delete_dsstore(path, files_to_delete=(".DS_Store", "__MACOSX")):
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.downloads import delete_dsstore
+        from ultralytics.utils.downloads import delete_dsstore
 
         delete_dsstore("path/to/dir")
         ```
@@ -107,7 +107,7 @@ def zip_directory(directory, compress=True, exclude=(".DS_Store", "__MACOSX"), p
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.downloads import zip_directory
+        from ultralytics.utils.downloads import zip_directory
 
         file = zip_directory("path/to/dir")
         ```
@@ -153,7 +153,7 @@ def unzip_file(file, path=None, exclude=(".DS_Store", "__MACOSX"), exist_ok=Fals
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.downloads import unzip_file
+        from ultralytics.utils.downloads import unzip_file
 
         dir = unzip_file("path/to/file.zip")
         ```
@@ -247,7 +247,7 @@ def get_google_drive_file_info(link):
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.downloads import get_google_drive_file_info
+        from ultralytics.utils.downloads import get_google_drive_file_info
 
         link = "https://drive.google.com/file/d/1cqT-cJgANNrhIHCrEufUYhQ4RqiWG_lJ/view?usp=drive_link"
         url, filename = get_google_drive_file_info(link)
@@ -307,7 +307,7 @@ def safe_download(
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.downloads import safe_download
+        from ultralytics.utils.downloads import safe_download
 
         link = "https://ultralytics.com/assets/bus.jpg"
         path = safe_download(link)
@@ -428,7 +428,7 @@ def attempt_download_asset(file, repo="ultralytics/assets", release="v8.3.0", **
         file_path = attempt_download_asset("yolo11n.pt", repo="ultralytics/assets", release="latest")
         ```
     """
-    from ultralytics_local.ultralytics.utils import SETTINGS  # scoped for circular import
+    from ultralytics.utils import SETTINGS  # scoped for circular import
 
     # YOLOv3/5u updates
     file = str(file)

@@ -2,11 +2,11 @@
 
 import requests
 
-from ultralytics_local.ultralytics.data.utils import HUBDatasetStats
-from ultralytics_local.ultralytics.hub.auth import Auth
-from ultralytics_local.ultralytics.hub.session import HUBTrainingSession
-from ultralytics_local.ultralytics.hub.utils import HUB_API_ROOT, HUB_WEB_ROOT, PREFIX, events
-from ultralytics_local.ultralytics.utils import LOGGER, SETTINGS, checks
+from ultralytics.data.utils import HUBDatasetStats
+from ultralytics.hub.auth import Auth
+from ultralytics.hub.session import HUBTrainingSession
+from ultralytics.hub.utils import HUB_API_ROOT, HUB_WEB_ROOT, PREFIX, events
+from ultralytics.utils import LOGGER, SETTINGS, checks
 
 __all__ = (
     "PREFIX",
@@ -73,7 +73,7 @@ def logout():
 
     Example:
         ```python
-        from ultralytics_local.ultralytics import hub
+        from ultralytics import hub
 
         hub.logout()
         ```
@@ -93,7 +93,7 @@ def reset_model(model_id=""):
 
 def export_fmts_hub():
     """Returns a list of HUB-supported export formats."""
-    from ultralytics_local.ultralytics.engine.exporter import export_formats
+    from ultralytics.engine.exporter import export_formats
 
     return list(export_formats()["Argument"][1:]) + ["ultralytics_tflite", "ultralytics_coreml"]
 
@@ -133,7 +133,7 @@ def check_dataset(path: str, task: str) -> None:
         Download *.zip files from https://github.com/ultralytics/hub/tree/main/example_datasets
             i.e. https://github.com/ultralytics/hub/raw/main/example_datasets/coco8.zip for coco8.zip.
         ```python
-        from ultralytics_local.ultralytics.hub import check_dataset
+        from ultralytics.hub import check_dataset
 
         check_dataset("path/to/coco8.zip", task="detect")  # detect dataset
         check_dataset("path/to/coco8-seg.zip", task="segment")  # segment dataset

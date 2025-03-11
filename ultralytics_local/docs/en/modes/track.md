@@ -67,7 +67,7 @@ To run the tracker on video streams, use a trained Detect, Segment or Pose model
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load an official or custom model
         model = YOLO("yolo11n.pt")  # Load an official Detect model
@@ -110,7 +110,7 @@ Tracking configuration shares properties with Predict mode, such as `conf`, `iou
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Configure the tracking parameters and run the tracker
         model = YOLO("yolo11n.pt")
@@ -133,7 +133,7 @@ Ultralytics also allows you to use a modified tracker configuration file. To do 
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the model and run the tracker with a custom configuration file
         model = YOLO("yolo11n.pt")
@@ -160,7 +160,7 @@ Here is a Python script using [OpenCV](https://www.ultralytics.com/glossary/open
     ```python
     import cv2
 
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     # Load the YOLO11 model
     model = YOLO("yolo11n.pt")
@@ -212,7 +212,7 @@ In the following example, we demonstrate how to utilize YOLO11's tracking capabi
     import cv2
     import numpy as np
 
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     # Load the YOLO11 model
     model = YOLO("yolo11n.pt")
@@ -288,7 +288,7 @@ Finally, after all threads have completed their task, the windows displaying the
 
     import cv2
 
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     # Define model names and video sources
     MODEL_NAMES = ["yolo11n.pt", "yolo11n-seg.pt"]
@@ -355,7 +355,7 @@ You can configure a custom tracker by copying an existing tracker configuration 
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         results = model.track(source="https://youtu.be/LNwODJXcvt4", tracker="custom_tracker.yaml")
@@ -378,7 +378,7 @@ To run object tracking on multiple video streams simultaneously, you can use Pyt
 
     import cv2
 
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     # Define model names and video sources
     MODEL_NAMES = ["yolo11n.pt", "yolo11n-seg.pt"]
@@ -436,7 +436,7 @@ To visualize object tracks over multiple video frames, you can use the YOLO mode
     import cv2
     import numpy as np
 
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     video_path = "path/to/video.mp4"

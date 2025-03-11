@@ -21,10 +21,10 @@ import torch
 from torch import distributed as dist
 from torch import nn, optim
 
-from ultralytics_local.ultralytics.cfg import get_cfg, get_save_dir
-from ultralytics_local.ultralytics.data.utils import check_cls_dataset, check_det_dataset
-from ultralytics_local.ultralytics.nn.tasks import attempt_load_one_weight, attempt_load_weights
-from ultralytics_local.ultralytics.utils import (
+from ultralytics.cfg import get_cfg, get_save_dir
+from ultralytics.data.utils import check_cls_dataset, check_det_dataset
+from ultralytics.nn.tasks import attempt_load_one_weight, attempt_load_weights
+from ultralytics.utils import (
     DEFAULT_CFG,
     LOCAL_RANK,
     LOGGER,
@@ -37,11 +37,11 @@ from ultralytics_local.ultralytics.utils import (
     emojis,
     yaml_save,
 )
-from ultralytics_local.ultralytics.utils.autobatch import check_train_batch_size
-from ultralytics_local.ultralytics.utils.checks import check_amp, check_file, check_imgsz, check_model_file_from_stem, print_args
-from ultralytics_local.ultralytics.utils.dist import ddp_cleanup, generate_ddp_command
-from ultralytics_local.ultralytics.utils.files import get_latest_run
-from ultralytics_local.ultralytics.utils.torch_utils import (
+from ultralytics.utils.autobatch import check_train_batch_size
+from ultralytics.utils.checks import check_amp, check_file, check_imgsz, check_model_file_from_stem, print_args
+from ultralytics.utils.dist import ddp_cleanup, generate_ddp_command
+from ultralytics.utils.files import get_latest_run
+from ultralytics.utils.torch_utils import (
     TORCH_2_4,
     EarlyStopping,
     ModelEMA,
@@ -507,7 +507,7 @@ class BaseTrainer:
 
     def read_results_csv(self):
         """Read results.csv into a dict using pandas."""
-        import pandas as pd  # scope for faster 'import ultralytics_local.ultralytics'
+        import pandas as pd  # scope for faster 'import ultralytics'
 
         return pd.read_csv(self.csv).to_dict(orient="list")
 

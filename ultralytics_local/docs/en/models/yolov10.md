@@ -150,7 +150,7 @@ For predicting new images with YOLOv10:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a pre-trained YOLOv10n model
         model = YOLO("yolov10n.pt")
@@ -176,7 +176,7 @@ For training YOLOv10 on a custom dataset:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load YOLOv10n model from scratch
         model = YOLO("yolov10n.yaml")
@@ -262,7 +262,7 @@ For easy inference, you can use the Ultralytics YOLO Python library or the comma
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the pre-trained YOLOv10n model
         model = YOLO("yolov10n.pt")

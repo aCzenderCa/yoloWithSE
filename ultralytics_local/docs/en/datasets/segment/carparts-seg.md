@@ -54,7 +54,7 @@ To train Ultralytics YOLO11n model on the Carparts Segmentation dataset for 100 
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)
@@ -119,7 +119,7 @@ To train a YOLO11 model on the Carparts Segmentation dataset, you can follow the
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)

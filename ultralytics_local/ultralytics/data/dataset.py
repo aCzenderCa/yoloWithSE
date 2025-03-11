@@ -12,9 +12,9 @@ import torch
 from PIL import Image
 from torch.utils.data import ConcatDataset
 
-from ultralytics_local.ultralytics.utils import LOCAL_RANK, NUM_THREADS, TQDM, colorstr
-from ultralytics_local.ultralytics.utils.ops import resample_segments
-from ultralytics_local.ultralytics.utils.torch_utils import TORCHVISION_0_18
+from ultralytics.utils import LOCAL_RANK, NUM_THREADS, TQDM, colorstr
+from ultralytics.utils.ops import resample_segments
+from ultralytics.utils.torch_utils import TORCHVISION_0_18
 
 from .augment import (
     Compose,
@@ -418,7 +418,7 @@ class ClassificationDataset:
             prefix (str, optional): Prefix for logging and cache filenames, aiding in dataset identification and
                 debugging. Default is an empty string.
         """
-        import torchvision  # scope for faster 'import ultralytics_local.ultralytics'
+        import torchvision  # scope for faster 'import ultralytics'
 
         # Base class assigned as attribute rather than used as base class to allow for scoping slow torchvision import
         if TORCHVISION_0_18:  # 'allow_empty' argument first introduced in torchvision 0.18

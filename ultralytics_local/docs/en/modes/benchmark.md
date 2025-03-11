@@ -68,7 +68,7 @@ Run YOLO11n benchmarks on all supported export formats including ONNX, TensorRT 
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics.utils.benchmarks import benchmark
+        from ultralytics.utils.benchmarks import benchmark
 
         # Benchmark on GPU
         benchmark(model="yolo11n.pt", data="coco8.yaml", imgsz=640, half=False, device=0)
@@ -120,7 +120,7 @@ Ultralytics YOLO11 offers a Benchmark mode to assess your model's performance ac
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics.utils.benchmarks import benchmark
+        from ultralytics.utils.benchmarks import benchmark
 
         # Benchmark on GPU
         benchmark(model="yolo11n.pt", data="coco8.yaml", imgsz=640, half=False, device=0)

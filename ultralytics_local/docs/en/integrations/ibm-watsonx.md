@@ -76,8 +76,8 @@ Then, you can import the needed packages.
     === "Python"
 
         ```python
-        # import ultralytics_local.ultralytics
-        import ultralytics_local.ultralytics
+        # import ultralytics
+        import ultralytics
 
         ultralytics.checks()
 

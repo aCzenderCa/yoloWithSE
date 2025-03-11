@@ -78,7 +78,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -144,7 +144,7 @@ Ultralytics YOLO11 models can be exported to TensorFlow GraphDef (TF GraphDef) f
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")

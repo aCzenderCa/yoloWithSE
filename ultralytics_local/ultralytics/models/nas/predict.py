@@ -2,9 +2,9 @@
 
 import torch
 
-from ultralytics_local.ultralytics.engine.predictor import BasePredictor
-from ultralytics_local.ultralytics.engine.results import Results
-from ultralytics_local.ultralytics.utils import ops
+from ultralytics.engine.predictor import BasePredictor
+from ultralytics.engine.results import Results
+from ultralytics.utils import ops
 
 
 class NASPredictor(BasePredictor):
@@ -20,7 +20,7 @@ class NASPredictor(BasePredictor):
 
     Example:
         ```python
-        from ultralytics_local.ultralytics import NAS
+        from ultralytics import NAS
 
         model = NAS("yolo_nas_s")
         predictor = model.predictor

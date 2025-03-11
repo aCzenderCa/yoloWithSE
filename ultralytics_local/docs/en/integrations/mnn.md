@@ -41,7 +41,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
           ```python
-          from ultralytics_local.ultralytics import YOLO
+          from ultralytics import YOLO
 
           # Load the YOLO11 model
           model = YOLO("yolo11n.pt")
@@ -286,7 +286,7 @@ To export your Ultralytics YOLO11 model to MNN format, follow these steps:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -316,7 +316,7 @@ To predict with an exported YOLO11 MNN model, use the `predict` function from th
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 MNN model
         model = YOLO("yolo11n.mnn")

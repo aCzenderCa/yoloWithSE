@@ -25,7 +25,7 @@ Requirements:
     $ pip install "ultralytics[export]"
 
 Python:
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
     model = YOLO('yolo11n.pt')
     results = model.export(format='onnx')
 
@@ -69,14 +69,14 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from ultralytics_local.ultralytics.cfg import TASK2DATA, get_cfg
-from ultralytics_local.ultralytics.data import build_dataloader
-from ultralytics_local.ultralytics.data.dataset import YOLODataset
-from ultralytics_local.ultralytics.data.utils import check_cls_dataset, check_det_dataset
-from ultralytics_local.ultralytics.nn.autobackend import check_class_names, default_class_names
-from ultralytics_local.ultralytics.nn.modules import C2f, Classify, Detect, RTDETRDecoder
-from ultralytics_local.ultralytics.nn.tasks import ClassificationModel, DetectionModel, SegmentationModel, WorldModel
-from ultralytics_local.ultralytics.utils import (
+from ultralytics.cfg import TASK2DATA, get_cfg
+from ultralytics.data import build_dataloader
+from ultralytics.data.dataset import YOLODataset
+from ultralytics.data.utils import check_cls_dataset, check_det_dataset
+from ultralytics.nn.autobackend import check_class_names, default_class_names
+from ultralytics.nn.modules import C2f, Classify, Detect, RTDETRDecoder
+from ultralytics.nn.tasks import ClassificationModel, DetectionModel, SegmentationModel, WorldModel
+from ultralytics.utils import (
     ARM64,
     DEFAULT_CFG,
     IS_COLAB,
@@ -94,17 +94,17 @@ from ultralytics_local.ultralytics.utils import (
     get_default_args,
     yaml_save,
 )
-from ultralytics_local.ultralytics.utils.checks import (
+from ultralytics.utils.checks import (
     check_imgsz,
     check_is_path_safe,
     check_requirements,
     check_version,
     is_sudo_available,
 )
-from ultralytics_local.ultralytics.utils.downloads import attempt_download_asset, get_github_assets, safe_download
-from ultralytics_local.ultralytics.utils.files import file_size, spaces_in_path
-from ultralytics_local.ultralytics.utils.ops import Profile, nms_rotated, xywh2xyxy
-from ultralytics_local.ultralytics.utils.torch_utils import TORCH_1_13, get_latest_opset, select_device
+from ultralytics.utils.downloads import attempt_download_asset, get_github_assets, safe_download
+from ultralytics.utils.files import file_size, spaces_in_path
+from ultralytics.utils.ops import Profile, nms_rotated, xywh2xyxy
+from ultralytics.utils.torch_utils import TORCH_1_13, get_latest_opset, select_device
 
 
 def export_formats():
@@ -330,7 +330,7 @@ class Exporter:
         model = model.fuse()
 
         if imx:
-            from ultralytics_local.ultralytics.utils.torch_utils import FXModel
+            from ultralytics.utils.torch_utils import FXModel
 
             model = FXModel(model)
         for m in model.modules():
@@ -345,7 +345,7 @@ class Exporter:
                 # EdgeTPU does not support FlexSplitV while split provides cleaner ONNX graph
                 m.forward = m.forward_split
             if isinstance(m, Detect) and imx:
-                from ultralytics_local.ultralytics.utils.tal import make_anchors
+                from ultralytics.utils.tal import make_anchors
 
                 m.anchors, m.strides = (
                     x.transpose(0, 1)

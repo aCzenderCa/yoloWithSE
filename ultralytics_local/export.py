@@ -1,4 +1,4 @@
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 from argparse import ArgumentParser
 
 args = ArgumentParser()

@@ -74,7 +74,7 @@ To train a YOLO11n-pose model on the Hand Keypoints dataset for 100 [epochs](htt
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load a pretrained model (recommended for training)
@@ -129,7 +129,7 @@ To train a YOLO11 model on the Hand Keypoints dataset, you can use either Python
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load a pretrained model (recommended for training)

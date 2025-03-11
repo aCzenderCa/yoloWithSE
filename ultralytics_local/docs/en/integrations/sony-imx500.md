@@ -48,7 +48,7 @@ Export an Ultralytics YOLOv8 model to IMX500 format and run inference with the e
     === "Python"
 
          ```python
-         from ultralytics_local.ultralytics import YOLO
+         from ultralytics import YOLO
 
          # Load a YOLOv8n PyTorch model
          model = YOLO("yolov8n.pt")
@@ -259,7 +259,7 @@ For more information and detailed guidelines, refer to Sony's [IMX500 website](h
 To export a YOLOv8 model to IMX500 format, use either the Python API or CLI command:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 model = YOLO("yolov8n.pt")
 model.export(format="imx")  # Exports with PTQ quantization by default

@@ -48,7 +48,7 @@ This example provides simple YOLOv6 training and inference examples. For full do
         YOLOv6 `*.yaml` files can be passed to the `YOLO()` class to build the corresponding model in Python:
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Build a YOLOv6n model from scratch
         model = YOLO("yolov6n.yaml")
@@ -129,7 +129,7 @@ You can train a YOLOv6 model using Ultralytics with simple Python or CLI command
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Build a YOLOv6n model from scratch
         model = YOLO("yolov6n.yaml")

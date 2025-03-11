@@ -14,11 +14,11 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from ultralytics_local.ultralytics.data.augment import LetterBox
-from ultralytics_local.ultralytics.engine.predictor import BasePredictor
-from ultralytics_local.ultralytics.engine.results import Results
-from ultralytics_local.ultralytics.utils import DEFAULT_CFG, ops
-from ultralytics_local.ultralytics.utils.torch_utils import select_device, smart_inference_mode
+from ultralytics.data.augment import LetterBox
+from ultralytics.engine.predictor import BasePredictor
+from ultralytics.engine.results import Results
+from ultralytics.utils import DEFAULT_CFG, ops
+from ultralytics.utils.torch_utils import select_device, smart_inference_mode
 
 from .amg import (
     batch_iterator,
@@ -337,7 +337,7 @@ class Predictor(BasePredictor):
             >>> im = torch.rand(1, 3, 1024, 1024)  # Example input image
             >>> masks, scores, boxes = predictor.generate(im)
         """
-        import torchvision  # scope for faster 'import ultralytics_local.ultralytics'
+        import torchvision  # scope for faster 'import ultralytics'
 
         self.segment_all = True
         ih, iw = im.shape[2:]
@@ -593,7 +593,7 @@ class Predictor(BasePredictor):
             >>> print(f"Original masks: {masks.shape}, Processed masks: {new_masks.shape}")
             >>> print(f"Indices of kept masks: {keep}")
         """
-        import torchvision  # scope for faster 'import ultralytics_local.ultralytics'
+        import torchvision  # scope for faster 'import ultralytics'
 
         if len(masks) == 0:
             return masks

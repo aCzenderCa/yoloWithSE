@@ -40,7 +40,7 @@ Make sure that MLflow logging is enabled in Ultralytics settings. Usually, this 
 
         Within the Python environment, call the `update` method on the `settings` object to change your settings:
         ```python
-        from ultralytics_local.ultralytics import settings
+        from ultralytics import settings
 
         # Update a setting
         settings.update({"mlflow": True})
@@ -135,7 +135,7 @@ Next, enable MLflow logging in Ultralytics settings. This can be controlled usin
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import settings
+        from ultralytics import settings
 
         # Update a setting
         settings.update({"mlflow": True})

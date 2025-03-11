@@ -65,7 +65,7 @@ Before diving into the usage instructions, be sure to check out the range of [YO
         ```python
         from clearml import Task
 
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Step 1: Creating a ClearML Task
         task = Task.init(project_name="my_project", task_name="my_yolov8_task")
@@ -219,7 +219,7 @@ Setting up a ClearML task for YOLO11 training involves initializing a task, sele
 ```python
 from clearml import Task
 
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Step 1: Creating a ClearML Task
 task = Task.init(project_name="my_project", task_name="my_yolov8_task")

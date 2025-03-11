@@ -5,10 +5,10 @@ import json
 import cv2
 import numpy as np
 
-from ultralytics_local.ultralytics.solutions.solutions import BaseSolution
-from ultralytics_local.ultralytics.utils import LOGGER
-from ultralytics_local.ultralytics.utils.checks import check_requirements
-from ultralytics_local.ultralytics.utils.plotting import Annotator
+from ultralytics.solutions.solutions import BaseSolution
+from ultralytics.utils import LOGGER
+from ultralytics.utils.checks import check_requirements
+from ultralytics.utils.plotting import Annotator
 
 
 class ParkingPtsSelection:
@@ -177,7 +177,7 @@ class ParkingManagement(BaseSolution):
         process_data: Processes model data for parking lot management and visualization.
 
     Examples:
-        >>> from ultralytics_local.ultralytics.solutions import ParkingManagement
+        >>> from ultralytics.solutions import ParkingManagement
         >>> parking_manager = ParkingManagement(model="yolo11n.pt", json_file="parking_regions.json")
         >>> print(f"Occupied spaces: {parking_manager.pr_info['Occupancy']}")
         >>> print(f"Available spaces: {parking_manager.pr_info['Available']}")

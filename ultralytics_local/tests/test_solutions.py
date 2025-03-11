@@ -3,10 +3,10 @@
 import cv2
 import pytest
 
-from ultralytics_local.tests import TMP
-from ultralytics_local.ultralytics import YOLO, solutions
-from ultralytics_local.ultralytics.utils import ASSETS_URL, WEIGHTS_DIR
-from ultralytics_local.ultralytics.utils.downloads import safe_download
+from tests import TMP
+from ultralytics import YOLO, solutions
+from ultralytics.utils import ASSETS_URL, WEIGHTS_DIR
+from ultralytics.utils.downloads import safe_download
 
 DEMO_VIDEO = "solutions_ci_demo.mp4"
 POSE_VIDEO = "solution_ci_pose_demo.mp4"
@@ -66,7 +66,7 @@ def test_major_solutions():
 @pytest.mark.slow
 def test_instance_segmentation():
     """Test the instance segmentation solution."""
-    from ultralytics_local.ultralytics.utils.plotting import Annotator, colors
+    from ultralytics.utils.plotting import Annotator, colors
 
     model = YOLO(WEIGHTS_DIR / "yolo11n-seg.pt")
     names = model.names

@@ -29,7 +29,7 @@ BaseTrainer contains the generic boilerplate training routine. It can be customi
 Here's how you can use the YOLO11 `DetectionTrainer` and customize it.
 
 ```python
-from ultralytics_local.ultralytics.models.yolo.detect import DetectionTrainer
+from ultralytics.models.yolo.detect import DetectionTrainer
 
 trainer = DetectionTrainer(overrides={...})
 trainer.train()
@@ -41,7 +41,7 @@ trained_model = trainer.best  # get best model
 Let's customize the trainer **to train a custom detection model** that is not supported directly. You can do this by simply overloading the existing the `get_model` functionality:
 
 ```python
-from ultralytics_local.ultralytics.models.yolo.detect import DetectionTrainer
+from ultralytics.models.yolo.detect import DetectionTrainer
 
 
 class CustomTrainer(DetectionTrainer):
@@ -60,8 +60,8 @@ You now realize that you need to customize the trainer further to:
 - Add `callback` that uploads model to your Google Drive after every 10 `epochs` Here's how you can do it:
 
 ```python
-from ultralytics_local.ultralytics.models.yolo.detect import DetectionTrainer
-from ultralytics_local.ultralytics.nn.tasks import DetectionModel
+from ultralytics.models.yolo.detect import DetectionTrainer
+from ultralytics.nn.tasks import DetectionModel
 
 
 class MyCustomModel(DetectionModel):
@@ -101,7 +101,7 @@ There are other components that can be customized similarly like `Validators` an
 To customize the Ultralytics YOLO11 `DetectionTrainer` for a specific task, you can override its methods to adapt to your custom model and dataloader. Start by inheriting from `DetectionTrainer` and then redefine methods like `get_model` to implement your custom functionalities. Here's an example:
 
 ```python
-from ultralytics_local.ultralytics.models.yolo.detect import DetectionTrainer
+from ultralytics.models.yolo.detect import DetectionTrainer
 
 
 class CustomTrainer(DetectionTrainer):
@@ -131,7 +131,7 @@ For more details on the customization and source code, see the [`BaseTrainer` Re
 You can add callbacks to monitor and modify the training process in Ultralytics YOLO11 `DetectionTrainer`. For instance, here's how you can add a callback to log model weights after every training [epoch](https://www.ultralytics.com/glossary/epoch):
 
 ```python
-from ultralytics_local.ultralytics.models.yolo.detect import DetectionTrainer
+from ultralytics.models.yolo.detect import DetectionTrainer
 
 
 # callback to upload model weights
@@ -163,7 +163,7 @@ Learn more about YOLO11's capabilities by visiting [Ultralytics YOLO](https://ww
 Yes, Ultralytics YOLO11 `DetectionTrainer` is highly flexible and can be customized for non-standard models. By inheriting from `DetectionTrainer`, you can overload different methods to support your specific model's needs. Here's a simple example:
 
 ```python
-from ultralytics_local.ultralytics.models.yolo.detect import DetectionTrainer
+from ultralytics.models.yolo.detect import DetectionTrainer
 
 
 class CustomDetectionTrainer(DetectionTrainer):

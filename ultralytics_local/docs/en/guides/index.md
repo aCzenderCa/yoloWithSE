@@ -73,7 +73,7 @@ Training a custom object detection model with Ultralytics YOLO is straightforwar
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")  # Load a pre-trained YOLO model
         model.train(data="path/to/dataset.yaml", epochs=50)  # Train on custom dataset

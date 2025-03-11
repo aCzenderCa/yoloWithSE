@@ -1,7 +1,7 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from ultralytics_local.ultralytics.utils import SETTINGS, TESTS_RUNNING
-from ultralytics_local.ultralytics.utils.torch_utils import model_info_for_loggers
+from ultralytics.utils import SETTINGS, TESTS_RUNNING
+from ultralytics.utils.torch_utils import model_info_for_loggers
 
 try:
     assert not TESTS_RUNNING  # do not log pytest
@@ -34,7 +34,7 @@ def _custom_table(x, y, classes, title="Precision Recall Curve", x_title="Recall
     Returns:
         (wandb.Object): A wandb object suitable for logging, showcasing the crafted metric visualization.
     """
-    import pandas  # scope for faster 'import ultralytics_local.ultralytics'
+    import pandas  # scope for faster 'import ultralytics'
 
     df = pandas.DataFrame({"class": classes, "y": y, "x": x}).round(3)
     fields = {"x": "x", "y": "y", "class": "class"}

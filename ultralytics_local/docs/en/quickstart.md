@@ -271,7 +271,7 @@ For example, users can load a model, train it, evaluate its performance on a val
 !!! example
 
     ```python
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     # Create a new YOLO model from scratch
     model = YOLO("yolo11n.yaml")
@@ -308,7 +308,7 @@ To gain insight into the current configuration of your settings, you can view th
 
         You can use Python to view your settings. Start by importing the `settings` object from the `ultralytics` module. Print and return settings using the following commands:
         ```python
-        from ultralytics_local.ultralytics import settings
+        from ultralytics import settings
 
         # View all settings
         print(settings)
@@ -334,7 +334,7 @@ Ultralytics allows users to easily modify their settings. Changes can be perform
 
         Within the Python environment, call the `update` method on the `settings` object to change your settings:
         ```python
-        from ultralytics_local.ultralytics import settings
+        from ultralytics import settings
 
         # Update a setting
         settings.update({"runs_dir": "/path/to/runs"})

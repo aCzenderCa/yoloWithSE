@@ -53,7 +53,7 @@ Export a YOLO11n model to a different format like ONNX or TensorRT. See the Argu
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official model
@@ -95,7 +95,7 @@ Exporting a YOLO11 model to ONNX format is straightforward with Ultralytics. It 
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official model
@@ -133,7 +133,7 @@ INT8 quantization is an excellent way to compress the model and speed up inferen
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")  # Load a model
         model.export(format="engine", int8=True)
@@ -158,7 +158,7 @@ To enable this feature, use the `dynamic=True` flag during export:
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         model.export(format="onnx", dynamic=True)

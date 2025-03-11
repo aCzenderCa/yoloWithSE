@@ -142,7 +142,7 @@ SAM 2 can be utilized across a broad spectrum of tasks, including real-time vide
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam2.1_b.pt")
@@ -175,7 +175,7 @@ SAM 2 can be utilized across a broad spectrum of tasks, including real-time vide
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam2.1_b.pt")
@@ -203,7 +203,7 @@ SAM 2 can be utilized across a broad spectrum of tasks, including real-time vide
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics.models.sam import SAM2VideoPredictor
+        from ultralytics.models.sam import SAM2VideoPredictor
 
         # Create SAM2VideoPredictor
         overrides = dict(conf=0.25, task="segment", mode="predict", imgsz=1024, model="sam2_b.pt")
@@ -246,7 +246,7 @@ Tests run on a 2023 Apple M2 Macbook with 16GB of RAM using `torch==2.3.1` and `
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import ASSETS, SAM, YOLO, FastSAM
+        from ultralytics import ASSETS, SAM, YOLO, FastSAM
 
         # Profile SAM2-t, SAM2-b, SAM-b, MobileSAM
         for file in ["sam_b.pt", "sam2_b.pt", "sam2_t.pt", "mobile_sam.pt"]:
@@ -287,7 +287,7 @@ To auto-annotate your dataset using SAM 2, follow this example:
 !!! example "Auto-Annotation Example"
 
     ```python
-    from ultralytics_local.ultralytics.data.annotator import auto_annotate
+    from ultralytics.data.annotator import auto_annotate
 
     auto_annotate(data="path/to/images", det_model="yolo11x.pt", sam_model="sam2_b.pt")
     ```
@@ -349,7 +349,7 @@ SAM 2 can be utilized for real-time video segmentation by leveraging its prompta
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam2_b.pt")

@@ -74,7 +74,7 @@ After installing the necessary packages, you're ready to start using Albumentati
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a pre-trained model
         model = YOLO("yolo11n.pt")
@@ -168,7 +168,7 @@ Albumentations integrates seamlessly with YOLO11 and applies automatically durin
 ```python
 # Install required packages
 # !pip install albumentations ultralytics
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load and train model with automatic augmentations
 model = YOLO("yolo11n.pt")

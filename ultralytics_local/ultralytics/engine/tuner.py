@@ -10,7 +10,7 @@ where small changes in hyperparameters can lead to significant differences in mo
 Example:
     Tune hyperparameters for YOLO11n on COCO8 at imgsz=640 and epochs=30 for 300 tuning iterations.
     ```python
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     model.tune(data="coco8.yaml", epochs=10, iterations=300, optimizer="AdamW", plots=False, save=False, val=False)
@@ -25,9 +25,9 @@ import time
 import numpy as np
 import torch
 
-from ultralytics_local.ultralytics.cfg import get_cfg, get_save_dir
-from ultralytics_local.ultralytics.utils import DEFAULT_CFG, LOGGER, callbacks, colorstr, remove_colorstr, yaml_print, yaml_save
-from ultralytics_local.ultralytics.utils.plotting import plot_tune_results
+from ultralytics.cfg import get_cfg, get_save_dir
+from ultralytics.utils import DEFAULT_CFG, LOGGER, callbacks, colorstr, remove_colorstr, yaml_print, yaml_save
+from ultralytics.utils.plotting import plot_tune_results
 
 
 class Tuner:
@@ -52,7 +52,7 @@ class Tuner:
     Example:
         Tune hyperparameters for YOLO11n on COCO8 at imgsz=640 and epochs=30 for 300 tuning iterations.
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         model.tune(data="coco8.yaml", epochs=10, iterations=300, optimizer="AdamW", plots=False, save=False, val=False)
@@ -60,7 +60,7 @@ class Tuner:
 
         Tune with custom search space.
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         model.tune(space={key1: val1, key2: val2})  # custom search space dictionary

@@ -85,7 +85,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -151,7 +151,7 @@ Exporting Ultralytics YOLO11 models to PaddlePaddle format is straightforward. Y
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")

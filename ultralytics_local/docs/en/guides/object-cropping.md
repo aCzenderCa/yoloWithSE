@@ -43,8 +43,8 @@ Object cropping with [Ultralytics YOLO11](https://github.com/ultralytics/ultraly
 
         import cv2
 
-        from ultralytics_local.ultralytics import YOLO
-        from ultralytics_local.ultralytics.utils.plotting import Annotator, colors
+        from ultralytics import YOLO
+        from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         names = model.names

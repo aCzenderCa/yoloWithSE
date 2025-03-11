@@ -83,7 +83,7 @@ This structured approach ensures that the model can effectively learn from well-
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -168,7 +168,7 @@ These datasets are structured in a way that makes them easy to use with YOLO. Ea
 To use your own dataset with Ultralytics YOLO, ensure it follows the specified directory format required for the classification task, with separate `train`, `test`, and optionally `val` directories, and subdirectories for each class containing the respective images. Once your dataset is structured correctly, point the `data` argument to your dataset's root directory when initializing the training script. Here's an example in Python:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -200,7 +200,7 @@ Training a model using Ultralytics YOLO can be done easily in both Python and CL
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model

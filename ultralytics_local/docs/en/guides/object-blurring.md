@@ -34,8 +34,8 @@ Object blurring with [Ultralytics YOLO11](https://github.com/ultralytics/ultraly
         ```python
         import cv2
 
-        from ultralytics_local.ultralytics import YOLO
-        from ultralytics_local.ultralytics.utils.plotting import Annotator, colors
+        from ultralytics import YOLO
+        from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         names = model.names
@@ -97,7 +97,7 @@ To implement real-time object blurring with YOLO11, follow the provided Python e
 ```python
 import cv2
 
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 model = YOLO("yolo11n.pt")
 cap = cv2.VideoCapture("path/to/video/file.mp4")

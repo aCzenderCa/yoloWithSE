@@ -48,7 +48,7 @@ Train YOLO11n-cls on the MNIST160 dataset for 100 [epochs](https://www.ultralyti
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.yaml")  # build a new model from YAML
@@ -85,7 +85,7 @@ Validate trained YOLO11n-cls model [accuracy](https://www.ultralytics.com/glossa
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load an official model
@@ -113,7 +113,7 @@ Use a trained YOLO11n-cls model to run predictions on images.
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load an official model
@@ -141,7 +141,7 @@ Export a YOLO11n-cls model to a different format like ONNX, CoreML, etc.
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load an official model
@@ -179,7 +179,7 @@ To train a YOLO11 model, you can use either Python or CLI commands. For example,
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -209,7 +209,7 @@ You can export a trained YOLO11 model to various formats using Python or CLI com
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load the trained model
@@ -235,7 +235,7 @@ To validate a trained model's accuracy on a dataset like MNIST160, you can use t
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load the trained model

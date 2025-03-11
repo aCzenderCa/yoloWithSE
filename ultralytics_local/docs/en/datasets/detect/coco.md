@@ -61,7 +61,7 @@ To train a YOLO11n model on the COCO dataset for 100 [epochs](https://www.ultral
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -123,7 +123,7 @@ To train a YOLO11 model using the COCO dataset, you can use the following code s
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

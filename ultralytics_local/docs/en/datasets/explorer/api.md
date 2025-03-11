@@ -37,7 +37,7 @@ pip install ultralytics[explorer]
 ## Usage
 
 ```python
-from ultralytics_local.ultralytics import Explorer
+from ultralytics import Explorer
 
 # Create an Explorer object
 explorer = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -76,7 +76,7 @@ You get a pandas dataframe with the `limit` number of most similar data points t
     === "Using Images"
 
         ```python
-        from ultralytics_local.ultralytics import Explorer
+        from ultralytics import Explorer
 
         # create an Explorer object
         exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -96,7 +96,7 @@ You get a pandas dataframe with the `limit` number of most similar data points t
     === "Using Dataset Indices"
 
         ```python
-        from ultralytics_local.ultralytics import Explorer
+        from ultralytics import Explorer
 
         # create an Explorer object
         exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -119,7 +119,7 @@ You can also plot the similar images using the `plot_similar` method. This metho
     === "Using Images"
 
         ```python
-        from ultralytics_local.ultralytics import Explorer
+        from ultralytics import Explorer
 
         # create an Explorer object
         exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -132,7 +132,7 @@ You can also plot the similar images using the `plot_similar` method. This metho
     === "Using Dataset Indices"
 
         ```python
-        from ultralytics_local.ultralytics import Explorer
+        from ultralytics import Explorer
 
         # create an Explorer object
         exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -150,8 +150,8 @@ Note: This works using LLMs under the hood so the results are probabilistic and 
 !!! example "Ask AI"
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
-    from ultralytics_local.ultralytics.data.explorer import plot_query_result
+    from ultralytics import Explorer
+    from ultralytics.data.explorer import plot_query_result
 
     # create an Explorer object
     exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -172,7 +172,7 @@ You can run SQL queries on your dataset using the `sql_query` method. This metho
 !!! example "SQL Query"
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
+    from ultralytics import Explorer
 
     # create an Explorer object
     exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -189,7 +189,7 @@ You can also plot the results of a SQL query using the `plot_sql_query` method. 
 !!! example "Plotting SQL Query Results"
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
+    from ultralytics import Explorer
 
     # create an Explorer object
     exp = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -208,7 +208,7 @@ You can also work with the embeddings table directly. Once the embeddings table 
     Explorer works on [LanceDB](https://lancedb.github.io/lancedb/) tables internally. You can access this table directly, using `Explorer.table` object and run raw queries, push down pre- and post-filters, etc.
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
+    from ultralytics import Explorer
 
     exp = Explorer()
     exp.create_embeddings_table()
@@ -222,7 +222,7 @@ Here are some examples of what you can do with the table:
 !!! example
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
+    from ultralytics import Explorer
 
     exp = Explorer()
     exp.create_embeddings_table()
@@ -237,7 +237,7 @@ Here are some examples of what you can do with the table:
 !!! example
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
+    from ultralytics import Explorer
 
     exp = Explorer(model="yolo11n.pt")
     exp.create_embeddings_table()
@@ -283,7 +283,7 @@ It returns a pandas dataframe with the following columns:
 !!! example "Similarity Index"
 
     ```python
-    from ultralytics_local.ultralytics import Explorer
+    from ultralytics import Explorer
 
     exp = Explorer()
     exp.create_embeddings_table()
@@ -360,7 +360,7 @@ This will automatically install all necessary external libraries for the Explore
 You can use the Ultralytics Explorer API to perform similarity searches by creating an embeddings table and querying it for similar images. Here's a basic example:
 
 ```python
-from ultralytics_local.ultralytics import Explorer
+from ultralytics import Explorer
 
 # Create an Explorer object
 explorer = Explorer(data="coco128.yaml", model="yolo11n.pt")
@@ -382,7 +382,7 @@ LanceDB, used under the hood by Ultralytics Explorer, provides scalable, on-disk
 The Ask AI feature allows users to filter datasets using natural language queries. This feature leverages LLMs to convert these queries into SQL queries behind the scenes. Here's an example:
 
 ```python
-from ultralytics_local.ultralytics import Explorer
+from ultralytics import Explorer
 
 # Create an Explorer object
 explorer = Explorer(data="coco128.yaml", model="yolo11n.pt")

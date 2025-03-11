@@ -1,7 +1,7 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from ultralytics_local.ultralytics.cfg import TASK2DATA, TASK2METRIC, get_cfg, get_save_dir
-from ultralytics_local.ultralytics.utils import DEFAULT_CFG, DEFAULT_CFG_DICT, LOGGER, NUM_THREADS, checks
+from ultralytics.cfg import TASK2DATA, TASK2METRIC, get_cfg, get_save_dir
+from ultralytics.utils import DEFAULT_CFG, DEFAULT_CFG_DICT, LOGGER, NUM_THREADS, checks
 
 
 def run_ray_tune(
@@ -28,7 +28,7 @@ def run_ray_tune(
 
     Example:
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n model
         model = YOLO("yolo11n.pt")

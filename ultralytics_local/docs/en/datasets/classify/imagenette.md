@@ -34,7 +34,7 @@ To train a model on the ImageNette dataset for 100 epochs with a standard image 
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -69,7 +69,7 @@ To use these datasets, simply replace 'imagenette' with 'imagenette160' or 'imag
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -90,7 +90,7 @@ To use these datasets, simply replace 'imagenette' with 'imagenette160' or 'imag
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -127,7 +127,7 @@ To train a YOLO model on the ImageNette dataset for 100 [epochs](https://www.ult
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -164,7 +164,7 @@ Yes, the ImageNette dataset is also available in two resized versions: ImageNett
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")

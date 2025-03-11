@@ -54,7 +54,7 @@ Parking management with [Ultralytics YOLO11](https://github.com/ultralytics/ultr
     === "Parking Annotator"
 
         ```python
-        from ultralytics_local.ultralytics import solutions
+        from ultralytics import solutions
 
         solutions.ParkingPtsSelection()
         ```
@@ -72,7 +72,7 @@ Parking management with [Ultralytics YOLO11](https://github.com/ultralytics/ultr
         ```python
         import cv2
 
-        from ultralytics_local.ultralytics import solutions
+        from ultralytics import solutions
 
         # Video capture
         cap = cv2.VideoCapture("Path/to/video/file.mp4")

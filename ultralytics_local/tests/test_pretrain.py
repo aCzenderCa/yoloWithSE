@@ -1,5 +1,5 @@
-from ultralytics_local.ultralytics import YOLO
-from ultralytics_local.ultralytics.models.yolo import obb
+from ultralytics import YOLO
+from ultralytics.models.yolo import obb
 
 model = YOLO('yolo11n-obb.pt')
 print(model.cfg)

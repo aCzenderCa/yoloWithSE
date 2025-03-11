@@ -126,7 +126,7 @@ yolo predict model=yolo11n.pt source='https://ultralytics.com/images/bus.jpg'
 Or with the [Ultralytics Python interface](../quickstart.md#use-ultralytics-with-python), for example to train the model:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")  # load an official YOLO11n model
@@ -209,7 +209,7 @@ Yes, AzureML allows you to use both the Ultralytics CLI and the Python interface
 - **Python Interface**: Useful for more complex tasks requiring custom coding and integration within notebooks.
 
     ```python
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     model.train(data="coco8.yaml", epochs=3)

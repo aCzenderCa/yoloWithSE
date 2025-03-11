@@ -5,10 +5,10 @@ from typing import Any
 
 import cv2
 
-from ultralytics_local.ultralytics import YOLO
-from ultralytics_local.ultralytics.utils import LOGGER
-from ultralytics_local.ultralytics.utils.checks import check_requirements
-from ultralytics_local.ultralytics.utils.downloads import GITHUB_ASSETS_STEMS
+from ultralytics import YOLO
+from ultralytics.utils import LOGGER
+from ultralytics.utils.checks import check_requirements
+from ultralytics.utils.downloads import GITHUB_ASSETS_STEMS
 
 
 class Inference:

@@ -57,7 +57,7 @@ TrackZone specializes in monitoring objects within designated areas of a frame i
         ```python
         import cv2
 
-        from ultralytics_local.ultralytics import solutions
+        from ultralytics import solutions
 
         cap = cv2.VideoCapture("path/to/video/file.mp4")
         assert cap.isOpened(), "Error reading video file"
@@ -124,7 +124,7 @@ With just a few lines of code, you can set up object tracking in specific zones,
 ```python
 import cv2
 
-from ultralytics_local.ultralytics import solutions
+from ultralytics import solutions
 
 cap = cv2.VideoCapture("path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"

@@ -18,7 +18,7 @@ import numpy as np
 import requests
 import torch
 
-from ultralytics_local.ultralytics.utils import (
+from ultralytics.utils import (
     ARM64,
     ASSETS,
     AUTOINSTALL,
@@ -62,7 +62,7 @@ def parse_requirements(file_path=ROOT.parent / "requirements.txt", package=""):
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.checks import parse_requirements
+        from ultralytics.utils.checks import parse_requirements
 
         parse_requirements(package="ultralytics")
         ```
@@ -290,7 +290,7 @@ def check_pip_update_available():
     """
     if ONLINE and IS_PIP_PACKAGE:
         try:
-            from ultralytics_local.ultralytics import __version__
+            from ultralytics import __version__
 
             latest = check_latest_pypi_version()
             if check_version(__version__, f"<{latest}"):  # check if current version is < latest version
@@ -364,7 +364,7 @@ def check_requirements(requirements=ROOT.parent / "requirements.txt", exclude=()
 
     Example:
         ```python
-        from ultralytics_local.ultralytics.utils.checks import check_requirements
+        from ultralytics.utils.checks import check_requirements
 
         # Check a requirements.txt file
         check_requirements("path/to/requirements.txt")
@@ -568,7 +568,7 @@ def check_yolo(verbose=True, device=""):
     """Return a human-readable YOLO software and hardware summary."""
     import psutil
 
-    from ultralytics_local.ultralytics.utils.torch_utils import select_device
+    from ultralytics.utils.torch_utils import select_device
 
     if IS_COLAB:
         shutil.rmtree("sample_data", ignore_errors=True)  # remove colab /sample_data directory
@@ -596,8 +596,8 @@ def collect_system_info():
     """Collect and print relevant system information including OS, Python, RAM, CPU, and CUDA."""
     import psutil
 
-    from ultralytics_local.ultralytics.utils import ENVIRONMENT  # scope to avoid circular import
-    from ultralytics_local.ultralytics.utils.torch_utils import get_cpu_info, get_gpu_info
+    from ultralytics.utils import ENVIRONMENT  # scope to avoid circular import
+    from ultralytics.utils.torch_utils import get_cpu_info, get_gpu_info
 
     gib = 1 << 30  # bytes per GiB
     cuda = torch and torch.cuda.is_available()
@@ -658,8 +658,8 @@ def check_amp(model):
 
     Example:
         ```python
-        from ultralytics_local.ultralytics import YOLO
-        from ultralytics_local.ultralytics.utils.checks import check_amp
+        from ultralytics import YOLO
+        from ultralytics.utils.checks import check_amp
 
         model = YOLO("yolo11n.pt").model.cuda()
         check_amp(model)
@@ -668,7 +668,7 @@ def check_amp(model):
     Returns:
         (bool): Returns True if the AMP functionality works correctly with YOLO11 model, else False.
     """
-    from ultralytics_local.ultralytics.utils.torch_utils import autocast
+    from ultralytics.utils.torch_utils import autocast
 
     device = next(model.parameters()).device  # get model device
     prefix = colorstr("AMP: ")
@@ -702,7 +702,7 @@ def check_amp(model):
     LOGGER.info(f"{prefix}running Automatic Mixed Precision (AMP) checks...")
     warning_msg = "Setting 'amp=True'. If you experience zero-mAP or NaN losses you can disable AMP with amp=False."
     try:
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         assert amp_allclose(YOLO("yolo11n.pt"), im)
         LOGGER.info(f"{prefix}checks passed ✅")

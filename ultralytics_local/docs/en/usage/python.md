@@ -24,7 +24,7 @@ For example, users can load a model, train it, evaluate its performance on a val
 !!! example "Python"
 
     ```python
-    from ultralytics_local.ultralytics import YOLO
+    from ultralytics import YOLO
 
     # Create a new YOLO model from scratch
     model = YOLO("yolo11n.yaml")
@@ -54,7 +54,7 @@ Train mode is used for training a YOLO11 model on a custom dataset. In this mode
     === "From pretrained (recommended)"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")  # pass any model type
         results = model.train(epochs=5)
@@ -63,7 +63,7 @@ Train mode is used for training a YOLO11 model on a custom dataset. In this mode
     === "From scratch"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.yaml")
         results = model.train(data="coco8.yaml", epochs=5)
@@ -87,7 +87,7 @@ Val mode is used for validating a YOLO11 model after it has been trained. In thi
     === "Val after training"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11 model
         model = YOLO("yolo11n.yaml")
@@ -102,7 +102,7 @@ Val mode is used for validating a YOLO11 model after it has been trained. In thi
     === "Val on another dataset"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11 model
         model = YOLO("yolo11n.yaml")
@@ -128,7 +128,7 @@ Predict mode is used for making predictions using a trained YOLO11 model on new 
         import cv2
         from PIL import Image
 
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("model.pt")
         # accepts all formats - image/dir/Path/URL/video/PIL/ndarray. 0 for webcam
@@ -197,7 +197,7 @@ Export mode is used for exporting a YOLO11 model to a format that can be used fo
 
         Export an official YOLO11n model to ONNX with dynamic batch-size and image-size.
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         model.export(format="onnx", dynamic=True)
@@ -207,7 +207,7 @@ Export mode is used for exporting a YOLO11 model to a format that can be used fo
 
         Export an official YOLO11n model to TensorRT on `device=0` for acceleration on CUDA devices.
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         model.export(format="onnx", device=0)
@@ -224,7 +224,7 @@ Track mode is used for tracking objects in real-time using a YOLO11 model. In th
     === "Python"
 
         ```python
-        from ultralytics_local.ultralytics import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official detection model
@@ -248,7 +248,7 @@ Benchmark mode is used to profile the speed and accuracy of various export forma
 
         Benchmark an official YOLO11n model across all export formats.
         ```python
-        from ultralytics_local.ultralytics.utils.benchmarks import benchmark
+        from ultralytics.utils.benchmarks import benchmark
 
         # Benchmark
         benchmark(model="yolo11n.pt", data="coco8.yaml", imgsz=640, half=False, device=0)
@@ -263,7 +263,7 @@ Benchmark mode is used to profile the speed and accuracy of various export forma
 !!! tip "Detection Trainer Example"
 
     ```python
-    from ultralytics_local.ultralytics.models.yolo import DetectionPredictor, DetectionTrainer, DetectionValidator
+    from ultralytics.models.yolo import DetectionPredictor, DetectionTrainer, DetectionValidator
 
     # trainer
     trainer = DetectionTrainer(overrides={})
@@ -294,7 +294,7 @@ You can easily customize Trainers to support custom tasks or explore R&D ideas. 
 Integrating Ultralytics YOLO11 into your Python projects is simple. You can load a pre-trained model or train a new model from scratch. Here's how to get started:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load a pretrained YOLO model
 model = YOLO("yolo11n.pt")
@@ -327,7 +327,7 @@ Each mode is designed to provide comprehensive functionalities for different sta
 To train a custom YOLO11 model, you need to specify your dataset and other hyperparameters. Here's a quick example:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load the YOLO model
 model = YOLO("yolo11n.yaml")
@@ -343,7 +343,7 @@ For more details on training and hyperlinks to example usage, visit our [Train M
 Exporting YOLO11 models in a format suitable for deployment is straightforward with the `export` function. For example, you can export a model to ONNX format:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load the YOLO model
 model = YOLO("yolo11n.pt")
@@ -359,7 +359,7 @@ For various export options, refer to the [Export Mode](../modes/export.md) docum
 Yes, validating YOLO11 models on different datasets is possible. After training, you can use the validation mode to evaluate the performance:
 
 ```python
-from ultralytics_local.ultralytics import YOLO
+from ultralytics import YOLO
 
 # Load a YOLO11 model
 model = YOLO("yolo11n.yaml")
