@@ -9,7 +9,7 @@ from pathlib import Path
 
 import torch
 
-from formerBackbone.blocks.vitblk import ViTBlock
+from ultralytics_l.formerBackbone.blocks.vitblk import ViTBlock
 
 from ultralytics_l.nn.modules import (
     AIFI,
