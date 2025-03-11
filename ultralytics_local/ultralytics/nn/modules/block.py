@@ -947,8 +947,8 @@ class PSABlock(nn.Module):
         """Initializes the PSABlock with attention and feed-forward layers for enhanced feature extraction."""
         super().__init__()
 
-        # self.attn = Attention(c, attn_ratio=attn_ratio, num_heads=num_heads)
-        self.cbam = CBAM(c)
+        self.attn = Attention(c, attn_ratio=attn_ratio, num_heads=num_heads)
+        # self.cbam = CBAM(c)
         self.ffn = nn.Sequential(Conv(c, c * 2, 1), Conv(c * 2, c, 1, act=False))
         self.add = shortcut
 
