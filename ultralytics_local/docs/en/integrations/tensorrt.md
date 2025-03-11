@@ -82,7 +82,7 @@ Before diving into the usage instructions, be sure to check out the range of [YO
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -163,7 +163,7 @@ Experimentation by NVIDIA led them to recommend using at least 500 calibration i
     === "Python"
 
         ```{ .py .annotate }
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolov8n.pt")
         model.export(
@@ -396,7 +396,7 @@ Expand sections below for information on how these models were exported and test
     See [export mode](../modes/export.md) for details regarding export configuration arguments.
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolov8n.pt")
 
@@ -419,7 +419,7 @@ Expand sections below for information on how these models were exported and test
     ```python
     import cv2
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolov8n.engine")
     img = cv2.imread("path/to/image.jpg")
@@ -437,7 +437,7 @@ Expand sections below for information on how these models were exported and test
     See [`val` mode](../modes/val.md) to learn more about validation configuration arguments.
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolov8n.engine")
     results = model.val(
@@ -484,7 +484,7 @@ To convert your Ultralytics YOLO11 models to TensorRT format for optimized NVIDI
 2. **Export your YOLO11 model**:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     model.export(format="engine")  # creates 'yolov8n.engine'
@@ -514,7 +514,7 @@ Yes, you can export YOLO11 models using TensorRT with INT8 quantization. This pr
 1. **Export with INT8**:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolov8n.pt")
     model.export(format="engine", batch=8, workspace=4, int8=True, data="coco.yaml")
@@ -523,7 +523,7 @@ Yes, you can export YOLO11 models using TensorRT with INT8 quantization. This pr
 2. **Run inference**:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolov8n.engine", task="detect")
     result = model.predict("https://ultralytics.com/images/bus.jpg")

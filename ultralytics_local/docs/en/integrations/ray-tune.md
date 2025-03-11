@@ -47,7 +47,7 @@ To install the required packages, run:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n model
         model = YOLO("yolo11n.pt")
@@ -108,7 +108,7 @@ In this example, we demonstrate how to use a custom search space for hyperparame
     ```python
     from ray import tune
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     # Define a YOLO model
     model = YOLO("yolo11n.pt")
@@ -202,7 +202,7 @@ To tune the hyperparameters of your Ultralytics YOLO11 model using Ray Tune, fol
 2. **Load your YOLO11 model and start tuning:**
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     # Load a YOLO11 model
     model = YOLO("yolo11n.pt")
@@ -246,7 +246,7 @@ To integrate Weights & Biases (W&B) with your Ultralytics YOLO11 tuning process:
     ```python
     import wandb
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     wandb.init(project="YOLO-Tuning", entity="your-entity")
 
@@ -276,7 +276,7 @@ To define a custom search space for your YOLO11 hyperparameter tuning with Ray T
 ```python
 from ray import tune
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 model = YOLO("yolo11n.pt")
 search_space = {"lr0": tune.uniform(1e-5, 1e-1), "momentum": tune.uniform(0.6, 0.98)}

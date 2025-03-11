@@ -47,7 +47,7 @@ To train a YOLO model on the CIFAR-100 dataset for 100 [epochs](https://www.ultr
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -105,7 +105,7 @@ You can train a YOLO model on the CIFAR-100 dataset using either Python or CLI c
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)

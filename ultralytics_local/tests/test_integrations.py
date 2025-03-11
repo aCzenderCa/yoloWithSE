@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 
 from tests import MODEL, SOURCE, TMP
-from ultralytics_l import YOLO, download
+from ultralytics import YOLO, download
 from ultralytics.utils import DATASETS_DIR, SETTINGS
 from ultralytics.utils.checks import check_requirements
 

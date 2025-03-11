@@ -38,7 +38,7 @@ To train a YOLO11n model on the signature detection dataset for 100 [epochs](htt
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -59,7 +59,7 @@ To train a YOLO11n model on the signature detection dataset for 100 [epochs](htt
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/best.pt")  # load a signature-detection fine-tuned model
@@ -107,7 +107,7 @@ To train a YOLO11n model on the Signature Detection Dataset, follow these steps:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n.pt")
@@ -145,7 +145,7 @@ To perform inference using a model trained on the Signature Detection Dataset, f
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the fine-tuned model
         model = YOLO("path/to/best.pt")

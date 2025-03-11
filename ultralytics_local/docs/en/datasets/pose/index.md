@@ -69,7 +69,7 @@ The `train` and `val` fields specify the paths to the directories containing the
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load a pretrained model (recommended for training)
@@ -178,7 +178,7 @@ To use the COCO-Pose dataset with Ultralytics YOLO:
 3. Use the configuration file for training:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n-pose.pt")  # load pretrained model
     results = model.train(data="coco-pose.yaml", epochs=100, imgsz=640)
@@ -195,7 +195,7 @@ To add your dataset:
 3. Use the configuration file to train your model:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n-pose.pt")
     results = model.train(data="your-dataset.yaml", epochs=100, imgsz=640)

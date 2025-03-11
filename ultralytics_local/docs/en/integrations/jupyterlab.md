@@ -126,7 +126,7 @@ To train a YOLO11 model using JupyterLab:
 3. Import the YOLO model and load a pretrained model:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     ```

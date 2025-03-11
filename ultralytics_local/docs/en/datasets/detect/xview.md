@@ -49,7 +49,7 @@ To train a model on the xView dataset for 100 [epochs](https://www.ultralytics.c
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -111,7 +111,7 @@ To train a model on the xView dataset using Ultralytics YOLO, follow these steps
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

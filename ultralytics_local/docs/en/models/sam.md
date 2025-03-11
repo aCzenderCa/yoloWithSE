@@ -47,7 +47,7 @@ The Segment Anything Model can be employed for a multitude of downstream tasks t
     === "Python"
 
         ```python
-        from ultralytics_l import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam_b.pt")
@@ -78,7 +78,7 @@ The Segment Anything Model can be employed for a multitude of downstream tasks t
     === "Python"
 
         ```python
-        from ultralytics_l import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam_b.pt")
@@ -171,7 +171,7 @@ Tests run on a 2023 Apple M2 Macbook with 16GB of RAM. To reproduce this test:
     === "Python"
 
         ```python
-        from ultralytics_l import ASSETS, SAM, YOLO, FastSAM
+        from ultralytics import ASSETS, SAM, YOLO, FastSAM
 
         # Profile SAM-b, MobileSAM
         for file in ["sam_b.pt", "mobile_sam.pt"]:
@@ -246,7 +246,7 @@ The Segment Anything Model (SAM) by Ultralytics is a revolutionary image segment
 You can use the Segment Anything Model (SAM) for image segmentation by running inference with various prompts such as bounding boxes or points. Here's an example using Python:
 
 ```python
-from ultralytics_l import SAM
+from ultralytics import SAM
 
 # Load a model
 model = SAM("sam_b.pt")

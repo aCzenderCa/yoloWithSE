@@ -6,7 +6,7 @@ from unittest import mock
 import torch
 
 from tests import MODEL
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 from ultralytics.cfg import get_cfg
 from ultralytics.engine.exporter import Exporter
 from ultralytics.models.yolo import classify, detect, segment

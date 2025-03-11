@@ -43,7 +43,7 @@ Measuring the gap between two objects is known as distance calculation within a 
         ```python
         import cv2
 
-        from ultralytics_l import solutions
+        from ultralytics import solutions
 
         cap = cv2.VideoCapture("Path/to/video/file.mp4")
         assert cap.isOpened(), "Error reading video file"

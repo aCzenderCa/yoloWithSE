@@ -140,7 +140,7 @@ This example provides simple YOLOv9 training and inference examples. For full do
         [PyTorch](https://www.ultralytics.com/glossary/pytorch) pretrained `*.pt` models as well as configuration `*.yaml` files can be passed to the `YOLO()` class to create a model instance in python:
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Build a YOLOv9c model from scratch
         model = YOLO("yolov9c.yaml")
@@ -219,7 +219,7 @@ YOLOv9 outperforms state-of-the-art real-time object detectors by achieving high
 You can train a YOLOv9 model using both Python and CLI commands. For Python, instantiate a model using the `YOLO` class and call the `train` method:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Build a YOLOv9c model from pretrained weights and train
 model = YOLO("yolov9c.pt")

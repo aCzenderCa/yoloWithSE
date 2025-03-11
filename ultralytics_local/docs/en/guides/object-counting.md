@@ -56,7 +56,7 @@ Object counting with [Ultralytics YOLO11](https://github.com/ultralytics/ultraly
         ```python
         import cv2
 
-        from ultralytics_l import solutions
+        from ultralytics import solutions
 
         cap = cv2.VideoCapture("path/to/video/file.mp4")
         assert cap.isOpened(), "Error reading video file"
@@ -128,7 +128,7 @@ Here's a simple example for counting in a region:
 ```python
 import cv2
 
-from ultralytics_l import solutions
+from ultralytics import solutions
 
 
 def count_objects_in_region(video_path, output_video_path, model_path):
@@ -176,7 +176,7 @@ To count specific classes of objects using Ultralytics YOLO11, you need to speci
 ```python
 import cv2
 
-from ultralytics_l import solutions
+from ultralytics import solutions
 
 
 def count_specific_classes(video_path, output_video_path, model_path, classes_to_count):

@@ -32,7 +32,7 @@ Export a YOLOv8n model to OpenVINO format and run inference with the exported mo
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLOv8n PyTorch model
         model = YOLO("yolov8n.pt")
@@ -350,7 +350,7 @@ To reproduce the Ultralytics benchmarks above on all export [formats](../modes/e
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLOv8n PyTorch model
         model = YOLO("yolov8n.pt")
@@ -389,7 +389,7 @@ Exporting YOLOv8 models to the OpenVINO format can significantly enhance CPU spe
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLOv8n PyTorch model
         model = YOLO("yolov8n.pt")
@@ -427,7 +427,7 @@ After exporting a YOLOv8 model to OpenVINO format, you can run inference using P
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the exported OpenVINO model
         ov_model = YOLO("yolov8n_openvino_model/")
@@ -464,7 +464,7 @@ Yes, you can benchmark YOLOv8 models in various formats including PyTorch, Torch
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLOv8n PyTorch model
         model = YOLO("yolov8n.pt")

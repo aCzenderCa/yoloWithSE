@@ -106,7 +106,7 @@ To train a model on the DOTA v1 dataset, you can utilize the following code snip
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Create a new YOLO11n-OBB model from scratch
         model = YOLO("yolo11n-obb.yaml")
@@ -174,7 +174,7 @@ To train a model on the DOTA dataset, you can use the following example with Ult
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Create a new YOLO11n-OBB model from scratch
         model = YOLO("yolo11n-obb.yaml")

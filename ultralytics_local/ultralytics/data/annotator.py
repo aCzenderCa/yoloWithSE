@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from ultralytics_l import SAM, YOLO
+from ultralytics import SAM, YOLO
 
 
 def auto_annotate(

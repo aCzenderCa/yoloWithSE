@@ -404,7 +404,7 @@ class Model(torch.nn.Module):
         from copy import deepcopy
         from datetime import datetime
 
-        from ultralytics_l import __version__
+        from ultralytics import __version__
 
         updates = {
             "model": deepcopy(self.model).half() if isinstance(self.model, torch.nn.Module) else self.model,

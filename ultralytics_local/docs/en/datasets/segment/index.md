@@ -71,7 +71,7 @@ The `train` and `val` fields specify the paths to the directories containing the
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)

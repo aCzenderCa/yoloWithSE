@@ -68,7 +68,7 @@ This example provides simple YOLOv5 training and inference examples. For full do
         [PyTorch](https://www.ultralytics.com/glossary/pytorch) pretrained `*.pt` models as well as configuration `*.yaml` files can be passed to the `YOLO()` class to create a model instance in python:
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a COCO-pretrained YOLOv5n model
         model = YOLO("yolov5n.pt")
@@ -149,7 +149,7 @@ You can train a YOLOv5u model by loading a pre-trained model and running the tra
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a COCO-pretrained YOLOv5n model
         model = YOLO("yolov5n.pt")

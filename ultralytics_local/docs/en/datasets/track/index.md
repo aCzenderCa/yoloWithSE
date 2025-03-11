@@ -17,7 +17,7 @@ Multi-Object Detector doesn't need standalone training and directly supports pre
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         results = model.track(source="https://youtu.be/LNwODJXcvt4", conf=0.3, iou=0.5, show=True)
@@ -40,7 +40,7 @@ To use Multi-Object Tracking with Ultralytics YOLO, you can start by using the P
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")  # Load the YOLO11 model
         results = model.track(source="https://youtu.be/LNwODJXcvt4", conf=0.3, iou=0.5, show=True)

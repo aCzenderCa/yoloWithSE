@@ -91,7 +91,7 @@ To use the Edge TPU, you need to convert your model into a compatible format. It
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/model.pt")  # Load an official model or custom model
@@ -131,7 +131,7 @@ Now you can run inference using the following code:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/<model_name>_full_integer_quant_edgetpu.tflite")  # Load an official model or custom model
@@ -155,7 +155,7 @@ Find comprehensive information on the [Predict](../modes/predict.md) page for fu
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/<model_name>_full_integer_quant_edgetpu.tflite")  # Load an official model or custom model
@@ -226,7 +226,7 @@ Yes, you can export your Ultralytics YOLO11 model to be compatible with the Cora
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/model.pt")  # Load an official model or custom model
@@ -268,7 +268,7 @@ After exporting your YOLO11 model to an Edge TPU-compatible format, you can run 
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/edgetpu_model.tflite")  # Load an official model or custom model

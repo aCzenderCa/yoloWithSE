@@ -36,7 +36,7 @@ You can use these pretrained for inference or fine-tuning as follows.
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load an Open Images Dataset V7 pretrained YOLOv8n model
         model = YOLO("yolov8n-oiv7.pt")
@@ -114,7 +114,7 @@ To train a YOLO11n model on the Open Images V7 dataset for 100 [epochs](https://
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a COCO-pretrained YOLO11n model
         model = YOLO("yolo11n.pt")
@@ -174,7 +174,7 @@ To train a YOLO11 model on the Open Images V7 dataset, you can use both Python a
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a COCO-pretrained YOLO11n model
         model = YOLO("yolo11n.pt")

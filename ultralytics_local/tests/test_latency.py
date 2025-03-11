@@ -1,7 +1,7 @@
 import warnings
 
 warnings.filterwarnings('ignore')
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 import os
 import torch
 import time

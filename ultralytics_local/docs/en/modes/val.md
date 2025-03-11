@@ -54,7 +54,7 @@ Validate trained YOLO11n model [accuracy](https://www.ultralytics.com/glossary/a
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official model
@@ -92,7 +92,7 @@ The below examples showcase YOLO model validation with custom arguments in Pytho
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")
@@ -114,7 +114,7 @@ The below examples showcase YOLO model validation with custom arguments in Pytho
 To validate your YOLO11 model, you can use the Val mode provided by Ultralytics. For example, using the Python API, you can load a model and run validation with:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")
@@ -170,7 +170,7 @@ Yes, you can validate your YOLO11 model using a [custom dataset](https://docs.ul
 Example in Python:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")
@@ -195,7 +195,7 @@ To save the validation results to a JSON file, you can set the `save_json` argum
 Example in Python:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")

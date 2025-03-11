@@ -63,7 +63,7 @@ To train a CNN model on the Fashion-MNIST dataset for 100 [epochs](https://www.u
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -106,7 +106,7 @@ To train an Ultralytics YOLO model on the Fashion-MNIST dataset, you can use bot
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n-cls.pt")

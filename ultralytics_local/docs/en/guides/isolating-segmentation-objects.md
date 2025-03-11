@@ -21,7 +21,7 @@ After performing the [Segment Task](../tasks/segment.md), it's sometimes desirab
 2.  Load a model and run `predict()` method on a source.
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     # Load a model
     model = YOLO("yolo11n-seg.pt")
@@ -265,7 +265,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 m = YOLO("yolo11n-seg.pt")  # (4)!
 res = m.predict()  # (3)!
@@ -317,7 +317,7 @@ To isolate objects using Ultralytics YOLO11, follow these steps:
 1. **Load the model and run inference:**
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n-seg.pt")
     results = model.predict(source="path/to/your/image.jpg")

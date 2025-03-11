@@ -86,7 +86,7 @@ import time
 
 import rospy
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 detection_model = YOLO("yolo11m.pt")
 segmentation_model = YOLO("yolo11m-seg.pt")
@@ -138,7 +138,7 @@ while True:
     import rospy
     from sensor_msgs.msg import Image
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     detection_model = YOLO("yolo11m.pt")
     segmentation_model = YOLO("yolo11m-seg.pt")
@@ -198,7 +198,7 @@ import rospy
 from sensor_msgs.msg import Image
 from std_msgs.msg import String
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 detection_model = YOLO("yolo11m.pt")
 rospy.init_node("ultralytics")
@@ -255,7 +255,7 @@ import time
 import rospy
 from std_msgs.msg import String
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 rospy.init_node("ultralytics")
 time.sleep(1)
@@ -308,7 +308,7 @@ while True:
     from sensor_msgs.msg import Image
     from std_msgs.msg import String
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     rospy.init_node("ultralytics")
     time.sleep(1)
@@ -380,7 +380,7 @@ import time
 
 import rospy
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 rospy.init_node("ultralytics")
 time.sleep(1)
@@ -459,7 +459,7 @@ for index, class_id in enumerate(classes):
     import ros_numpy
     import rospy
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     rospy.init_node("ultralytics")
     time.sleep(1)
@@ -534,7 +534,7 @@ import ros_numpy
 import rospy
 from sensor_msgs.msg import Image
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 detection_model = YOLO("yolo11m.pt")
 rospy.init_node("ultralytics")
@@ -586,7 +586,7 @@ import ros_numpy
 import rospy
 from sensor_msgs.msg import PointCloud2
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 rospy.init_node("ultralytics")
 segmentation_model = YOLO("yolo11m-seg.pt")

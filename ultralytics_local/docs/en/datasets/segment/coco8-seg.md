@@ -31,7 +31,7 @@ To train a YOLO11n-seg model on the COCO8-Seg dataset for 100 [epochs](https://w
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)
@@ -93,7 +93,7 @@ To train a **YOLO11n-seg** model on the COCO8-Seg dataset for 100 epochs with an
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # Load a pretrained model (recommended for training)

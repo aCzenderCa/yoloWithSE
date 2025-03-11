@@ -80,7 +80,7 @@ To gain insight into the current configuration of your settings, you can view th
 
         You can use Python to view your settings. Start by importing the `settings` object from the `ultralytics` module. Print and return settings using the following commands:
         ```python
-        from ultralytics_l import settings
+        from ultralytics import settings
 
         # View all settings
         print(settings)
@@ -106,7 +106,7 @@ Ultralytics allows users to easily modify their settings. Changes can be perform
 
         Within the Python environment, call the `update` method on the `settings` object to change your settings:
         ```python
-        from ultralytics_l import settings
+        from ultralytics import settings
 
         # Disable analytics and crash reporting
         settings.update({"sync": False})
@@ -165,7 +165,7 @@ To opt out of data collection, you can simply set `sync=False` in your YOLO sett
     === "Python"
 
         ```python
-        from ultralytics_l import settings
+        from ultralytics import settings
 
         # Disable analytics and crash reporting
         settings.update({"sync": False})
@@ -199,7 +199,7 @@ Yes, you can easily view your current settings to understand the configuration o
     === "Python"
 
         ```python
-        from ultralytics_l import settings
+        from ultralytics import settings
 
         # View all settings
         print(settings)

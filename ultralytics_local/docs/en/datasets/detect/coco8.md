@@ -42,7 +42,7 @@ To train a YOLO11n model on the COCO8 dataset for 100 [epochs](https://www.ultra
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -104,7 +104,7 @@ To train a YOLO11 model using the COCO8 dataset, you can employ either Python or
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

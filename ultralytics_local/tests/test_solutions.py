@@ -4,7 +4,7 @@ import cv2
 import pytest
 
 from tests import TMP
-from ultralytics_l import YOLO, solutions
+from ultralytics import YOLO, solutions
 from ultralytics.utils import ASSETS_URL, WEIGHTS_DIR
 from ultralytics.utils.downloads import safe_download
 

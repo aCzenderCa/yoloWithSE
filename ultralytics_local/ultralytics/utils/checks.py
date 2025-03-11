@@ -290,7 +290,7 @@ def check_pip_update_available():
     """
     if ONLINE and IS_PIP_PACKAGE:
         try:
-            from ultralytics_l import __version__
+            from ultralytics import __version__
 
             latest = check_latest_pypi_version()
             if check_version(__version__, f"<{latest}"):  # check if current version is < latest version
@@ -702,7 +702,7 @@ def check_amp(model):
     LOGGER.info(f"{prefix}running Automatic Mixed Precision (AMP) checks...")
     warning_msg = "Setting 'amp=True'. If you experience zero-mAP or NaN losses you can disable AMP with amp=False."
     try:
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         assert amp_allclose(YOLO("yolo11n.pt"), im)
         LOGGER.info(f"{prefix}checks passed ✅")

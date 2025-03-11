@@ -142,7 +142,7 @@ SAM 2 can be utilized across a broad spectrum of tasks, including real-time vide
     === "Python"
 
         ```python
-        from ultralytics_l import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam2.1_b.pt")
@@ -175,7 +175,7 @@ SAM 2 can be utilized across a broad spectrum of tasks, including real-time vide
     === "Python"
 
         ```python
-        from ultralytics_l import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam2.1_b.pt")
@@ -246,7 +246,7 @@ Tests run on a 2023 Apple M2 Macbook with 16GB of RAM using `torch==2.3.1` and `
     === "Python"
 
         ```python
-        from ultralytics_l import ASSETS, SAM, YOLO, FastSAM
+        from ultralytics import ASSETS, SAM, YOLO, FastSAM
 
         # Profile SAM2-t, SAM2-b, SAM-b, MobileSAM
         for file in ["sam_b.pt", "sam2_b.pt", "sam2_t.pt", "mobile_sam.pt"]:
@@ -349,7 +349,7 @@ SAM 2 can be utilized for real-time video segmentation by leveraging its prompta
     === "Python"
 
         ```python
-        from ultralytics_l import SAM
+        from ultralytics import SAM
 
         # Load a model
         model = SAM("sam2_b.pt")

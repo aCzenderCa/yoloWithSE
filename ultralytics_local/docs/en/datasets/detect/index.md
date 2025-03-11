@@ -53,7 +53,7 @@ Here's how you can use these formats to train your model:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -170,7 +170,7 @@ To start training a YOLO11 model, ensure your dataset is formatted correctly and
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")  # Load a pretrained model
         results = model.train(data="path/to/your_dataset.yaml", epochs=100, imgsz=640)

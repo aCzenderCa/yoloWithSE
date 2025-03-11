@@ -46,7 +46,7 @@ To train a YOLO11n model on the VOC dataset for 100 [epochs](https://www.ultraly
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -108,7 +108,7 @@ To train a YOLO11 model with the VOC dataset, you need the dataset configuration
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

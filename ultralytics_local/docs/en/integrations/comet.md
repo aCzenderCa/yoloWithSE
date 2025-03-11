@@ -71,7 +71,7 @@ Before diving into the usage instructions, be sure to check out the range of [YO
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")
@@ -210,7 +210,7 @@ To integrate Comet ML with Ultralytics YOLO11, follow these steps:
 4. **Train your YOLO11 model and log metrics**:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     results = model.train(

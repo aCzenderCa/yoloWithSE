@@ -60,7 +60,7 @@ Train YOLO11n on the COCO8 dataset for 100 [epochs](https://www.ultralytics.com/
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.yaml")  # build a new model from YAML
@@ -95,7 +95,7 @@ Multi-GPU training allows for more efficient utilization of available hardware r
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -122,7 +122,7 @@ To enable training on Apple silicon chips, you should specify 'mps' as your devi
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -155,7 +155,7 @@ Below is an example of how to resume an interrupted training using Python and vi
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("path/to/last.pt")  # load a partially trained model
@@ -285,7 +285,7 @@ To train an object detection model using Ultralytics YOLO11, you can either use 
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -322,7 +322,7 @@ To resume training from an interrupted session, set the `resume` argument to `Tr
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the partially trained model
         model = YOLO("path/to/last.pt")
@@ -348,7 +348,7 @@ Yes, Ultralytics YOLO11 supports training on Apple silicon chips utilizing the M
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n.pt")

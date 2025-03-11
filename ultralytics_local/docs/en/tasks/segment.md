@@ -48,7 +48,7 @@ Train YOLO11n-seg on the COCO8-seg dataset for 100 [epochs](https://www.ultralyt
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.yaml")  # build a new model from YAML
@@ -85,7 +85,7 @@ Validate trained YOLO11n-seg model [accuracy](https://www.ultralytics.com/glossa
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load an official model
@@ -119,7 +119,7 @@ Use a trained YOLO11n-seg model to run predictions on images.
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load an official model
@@ -153,7 +153,7 @@ Export a YOLO11n-seg model to a different format like ONNX, CoreML, etc.
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load an official model
@@ -187,7 +187,7 @@ To train a YOLO11 segmentation model on a custom dataset, you first need to prep
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a pretrained YOLO11 segment model
         model = YOLO("yolo11n-seg.pt")
@@ -221,7 +221,7 @@ Loading and validating a pretrained YOLO segmentation model is straightforward. 
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n-seg.pt")
@@ -249,7 +249,7 @@ Exporting a YOLO segmentation model to ONNX format is simple and can be done usi
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n-seg.pt")

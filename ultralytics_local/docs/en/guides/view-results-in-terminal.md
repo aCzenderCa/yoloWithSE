@@ -44,7 +44,7 @@ The VSCode compatible protocols for viewing images using the integrated terminal
 3. Load a model and execute inference, then plot the results and store in a variable. See more about inference arguments and working with results on the [predict mode](../modes/predict.md) page.
 
     ```{ .py .annotate }
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     # Load a model
     model = YOLO("yolo11n.pt")
@@ -108,7 +108,7 @@ import io
 import cv2
 from sixel import SixelWriter
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")
@@ -162,7 +162,7 @@ To view YOLO inference results in a VSCode terminal on macOS or Linux, follow th
 3. Load your YOLO model and run inference:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     results = model.predict(source="path_to_image")

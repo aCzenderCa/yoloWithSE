@@ -1,4 +1,4 @@
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 from ultralytics.models.yolo import obb
 
 model = YOLO('yolo11n-obb.pt')

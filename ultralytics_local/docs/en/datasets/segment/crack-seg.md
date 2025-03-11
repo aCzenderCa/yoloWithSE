@@ -54,7 +54,7 @@ To train Ultralytics YOLO11n model on the Crack Segmentation dataset for 100 [ep
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)
@@ -120,7 +120,7 @@ To train an Ultralytics YOLO11 model on the Crack Segmentation dataset, use the 
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)

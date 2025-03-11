@@ -51,7 +51,7 @@ To train a YOLO11n-pose model on the COCO-Pose dataset for 100 [epochs](https://
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load a pretrained model (recommended for training)
@@ -113,7 +113,7 @@ Training a YOLO11 model on the COCO-Pose dataset can be accomplished using eithe
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load a pretrained model (recommended for training)

@@ -106,7 +106,7 @@ For additional information about the `convert_coco` function, [visit the referen
 
 ```{.py .annotate }
 from ultralytics.utils.plotting import Annotator
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 import cv2
 
 model = YOLO('yolo11n.pt')  # Load pretrain or fine-tune model
@@ -403,7 +403,7 @@ Ultralytics includes an Annotator class that can be used to annotate any kind of
     ```python
     import cv2
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
     from ultralytics.utils.plotting import Annotator, colors
 
     # User defined video path and model file
@@ -577,7 +577,7 @@ image_with_obb = ann.result()
 ```python
 import cv2
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator
 
 model = YOLO("yolo11s.pt")
@@ -616,7 +616,7 @@ cv2.destroyAllWindows()
 ```python
 import cv2
 
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator
 
 model = YOLO("yolo11s.pt")

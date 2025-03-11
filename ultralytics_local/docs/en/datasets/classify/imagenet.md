@@ -40,7 +40,7 @@ To train a deep learning model on the ImageNet dataset for 100 [epochs](https://
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -101,7 +101,7 @@ To use a pretrained Ultralytics YOLO model for image classification on the Image
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)

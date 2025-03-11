@@ -76,7 +76,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
           ```python
-          from ultralytics_l import YOLO
+          from ultralytics import YOLO
 
           # Load the YOLO11 model
           model = YOLO("yolo11n.pt")
@@ -146,7 +146,7 @@ pip install ultralytics
 Then, use the following code snippet to export your model:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load the YOLO11 model
 model = YOLO("yolo11n.pt")

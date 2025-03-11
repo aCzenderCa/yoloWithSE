@@ -73,7 +73,7 @@ For detailed instructions and best practices related to the installation process
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -126,7 +126,7 @@ To install the required packages, run:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the exported RKNN model
         rknn_model = YOLO("./yolo11n_rknn_model")
@@ -183,7 +183,7 @@ You can easily export your Ultralytics YOLO model to RKNN format using the `expo
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load your YOLO model
         model = YOLO("yolo11n.pt")

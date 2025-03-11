@@ -27,7 +27,7 @@ import torch
 import tqdm
 import yaml
 
-from ultralytics_l import __version__
+from ultralytics import __version__
 
 # PyTorch Multi-GPU DDP Constants
 RANK = int(os.getenv("RANK", -1))

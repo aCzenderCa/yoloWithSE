@@ -63,7 +63,7 @@ To train a custom YOLO11 model:
 3. Use the following Python code to start training:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolov8n.yaml")  # build a new model from scratch
@@ -90,7 +90,7 @@ These models vary in size and complexity, offering different trade-offs between 
 To perform inference with a trained model:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("path/to/your/model.pt")
@@ -196,7 +196,7 @@ Performing inference with a trained Ultralytics YOLO model is straightforward:
 1. Load the Model:
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("path/to/your/model.pt")
     ```

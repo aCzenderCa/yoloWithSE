@@ -37,7 +37,7 @@ To train a model using these OBB formats:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Create a new YOLO11n-OBB model from scratch
         model = YOLO("yolo11n-obb.yaml")
@@ -113,7 +113,7 @@ Training a YOLO11 model with OBBs involves ensuring your dataset is in the YOLO 
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Create a new YOLO11n-OBB model from scratch
         model = YOLO("yolo11n-obb.yaml")

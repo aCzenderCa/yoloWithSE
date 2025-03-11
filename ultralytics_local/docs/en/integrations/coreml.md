@@ -80,7 +80,7 @@ Before diving into the usage instructions, be sure to check out the range of [YO
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -157,7 +157,7 @@ Next, you can export the model using the following Python or CLI commands:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         model = YOLO("yolo11n.pt")
         model.export(format="coreml")
@@ -214,7 +214,7 @@ Yes, you can run inference directly using the exported CoreML model. Below are t
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         coreml_model = YOLO("yolo11n.mlpackage")
         results = coreml_model("https://ultralytics.com/images/bus.jpg")

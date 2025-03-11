@@ -106,7 +106,7 @@ The YOLO11n model in PyTorch format is converted to NCNN to run inference with t
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n PyTorch model
         model = YOLO("yolo11n.pt")
@@ -195,7 +195,7 @@ To reproduce the above Ultralytics benchmarks on all [export formats](../modes/e
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n PyTorch model
         model = YOLO("yolo11n.pt")
@@ -255,7 +255,7 @@ There are 2 methods of using the Raspberry Pi Camera to inference YOLO11 models.
                 import cv2
                 from picamera2 import Picamera2
 
-                from ultralytics_l import YOLO
+                from ultralytics import YOLO
 
                 # Initialize the Picamera2
                 picam2 = Picamera2()
@@ -304,7 +304,7 @@ There are 2 methods of using the Raspberry Pi Camera to inference YOLO11 models.
             === "Python"
 
                 ```python
-                from ultralytics_l import YOLO
+                from ultralytics import YOLO
 
                 # Load a YOLO11n PyTorch model
                 model = YOLO("yolo11n.pt")
@@ -381,7 +381,7 @@ You can convert a PyTorch YOLO11 model to NCNN format using either Python or CLI
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n PyTorch model
         model = YOLO("yolo11n.pt")
@@ -428,7 +428,7 @@ There are two methods to set up a Raspberry Pi Camera for YOLO11 inference:
     import cv2
     from picamera2 import Picamera2
 
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     picam2 = Picamera2()
     picam2.preview_configuration.main.size = (1280, 720)
@@ -458,7 +458,7 @@ There are two methods to set up a Raspberry Pi Camera for YOLO11 inference:
     ```
 
     ```python
-    from ultralytics_l import YOLO
+    from ultralytics import YOLO
 
     model = YOLO("yolo11n.pt")
     results = model("tcp://127.0.0.1:8888")

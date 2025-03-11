@@ -71,7 +71,7 @@ conda install -c pytorch -c nvidia -c conda-forge pytorch torchvision pytorch-cu
 With Ultralytics installed, you can now start using its robust features for [object detection](https://www.ultralytics.com/glossary/object-detection), [instance segmentation](https://www.ultralytics.com/glossary/instance-segmentation), and more. For example, to predict an image, you can run:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 model = YOLO("yolo11n.pt")  # initialize model
 results = model("path/to/image.jpg")  # perform inference

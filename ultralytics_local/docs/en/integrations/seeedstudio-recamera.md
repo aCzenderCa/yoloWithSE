@@ -96,7 +96,7 @@ For detailed instructions and best practices related to the installation process
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")

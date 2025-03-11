@@ -50,7 +50,7 @@ This example provides simple RT-DETR training and inference examples. For full d
     === "Python"
 
         ```python
-        from ultralytics_l import RTDETR
+        from ultralytics import RTDETR
 
         # Load a COCO-pretrained RT-DETR-l model
         model = RTDETR("rtdetr-l.pt")
@@ -120,7 +120,7 @@ You can leverage Ultralytics Python API to use pre-trained PaddlePaddle RT-DETR 
     === "Python"
 
         ```python
-        from ultralytics_l import RTDETR
+        from ultralytics import RTDETR
 
         # Load a COCO-pretrained RT-DETR-l model
         model = RTDETR("rtdetr-l.pt")

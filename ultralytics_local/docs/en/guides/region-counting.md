@@ -41,7 +41,7 @@ keywords: object counting, regions, YOLO11, computer vision, Ultralytics, effici
         ```python
         import cv2
 
-        from ultralytics_l import solutions
+        from ultralytics import solutions
 
         cap = cv2.VideoCapture("Path/to/video/file.mp4")
         assert cap.isOpened(), "Error reading video file"

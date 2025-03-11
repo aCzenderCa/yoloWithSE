@@ -41,7 +41,7 @@ There are two types of instance segmentation tracking available in the Ultralyti
         ```python
         import cv2
 
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
         from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n-seg.pt")  # segmentation model
@@ -84,7 +84,7 @@ There are two types of instance segmentation tracking available in the Ultralyti
         ```python
         import cv2
 
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
         from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n-seg.pt")  # segmentation model
@@ -149,7 +149,7 @@ To perform instance segmentation using Ultralytics YOLO11, initialize the YOLO m
         ```python
         import cv2
 
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
         from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n-seg.pt")  # segmentation model
@@ -203,7 +203,7 @@ To implement object tracking, use the `model.track` method and ensure that each 
         ```python
         import cv2
 
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
         from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n-seg.pt")  # segmentation model

@@ -87,7 +87,7 @@ yolo predict model=yolo11n.pt source='https://ultralytics.com/images/bus.jpg'
 YOLO may also be used directly in a Python environment, and accepts the same [arguments](https://docs.ultralytics.com/usage/cfg/) as in the CLI example above:
 
 ```python
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")

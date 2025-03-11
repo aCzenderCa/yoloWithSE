@@ -113,7 +113,7 @@ Here's how to define a search space and use the `model.tune()` method to utilize
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Initialize the YOLO model
         model = YOLO("yolo11n.pt")
@@ -271,7 +271,7 @@ To optimize the learning rate for Ultralytics YOLO, start by setting an initial 
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Initialize the YOLO model
         model = YOLO("yolo11n.pt")

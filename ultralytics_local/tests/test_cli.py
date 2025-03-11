@@ -71,7 +71,7 @@ def test_fastsam(task="segment", model=WEIGHTS_DIR / "FastSAM-s.pt", data="coco8
     run(f"yolo segment val {task} model={model} data={data} imgsz=32")
     run(f"yolo segment predict model={model} source={source} imgsz=32 save save_crop save_txt")
 
-    from ultralytics_l import FastSAM
+    from ultralytics import FastSAM
     from ultralytics.models.sam import Predictor
 
     # Create a FastSAM model
@@ -90,7 +90,7 @@ def test_fastsam(task="segment", model=WEIGHTS_DIR / "FastSAM-s.pt", data="coco8
 
 def test_mobilesam():
     """Test MobileSAM segmentation with point prompts using Ultralytics."""
-    from ultralytics_l import SAM
+    from ultralytics import SAM
 
     # Load the model
     model = SAM(WEIGHTS_DIR / "mobile_sam.pt")

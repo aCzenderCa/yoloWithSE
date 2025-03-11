@@ -7,7 +7,7 @@ import pytest
 import torch
 
 from tests import CUDA_DEVICE_COUNT, CUDA_IS_AVAILABLE, MODEL, SOURCE
-from ultralytics_l import YOLO
+from ultralytics import YOLO
 from ultralytics.cfg import TASK2DATA, TASK2MODEL, TASKS
 from ultralytics.utils import ASSETS, WEIGHTS_DIR
 from ultralytics.utils.checks import check_amp
@@ -112,7 +112,7 @@ def test_utils_benchmarks():
 @pytest.mark.skipif(not CUDA_IS_AVAILABLE, reason="CUDA is not available")
 def test_predict_sam():
     """Test SAM model predictions using different prompts, including bounding boxes and point annotations."""
-    from ultralytics_l import SAM
+    from ultralytics import SAM
     from ultralytics.models.sam import Predictor as SAMPredictor
 
     # Load a model

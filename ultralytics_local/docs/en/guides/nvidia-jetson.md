@@ -254,7 +254,7 @@ The YOLO11n model in PyTorch format is converted to TensorRT to run inference wi
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n PyTorch model
         model = YOLO("yolo11n.pt")
@@ -302,7 +302,7 @@ The following Jetson devices are equipped with DLA hardware:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n PyTorch model
         model = YOLO("yolo11n.pt")
@@ -561,7 +561,7 @@ To reproduce the above Ultralytics benchmarks on all export [formats](../modes/e
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load a YOLO11n PyTorch model
         model = YOLO("yolo11n.pt")

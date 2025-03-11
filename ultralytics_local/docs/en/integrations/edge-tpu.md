@@ -70,7 +70,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -135,7 +135,7 @@ To export a YOLO11 model to TFLite Edge TPU format, you can follow these steps:
     === "Python"
 
         ```python
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")

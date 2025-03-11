@@ -573,7 +573,7 @@ def handle_yolo_hub(args: List[str]) -> None:
         - For the 'login' command, if no API key is provided, an empty string is passed to the login function.
         - The 'logout' command does not require any additional arguments.
     """
-    from ultralytics_l import hub
+    from ultralytics import hub
 
     if args[0] == "login":
         key = args[1] if len(args) > 1 else ""
@@ -707,7 +707,7 @@ def handle_yolo_solutions(args: List[str]) -> None:
     else:
         cls, method = SOLUTION_MAP[s_n]  # solution class name, method name and default source
 
-        from ultralytics_l import solutions  # import ultralytics solutions
+        from ultralytics import solutions  # import ultralytics solutions
 
         solution = getattr(solutions, cls)(IS_CLI=True, **overrides)  # get solution class i.e ObjectCounter
         process = getattr(
@@ -940,19 +940,19 @@ def entrypoint(debug=""):
     overrides["model"] = model
     stem = Path(model).stem.lower()
     if "rtdetr" in stem:  # guess architecture
-        from ultralytics_l import RTDETR
+        from ultralytics import RTDETR
 
         model = RTDETR(model)  # no task argument
     elif "fastsam" in stem:
-        from ultralytics_l import FastSAM
+        from ultralytics import FastSAM
 
         model = FastSAM(model)
     elif "sam_" in stem or "sam2_" in stem or "sam2.1_" in stem:
-        from ultralytics_l import SAM
+        from ultralytics import SAM
 
         model = SAM(model)
     else:
-        from ultralytics_l import YOLO
+        from ultralytics import YOLO
 
         model = YOLO(model, task=task)
     if isinstance(overrides.get("pretrained"), str):
