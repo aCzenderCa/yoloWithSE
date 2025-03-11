@@ -90,7 +90,7 @@ The YOLO-World models are easy to integrate into your Python applications. Ultra
         [PyTorch](https://www.ultralytics.com/glossary/pytorch) pretrained `*.pt` models as well as configuration `*.yaml` files can be passed to the `YOLOWorld()` class to create a model instance in python:
 
         ```python
-        from ultralytics import YOLOWorld
+        from ultralytics_l import YOLOWorld
 
         # Load a pretrained YOLOv8s-worldv2 model
         model = YOLOWorld("yolov8s-worldv2.pt")
@@ -118,7 +118,7 @@ Object detection is straightforward with the `predict` method, as illustrated be
     === "Python"
 
         ```python
-        from ultralytics import YOLOWorld
+        from ultralytics_l import YOLOWorld
 
         # Initialize a YOLO-World model
         model = YOLOWorld("yolov8s-world.pt")  # or select yolov8m/l-world.pt for different sizes
@@ -148,7 +148,7 @@ Model validation on a dataset is streamlined as follows:
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Create a YOLO-World model
         model = YOLO("yolov8s-world.pt")  # or select yolov8m/l-world.pt for different sizes
@@ -173,7 +173,7 @@ Model validation on a dataset is streamlined as follows:
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Create a YOLO-World model
         model = YOLO("yolov8s-world.pt")  # or select yolov8m/l-world.pt for different sizes
@@ -206,7 +206,7 @@ For instance, if your application only requires detecting 'person' and 'bus' obj
     === "Custom Inference Prompts"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Initialize a YOLO-World model
         model = YOLO("yolov8s-world.pt")  # or choose yolov8m/l-world.pt
@@ -230,7 +230,7 @@ You can also save a model after setting custom classes. By doing this you create
         First load a YOLO-World model, set custom classes for it and save it:
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Initialize a YOLO-World model
         model = YOLO("yolov8s-world.pt")  # or select yolov8m/l-world.pt
@@ -245,7 +245,7 @@ You can also save a model after setting custom classes. By doing this you create
         After saving, the custom_yolov8s.pt model behaves like any other pre-trained YOLOv8 model but with a key difference: it is now optimized to detect only the classes you have defined. This customization can significantly improve detection performance and efficiency for your specific application scenarios.
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load your custom model
         model = YOLO("custom_yolov8s.pt")
@@ -295,8 +295,8 @@ This approach provides a powerful means of customizing state-of-the-art object d
     === "Python"
 
         ```python
-        from ultralytics import YOLOWorld
-        from ultralytics.models.yolo.world.train_world import WorldTrainerFromScratch
+        from ultralytics_l import YOLOWorld
+        from ultralytics_l.models.yolo.world.train_world import WorldTrainerFromScratch
 
         data = dict(
             train=dict(
@@ -348,7 +348,7 @@ The YOLO-World model is an advanced, real-time object detection approach based o
 YOLO-World supports a "prompt-then-detect" strategy, which utilizes an offline vocabulary to enhance efficiency. Custom prompts like captions or specific object categories are pre-encoded and stored as offline vocabulary [embeddings](https://www.ultralytics.com/glossary/embeddings). This approach streamlines the detection process without the need for retraining. You can dynamically set these prompts within the model to tailor it to specific detection tasks, as shown below:
 
 ```python
-from ultralytics import YOLOWorld
+from ultralytics_l import YOLOWorld
 
 # Initialize a YOLO-World model
 model = YOLOWorld("yolov8s-world.pt")
@@ -377,7 +377,7 @@ YOLO-World provides several advantages over traditional Open-Vocabulary detectio
 Training a YOLO-World model on your dataset is straightforward through the provided Python API or CLI commands. Here's how to start training using Python:
 
 ```python
-from ultralytics import YOLOWorld
+from ultralytics_l import YOLOWorld
 
 # Load a pretrained YOLOv8s-worldv2 model
 model = YOLOWorld("yolov8s-worldv2.pt")
@@ -412,8 +412,8 @@ Ultralytics offers multiple pre-trained YOLO-World models supporting various tas
 To reproduce the official results from scratch, you need to prepare the datasets and launch the training using the provided code. The training procedure involves creating a data dictionary and running the `train` method with a custom trainer:
 
 ```python
-from ultralytics import YOLOWorld
-from ultralytics.models.yolo.world.train_world import WorldTrainerFromScratch
+from ultralytics_l import YOLOWorld
+from ultralytics_l.models.yolo.world.train_world import WorldTrainerFromScratch
 
 data = {
     "train": {

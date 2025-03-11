@@ -2,7 +2,7 @@
 # Builds GitHub actions CI runner image for deployment to DockerHub https://hub.docker.com/r/ultralytics/ultralytics
 # Image is CUDA-optimized for YOLO11 single/multi-GPU training and inference tests
 
-# Start FROM Ultralytics GPU image
+# Start from ultralytics_l GPU image
 FROM ultralytics/ultralytics:latest
 
 # Set environment variables

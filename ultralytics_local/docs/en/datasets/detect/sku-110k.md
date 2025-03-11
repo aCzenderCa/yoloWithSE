@@ -58,7 +58,7 @@ To train a YOLO11n model on the SKU-110K dataset for 100 [epochs](https://www.ul
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -118,7 +118,7 @@ Training a YOLO11 model on the SKU-110k dataset is straightforward. Here's an ex
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

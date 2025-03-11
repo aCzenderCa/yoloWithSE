@@ -63,7 +63,7 @@ To train a YOLO11n model on the LVIS dataset for 100 [epochs](https://www.ultral
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -123,7 +123,7 @@ To train a YOLO11n model on the LVIS dataset for 100 epochs with an image size o
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

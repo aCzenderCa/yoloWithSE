@@ -24,8 +24,8 @@ keywords: VisionEye, YOLO11, Ultralytics, object mapping, object tracking, dista
         ```python
         import cv2
 
-        from ultralytics import YOLO
-        from ultralytics.utils.plotting import Annotator, colors
+        from ultralytics_l import YOLO
+        from ultralytics_l.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         names = model.model.names
@@ -68,8 +68,8 @@ keywords: VisionEye, YOLO11, Ultralytics, object mapping, object tracking, dista
         ```python
         import cv2
 
-        from ultralytics import YOLO
-        from ultralytics.utils.plotting import Annotator, colors
+        from ultralytics_l import YOLO
+        from ultralytics_l.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         cap = cv2.VideoCapture("path/to/video/file.mp4")
@@ -115,8 +115,8 @@ keywords: VisionEye, YOLO11, Ultralytics, object mapping, object tracking, dista
 
         import cv2
 
-        from ultralytics import YOLO
-        from ultralytics.utils.plotting import Annotator
+        from ultralytics_l import YOLO
+        from ultralytics_l.utils.plotting import Annotator
 
         model = YOLO("yolo11n.pt")
         cap = cv2.VideoCapture("Path/to/video/file.mp4")
@@ -187,7 +187,7 @@ To start using VisionEye Object Mapping with Ultralytics YOLO11, first, you'll n
 ```python
 import cv2
 
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 model = YOLO("yolo11n.pt")
 cap = cv2.VideoCapture("path/to/video/file.mp4")
@@ -224,7 +224,7 @@ Here's a brief code snippet demonstrating tracking with VisionEye:
 ```python
 import cv2
 
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 model = YOLO("yolo11n.pt")
 cap = cv2.VideoCapture("path/to/video/file.mp4")
@@ -260,7 +260,7 @@ import math
 
 import cv2
 
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 model = YOLO("yolo11n.pt")
 cap = cv2.VideoCapture("path/to/video/file.mp4")

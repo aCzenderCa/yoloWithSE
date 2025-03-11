@@ -45,7 +45,7 @@ To train a YOLO11n model on the Global Wheat Head Dataset for 100 [epochs](https
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -105,7 +105,7 @@ To train a YOLO11n model on the Global Wheat Head Dataset, you can use the follo
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a pre-trained model (recommended for training)
         model = YOLO("yolo11n.pt")

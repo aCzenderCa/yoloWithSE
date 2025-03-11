@@ -43,7 +43,7 @@ Ensure you have the following prerequisites before proceeding:
 Before deploying the model on Triton, it must be exported to the ONNX format. ONNX (Open Neural Network Exchange) is a format that allows models to be transferred between different deep learning frameworks. Use the `export` function from the `YOLO` class:
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # Load a model
 model = YOLO("yolo11n.pt")  # load an official model
@@ -170,7 +170,7 @@ for _ in range(10):
 Then run inference using the Triton Server model:
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # Load the Triton Server model
 model = YOLO("http://localhost:8000/yolo", task="detect")
@@ -199,7 +199,7 @@ Setting up [Ultralytics YOLO11](https://docs.ultralytics.com/models/yolov8/) wit
 1. **Export YOLO11 to ONNX format**:
 
     ```python
-    from ultralytics import YOLO
+    from ultralytics_l import YOLO
 
     # Load a model
     model = YOLO("yolo11n.pt")  # load an official model
@@ -279,7 +279,7 @@ Using ONNX (Open Neural Network Exchange) format for your [Ultralytics YOLO11](.
 To export your model, use:
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 model = YOLO("yolo11n.pt")
 onnx_file = model.export(format="onnx", dynamic=True)
@@ -292,7 +292,7 @@ You can follow the steps in the [exporting guide](../modes/export.md) to complet
 Yes, you can run inference using the [Ultralytics YOLO11](../models/yolov8.md) model on [NVIDIA Triton Inference Server](https://developer.nvidia.com/triton-inference-server). Once your model is set up in the Triton Model Repository and the server is running, you can load and run inference on your model as follows:
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # Load the Triton Server model
 model = YOLO("http://localhost:8000/yolo", task="detect")

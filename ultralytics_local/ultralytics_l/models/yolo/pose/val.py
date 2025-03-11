@@ -5,11 +5,11 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from ultralytics.models.yolo.detect import DetectionValidator
-from ultralytics.utils import LOGGER, ops
-from ultralytics.utils.checks import check_requirements
-from ultralytics.utils.metrics import OKS_SIGMA, PoseMetrics, box_iou, kpt_iou
-from ultralytics.utils.plotting import output_to_target, plot_images
+from ultralytics_l.models.yolo.detect import DetectionValidator
+from ultralytics_l.utils import LOGGER, ops
+from ultralytics_l.utils.checks import check_requirements
+from ultralytics_l.utils.metrics import OKS_SIGMA, PoseMetrics, box_iou, kpt_iou
+from ultralytics_l.utils.plotting import output_to_target, plot_images
 
 
 class PoseValidator(DetectionValidator):
@@ -18,7 +18,7 @@ class PoseValidator(DetectionValidator):
 
     Example:
         ```python
-        from ultralytics.models.yolo.pose import PoseValidator
+        from ultralytics_l.models.yolo.pose import PoseValidator
 
         args = dict(model="yolo11n-pose.pt", data="coco8-pose.yaml")
         validator = PoseValidator(args=args)
@@ -212,7 +212,7 @@ class PoseValidator(DetectionValidator):
 
     def save_one_txt(self, predn, pred_kpts, save_conf, shape, file):
         """Save YOLO detections to a txt file in normalized coordinates in a specific format."""
-        from ultralytics.engine.results import Results
+        from ultralytics_l.engine.results import Results
 
         Results(
             np.zeros((shape[0], shape[1]), dtype=np.uint8),

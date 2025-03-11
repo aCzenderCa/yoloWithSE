@@ -8,11 +8,11 @@ import numpy as np
 import torch
 from PIL import Image
 
-from ultralytics.cfg import TASK2DATA, get_cfg, get_save_dir
-from ultralytics.engine.results import Results
-from ultralytics.hub import HUB_WEB_ROOT, HUBTrainingSession
-from ultralytics.nn.tasks import attempt_load_one_weight, guess_model_task, yaml_model_load
-from ultralytics.utils import (
+from ultralytics_l.cfg import TASK2DATA, get_cfg, get_save_dir
+from ultralytics_l.engine.results import Results
+from ultralytics_l.hub import HUB_WEB_ROOT, HUBTrainingSession
+from ultralytics_l.nn.tasks import attempt_load_one_weight, guess_model_task, yaml_model_load
+from ultralytics_l.utils import (
     ARGV,
     ASSETS,
     DEFAULT_CFG_DICT,
@@ -71,7 +71,7 @@ class Model(torch.nn.Module):
         reset_callbacks: Resets all callbacks to their default functions.
 
     Examples:
-        >>> from ultralytics import YOLO
+        >>> from ultralytics_l import YOLO
         >>> model = YOLO("yolo11n.pt")
         >>> results = model.predict("image.jpg")
         >>> model.train(data="coco8.yaml", epochs=3)
@@ -95,7 +95,7 @@ class Model(torch.nn.Module):
 
         Args:
             model (Union[str, Path]): Path or name of the model to load or create. Can be a local file path, a
-                model name from Ultralytics HUB, or a Triton Server model.
+                model name from ultralytics_l HUB, or a Triton Server model.
             task (str | None): The task type associated with the YOLO model, specifying its application domain.
             verbose (bool): If True, enables verbose output during the model's initialization and subsequent
                 operations.
@@ -404,7 +404,7 @@ class Model(torch.nn.Module):
         from copy import deepcopy
         from datetime import datetime
 
-        from ultralytics import __version__
+        from ultralytics_l import __version__
 
         updates = {
             "model": deepcopy(self.model).half() if isinstance(self.model, torch.nn.Module) else self.model,
@@ -598,7 +598,7 @@ class Model(torch.nn.Module):
             - Batch size is set to 1 for tracking in videos.
         """
         if not hasattr(self.predictor, "trackers"):
-            from ultralytics.trackers import register_tracker
+            from ultralytics_l.trackers import register_tracker
 
             register_tracker(self, persist)
         kwargs["conf"] = kwargs.get("conf") or 0.1  # ByteTrack-based method needs low confidence predictions as input
@@ -678,7 +678,7 @@ class Model(torch.nn.Module):
             >>> print(results)
         """
         self._check_is_pytorch_model()
-        from ultralytics.utils.benchmarks import benchmark
+        from ultralytics_l.utils.benchmarks import benchmark
 
         custom = {"verbose": False}  # method defaults
         args = {**DEFAULT_CFG_DICT, **self.model.args, **custom, **kwargs, "mode": "benchmark"}
@@ -850,7 +850,7 @@ class Model(torch.nn.Module):
         """
         self._check_is_pytorch_model()
         if use_ray:
-            from ultralytics.utils.tuner import run_ray_tune
+            from ultralytics_l.utils.tuner import run_ray_tune
 
             return run_ray_tune(self, max_samples=iterations, *args, **kwargs)
         else:
@@ -908,7 +908,7 @@ class Model(torch.nn.Module):
             >>> print(model.names)
             {0: 'person', 1: 'bicycle', 2: 'car', ...}
         """
-        from ultralytics.nn.autobackend import check_class_names
+        from ultralytics_l.nn.autobackend import check_class_names
 
         if hasattr(self.model, "names"):
             return check_class_names(self.model.names)

@@ -125,7 +125,7 @@ The [Ultralytics HUB](https://www.ultralytics.com/hub) Inference API returns a J
     === "`ultralytics`"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load model
         model = YOLO("yolov8n-cls.pt")
@@ -206,7 +206,7 @@ The [Ultralytics HUB](https://www.ultralytics.com/hub) Inference API returns a J
     === "`ultralytics`"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load model
         model = YOLO("yolov8n.pt")
@@ -293,7 +293,7 @@ The [Ultralytics HUB](https://www.ultralytics.com/hub) Inference API returns a J
     === "`ultralytics`"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load model
         model = YOLO("yolov8n-obb.pt")
@@ -384,7 +384,7 @@ The [Ultralytics HUB](https://www.ultralytics.com/hub) Inference API returns a J
     === "`ultralytics`"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load model
         model = YOLO("yolov8n-seg.pt")
@@ -485,7 +485,7 @@ The [Ultralytics HUB](https://www.ultralytics.com/hub) Inference API returns a J
     === "`ultralytics`"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load model
         model = YOLO("yolov8n-pose.pt")

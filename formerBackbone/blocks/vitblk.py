@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from ultralytics.nn.modules import CBAM
+from ultralytics_l.nn.modules import CBAM
 
 
 class ViTBlock(nn.Module):

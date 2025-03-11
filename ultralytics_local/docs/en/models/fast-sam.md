@@ -65,7 +65,7 @@ To perform [object detection](https://www.ultralytics.com/glossary/object-detect
     === "Python"
 
         ```python
-        from ultralytics import FastSAM
+        from ultralytics_l import FastSAM
 
         # Define an inference source
         source = "path/to/bus.jpg"
@@ -105,7 +105,7 @@ This snippet demonstrates the simplicity of loading a pre-trained model and runn
     === "Prompt inference"
 
         ```python
-        from ultralytics.models.fastsam import FastSAMPredictor
+        from ultralytics_l.models.fastsam import FastSAMPredictor
 
         # Create FastSAMPredictor
         overrides = dict(conf=0.25, task="segment", mode="predict", model="FastSAM-s.pt", save=False, imgsz=1024)
@@ -133,7 +133,7 @@ Validation of the model on a dataset can be done as follows:
     === "Python"
 
         ```python
-        from ultralytics import FastSAM
+        from ultralytics_l import FastSAM
 
         # Create a FastSAM model
         model = FastSAM("FastSAM-s.pt")  # or FastSAM-x.pt
@@ -160,7 +160,7 @@ To perform object tracking on an image, use the `track` method as shown below:
     === "Python"
 
         ```python
-        from ultralytics import FastSAM
+        from ultralytics_l import FastSAM
 
         # Create a FastSAM model
         model = FastSAM("FastSAM-s.pt")  # or FastSAM-x.pt
@@ -284,7 +284,7 @@ Its ability to handle various user interaction prompts makes FastSAM adaptable a
 To use FastSAM for inference in Python, you can follow the example below:
 
 ```python
-from ultralytics import FastSAM
+from ultralytics_l import FastSAM
 
 # Define an inference source
 source = "path/to/bus.jpg"

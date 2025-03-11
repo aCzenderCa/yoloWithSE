@@ -41,14 +41,14 @@ import cv2
 import numpy as np
 import torch
 
-from ultralytics.cfg import get_cfg, get_save_dir
-from ultralytics.data import load_inference_source
-from ultralytics.data.augment import LetterBox, classify_transforms
-from ultralytics.nn.autobackend import AutoBackend
-from ultralytics.utils import DEFAULT_CFG, LOGGER, MACOS, WINDOWS, callbacks, colorstr, ops
-from ultralytics.utils.checks import check_imgsz, check_imshow
-from ultralytics.utils.files import increment_path
-from ultralytics.utils.torch_utils import select_device, smart_inference_mode
+from ultralytics_l.cfg import get_cfg, get_save_dir
+from ultralytics_l.data import load_inference_source
+from ultralytics_l.data.augment import LetterBox, classify_transforms
+from ultralytics_l.nn.autobackend import AutoBackend
+from ultralytics_l.utils import DEFAULT_CFG, LOGGER, MACOS, WINDOWS, callbacks, colorstr, ops
+from ultralytics_l.utils.checks import check_imgsz, check_imshow
+from ultralytics_l.utils.files import increment_path
+from ultralytics_l.utils.torch_utils import select_device, smart_inference_mode
 
 STREAM_WARNING = """
 WARNING ⚠️ inference results will accumulate in RAM unless `stream=True` is passed, causing potential out-of-memory

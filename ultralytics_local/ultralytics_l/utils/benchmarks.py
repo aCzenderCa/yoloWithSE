@@ -3,7 +3,7 @@
 Benchmark a YOLO model formats for speed and accuracy.
 
 Usage:
-    from ultralytics.utils.benchmarks import ProfileModels, benchmark
+    from ultralytics_l.utils.benchmarks import ProfileModels, benchmark
     ProfileModels(['yolo11n.yaml', 'yolov8s.yaml']).profile()
     benchmark(model='yolo11n.pt', imgsz=160)
 
@@ -38,14 +38,14 @@ import numpy as np
 import torch.cuda
 import yaml
 
-from ultralytics import YOLO, YOLOWorld
-from ultralytics.cfg import TASK2DATA, TASK2METRIC
-from ultralytics.engine.exporter import export_formats
-from ultralytics.utils import ARM64, ASSETS, LINUX, LOGGER, MACOS, TQDM, WEIGHTS_DIR
-from ultralytics.utils.checks import IS_PYTHON_3_12, check_imgsz, check_requirements, check_yolo, is_rockchip
-from ultralytics.utils.downloads import safe_download
-from ultralytics.utils.files import file_size
-from ultralytics.utils.torch_utils import get_cpu_info, select_device
+from ultralytics_l import YOLO, YOLOWorld
+from ultralytics_l.cfg import TASK2DATA, TASK2METRIC
+from ultralytics_l.engine.exporter import export_formats
+from ultralytics_l.utils import ARM64, ASSETS, LINUX, LOGGER, MACOS, TQDM, WEIGHTS_DIR
+from ultralytics_l.utils.checks import IS_PYTHON_3_12, check_imgsz, check_requirements, check_yolo, is_rockchip
+from ultralytics_l.utils.downloads import safe_download
+from ultralytics_l.utils.files import file_size
+from ultralytics_l.utils.torch_utils import get_cpu_info, select_device
 
 
 def benchmark(
@@ -79,7 +79,7 @@ def benchmark(
 
     Examples:
         Benchmark a YOLO model with default settings:
-        >>> from ultralytics.utils.benchmarks import benchmark
+        >>> from ultralytics_l.utils.benchmarks import benchmark
         >>> benchmark(model="yolo11n.pt", imgsz=640)
     """
     imgsz = check_imgsz(imgsz)
@@ -356,7 +356,7 @@ class ProfileModels:
 
     Examples:
         Profile models and print results
-        >>> from ultralytics.utils.benchmarks import ProfileModels
+        >>> from ultralytics_l.utils.benchmarks import ProfileModels
         >>> profiler = ProfileModels(["yolo11n.yaml", "yolov8s.yaml"], imgsz=640)
         >>> profiler.profile()
     """
@@ -390,7 +390,7 @@ class ProfileModels:
 
         Examples:
             Initialize and profile models
-            >>> from ultralytics.utils.benchmarks import ProfileModels
+            >>> from ultralytics_l.utils.benchmarks import ProfileModels
             >>> profiler = ProfileModels(["yolo11n.yaml", "yolov8s.yaml"], imgsz=640)
             >>> profiler.profile()
         """

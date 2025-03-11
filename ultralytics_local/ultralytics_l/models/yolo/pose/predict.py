@@ -1,7 +1,7 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from ultralytics.models.yolo.detect.predict import DetectionPredictor
-from ultralytics.utils import DEFAULT_CFG, LOGGER, ops
+from ultralytics_l.models.yolo.detect.predict import DetectionPredictor
+from ultralytics_l.utils import DEFAULT_CFG, LOGGER, ops
 
 
 class PosePredictor(DetectionPredictor):
@@ -10,8 +10,8 @@ class PosePredictor(DetectionPredictor):
 
     Example:
         ```python
-        from ultralytics.utils import ASSETS
-        from ultralytics.models.yolo.pose import PosePredictor
+        from ultralytics_l.utils import ASSETS
+        from ultralytics_l.models.yolo.pose import PosePredictor
 
         args = dict(model="yolo11n-pose.pt", source=ASSETS)
         predictor = PosePredictor(overrides=args)

@@ -13,7 +13,7 @@ import torch.nn.functional as F
 from torch import nn
 from torch.nn.init import trunc_normal_
 
-from ultralytics.nn.modules import MLP
+from ultralytics_l.nn.modules import MLP
 
 from .blocks import SAM2TwoWayTransformer
 from .decoders import MaskDecoder, SAM2MaskDecoder

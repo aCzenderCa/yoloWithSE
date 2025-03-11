@@ -50,7 +50,7 @@ To train a YOLO11n model on the Argoverse dataset for 100 [epochs](https://www.u
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -111,7 +111,7 @@ To train a YOLO11 model with the Argoverse dataset, use the provided YAML config
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)

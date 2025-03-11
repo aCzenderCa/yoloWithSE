@@ -56,7 +56,7 @@ Monitoring workouts through pose estimation with [Ultralytics YOLO11](https://gi
         ```python
         import cv2
 
-        from ultralytics import solutions
+        from ultralytics_l import solutions
 
         cap = cv2.VideoCapture("path/to/video/file.mp4")
         assert cap.isOpened(), "Error reading video file"
@@ -118,7 +118,7 @@ To monitor your workouts using Ultralytics YOLO11, you can utilize the pose esti
 ```python
 import cv2
 
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 cap = cv2.VideoCapture("path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"
@@ -163,7 +163,7 @@ Ultralytics YOLO11 is highly accurate in detecting and tracking exercises due to
 Yes, Ultralytics YOLO11 can be adapted for custom workout routines. The `AIGym` class supports different pose types such as `pushup`, `pullup`, and `abworkout`. You can specify keypoints and angles to detect specific exercises. Here is an example setup:
 
 ```python
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 gym = solutions.AIGym(
     line_width=2,
@@ -181,7 +181,7 @@ To save the workout monitoring output, you can modify the code to include a vide
 ```python
 import cv2
 
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 cap = cv2.VideoCapture("path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"

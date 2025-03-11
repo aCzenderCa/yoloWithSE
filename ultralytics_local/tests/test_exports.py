@@ -8,9 +8,9 @@ from pathlib import Path
 import pytest
 
 from tests import MODEL, SOURCE
-from ultralytics import YOLO
-from ultralytics.cfg import TASK2DATA, TASK2MODEL, TASKS
-from ultralytics.utils import (
+from ultralytics_l import YOLO
+from ultralytics_l.cfg import TASK2DATA, TASK2MODEL, TASKS
+from ultralytics_l.utils import (
     ARM64,
     IS_RASPBERRYPI,
     LINUX,
@@ -18,7 +18,7 @@ from ultralytics.utils import (
     WINDOWS,
     checks,
 )
-from ultralytics.utils.torch_utils import TORCH_1_9, TORCH_1_13
+from ultralytics_l.utils.torch_utils import TORCH_1_9, TORCH_1_13
 
 
 def test_export_torchscript():

@@ -2,10 +2,10 @@
 
 import torch
 
-from ultralytics.data import YOLODataset
-from ultralytics.data.augment import Compose, Format, v8_transforms
-from ultralytics.models.yolo.detect import DetectionValidator
-from ultralytics.utils import colorstr, ops
+from ultralytics_l.data import YOLODataset
+from ultralytics_l.data.augment import Compose, Format, v8_transforms
+from ultralytics_l.models.yolo.detect import DetectionValidator
+from ultralytics_l.utils import colorstr, ops
 
 __all__ = ("RTDETRValidator",)  # tuple or list
 
@@ -60,7 +60,7 @@ class RTDETRValidator(DetectionValidator):
 
     Example:
         ```python
-        from ultralytics.models.rtdetr import RTDETRValidator
+        from ultralytics_l.models.rtdetr import RTDETRValidator
 
         args = dict(model="rtdetr-l.pt", data="coco8.yaml")
         validator = RTDETRValidator(args=args)

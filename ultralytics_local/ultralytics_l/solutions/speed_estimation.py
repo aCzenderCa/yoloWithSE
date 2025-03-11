@@ -4,8 +4,8 @@ from time import time
 
 import numpy as np
 
-from ultralytics.solutions.solutions import BaseSolution
-from ultralytics.utils.plotting import Annotator, colors
+from ultralytics_l.solutions.solutions import BaseSolution
+from ultralytics_l.utils.plotting import Annotator, colors
 
 
 class SpeedEstimator(BaseSolution):

@@ -88,7 +88,7 @@ Before diving into the usage instructions, be sure to check out the range of [YO
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -157,7 +157,7 @@ To export your YOLO11 models to ONNX format using Ultralytics, follow these step
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")

@@ -79,7 +79,7 @@ If you want to get a deeper understanding of your YOLO11 model's performance, yo
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the model
         model = YOLO("yolo11n.pt")
@@ -181,7 +181,7 @@ You can access YOLO11 model evaluation metrics using Python with the following s
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the model
         model = YOLO("yolo11n.pt")

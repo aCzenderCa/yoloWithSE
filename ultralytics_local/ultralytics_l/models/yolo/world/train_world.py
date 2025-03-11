@@ -1,10 +1,10 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from ultralytics.data import YOLOConcatDataset, build_grounding, build_yolo_dataset
-from ultralytics.data.utils import check_det_dataset
-from ultralytics.models.yolo.world import WorldTrainer
-from ultralytics.utils import DEFAULT_CFG
-from ultralytics.utils.torch_utils import de_parallel
+from ultralytics_l.data import YOLOConcatDataset, build_grounding, build_yolo_dataset
+from ultralytics_l.data.utils import check_det_dataset
+from ultralytics_l.models.yolo.world import WorldTrainer
+from ultralytics_l.utils import DEFAULT_CFG
+from ultralytics_l.utils.torch_utils import de_parallel
 
 
 class WorldTrainerFromScratch(WorldTrainer):
@@ -13,8 +13,8 @@ class WorldTrainerFromScratch(WorldTrainer):
 
     Example:
         ```python
-        from ultralytics.models.yolo.world.train_world import WorldTrainerFromScratch
-        from ultralytics import YOLOWorld
+        from ultralytics_l.models.yolo.world.train_world import WorldTrainerFromScratch
+        from ultralytics_l import YOLOWorld
 
         data = dict(
             train=dict(

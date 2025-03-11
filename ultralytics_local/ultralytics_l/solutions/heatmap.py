@@ -3,8 +3,8 @@
 import cv2
 import numpy as np
 
-from ultralytics.solutions.object_counter import ObjectCounter
-from ultralytics.utils.plotting import Annotator
+from ultralytics_l.solutions.object_counter import ObjectCounter
+from ultralytics_l.utils.plotting import Annotator
 
 
 class Heatmap(ObjectCounter):
@@ -25,7 +25,7 @@ class Heatmap(ObjectCounter):
         generate_heatmap: Generates and applies the heatmap effect to each frame.
 
     Examples:
-        >>> from ultralytics.solutions import Heatmap
+        >>> from ultralytics_l.solutions import Heatmap
         >>> heatmap = Heatmap(model="yolo11n.pt", colormap=cv2.COLORMAP_JET)
         >>> frame = cv2.imread("frame.jpg")
         >>> processed_frame = heatmap.generate_heatmap(frame)

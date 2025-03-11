@@ -69,7 +69,7 @@ The `train` and `val` fields specify the paths to the directories containing the
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load a pretrained model (recommended for training)
@@ -149,7 +149,7 @@ Ultralytics provides a convenient conversion tool to convert labels from the pop
     === "Python"
 
         ```python
-        from ultralytics.data.converter import convert_coco
+        from ultralytics_l.data.converter import convert_coco
 
         convert_coco(labels_dir="path/to/coco/annotations/", use_keypoints=True)
         ```
@@ -178,7 +178,7 @@ To use the COCO-Pose dataset with Ultralytics YOLO:
 3. Use the configuration file for training:
 
     ```python
-    from ultralytics import YOLO
+    from ultralytics_l import YOLO
 
     model = YOLO("yolo11n-pose.pt")  # load pretrained model
     results = model.train(data="coco-pose.yaml", epochs=100, imgsz=640)
@@ -195,7 +195,7 @@ To add your dataset:
 3. Use the configuration file to train your model:
 
     ```python
-    from ultralytics import YOLO
+    from ultralytics_l import YOLO
 
     model = YOLO("yolo11n-pose.pt")
     results = model.train(data="your-dataset.yaml", epochs=100, imgsz=640)
@@ -222,7 +222,7 @@ Read more about creating YAML configuration files in [Dataset YAML format](#data
 Ultralytics provides a conversion tool to convert COCO dataset labels to the YOLO format, including keypoint information:
 
 ```python
-from ultralytics.data.converter import convert_coco
+from ultralytics_l.data.converter import convert_coco
 
 convert_coco(labels_dir="path/to/coco/annotations/", use_keypoints=True)
 ```

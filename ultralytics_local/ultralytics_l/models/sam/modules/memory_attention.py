@@ -5,7 +5,7 @@ from typing import Optional
 
 import torch
 from torch import Tensor, nn
-from ultralytics.nn.modules import CBAM
+from ultralytics_l.nn.modules import CBAM
 
 from .blocks import RoPEAttention
 

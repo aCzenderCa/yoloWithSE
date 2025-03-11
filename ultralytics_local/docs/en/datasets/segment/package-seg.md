@@ -54,7 +54,7 @@ To train Ultralytics YOLO11n model on the Package Segmentation dataset for 100 [
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model (recommended for training)
@@ -119,7 +119,7 @@ You can train an Ultralytics YOLO11n model using both Python and CLI methods. Us
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-seg.pt")  # load a pretrained model

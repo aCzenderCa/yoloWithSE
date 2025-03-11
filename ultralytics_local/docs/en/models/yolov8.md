@@ -141,7 +141,7 @@ Note the below example is for YOLOv8 [Detect](../tasks/detect.md) models for obj
         [PyTorch](https://www.ultralytics.com/glossary/pytorch) pretrained `*.pt` models as well as configuration `*.yaml` files can be passed to the `YOLO()` class to create a model instance in python:
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a COCO-pretrained YOLOv8n model
         model = YOLO("yolov8n.pt")
@@ -217,7 +217,7 @@ Training a YOLOv8 model can be done using either Python or CLI. Below are exampl
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a COCO-pretrained YOLOv8n model
         model = YOLO("yolov8n.pt")
@@ -243,7 +243,7 @@ Yes, YOLOv8 models can be benchmarked for performance in terms of speed and accu
     === "Python"
 
         ```python
-        from ultralytics.utils.benchmarks import benchmark
+        from ultralytics_l.utils.benchmarks import benchmark
 
         # Benchmark on GPU
         benchmark(model="yolov8n.pt", data="coco8.yaml", imgsz=640, half=False, device=0)

@@ -6,7 +6,7 @@ from typing import Tuple, Type
 import torch
 from torch import Tensor, nn
 
-from ultralytics.nn.modules import MLPBlock, CBAM
+from ultralytics_l.nn.modules import MLPBlock, CBAM
 
 
 class TwoWayTransformer(nn.Module):

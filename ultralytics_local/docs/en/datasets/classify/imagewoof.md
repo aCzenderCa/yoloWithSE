@@ -31,7 +31,7 @@ To train a CNN model on the ImageWoof dataset for 100 [epochs](https://www.ultra
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -64,7 +64,7 @@ To use these variants in your training, simply replace 'imagewoof' in the datase
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -114,7 +114,7 @@ To train a [Convolutional Neural Network](https://www.ultralytics.com/glossary/c
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         model = YOLO("yolo11n-cls.pt")  # Load a pretrained model
         results = model.train(data="imagewoof", epochs=100, imgsz=224)

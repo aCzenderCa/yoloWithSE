@@ -58,7 +58,7 @@ This guide provides a comprehensive overview of three fundamental types of [data
         ```python
         import cv2
 
-        from ultralytics import solutions
+        from ultralytics_l import solutions
 
         cap = cv2.VideoCapture("Path/to/video/file.mp4")
         assert cap.isOpened(), "Error reading video file"
@@ -131,7 +131,7 @@ Example:
 ```python
 import cv2
 
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 cap = cv2.VideoCapture("Path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"
@@ -181,7 +181,7 @@ Use the following example to generate a bar plot:
 ```python
 import cv2
 
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 cap = cv2.VideoCapture("Path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"
@@ -231,7 +231,7 @@ Here's a quick example:
 ```python
 import cv2
 
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 cap = cv2.VideoCapture("Path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"
@@ -276,7 +276,7 @@ Example for tracking and updating a line graph:
 ```python
 import cv2
 
-from ultralytics import solutions
+from ultralytics_l import solutions
 
 cap = cv2.VideoCapture("Path/to/video/file.mp4")
 assert cap.isOpened(), "Error reading video file"

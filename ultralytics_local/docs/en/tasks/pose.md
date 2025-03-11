@@ -68,7 +68,7 @@ Train a YOLO11-pose model on the COCO8-pose dataset.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.yaml")  # build a new model from YAML
@@ -105,7 +105,7 @@ Validate trained YOLO11n-pose model [accuracy](https://www.ultralytics.com/gloss
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load an official model
@@ -135,7 +135,7 @@ Use a trained YOLO11n-pose model to run predictions on images.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load an official model
@@ -169,7 +169,7 @@ Export a YOLO11n Pose model to a different format like ONNX, CoreML, etc.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-pose.pt")  # load an official model
@@ -203,7 +203,7 @@ Pose estimation with Ultralytics YOLO11 involves identifying specific points, kn
 Training a YOLO11-pose model on a custom dataset involves loading a model, either a new model defined by a YAML file or a pre-trained model. You can then start the training process using your specified dataset and parameters.
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # Load a model
 model = YOLO("yolo11n-pose.yaml")  # build a new model from YAML
@@ -220,7 +220,7 @@ For comprehensive details on training, refer to the [Train Section](#train).
 Validation of a YOLO11-pose model involves assessing its accuracy using the same dataset parameters retained during training. Here's an example:
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # Load a model
 model = YOLO("yolo11n-pose.pt")  # load an official model
@@ -237,7 +237,7 @@ For more information, visit the [Val Section](#val).
 Yes, you can export a YOLO11-pose model to various formats like ONNX, CoreML, TensorRT, and more. This can be done using either Python or the Command Line Interface (CLI).
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # Load a model
 model = YOLO("yolo11n-pose.pt")  # load an official model

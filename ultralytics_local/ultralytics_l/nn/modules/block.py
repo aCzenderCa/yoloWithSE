@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from ultralytics.utils.torch_utils import fuse_conv_and_bn
+from ultralytics_l.utils.torch_utils import fuse_conv_and_bn
 
 from .conv import Conv, DWConv, GhostConv, LightConv, RepConv, autopad, CBAM
 from .transformer import TransformerBlock
@@ -1062,7 +1062,7 @@ class C2fPSA(C2f):
 
     Examples:
         >>> import torch
-        >>> from ultralytics.models.common import C2fPSA
+        >>> from ultralytics_l.models.common import C2fPSA
         >>> model = C2fPSA(c1=64, c2=64, n=3, e=0.5)
         >>> x = torch.randn(1, 64, 128, 128)
         >>> output = model(x)
@@ -1092,7 +1092,7 @@ class SCDown(nn.Module):
 
     Examples:
         >>> import torch
-        >>> from ultralytics import SCDown
+        >>> from ultralytics_l import SCDown
         >>> model = SCDown(c1=64, c2=128, k=3, s=2)
         >>> x = torch.randn(1, 64, 128, 128)
         >>> y = model(x)

@@ -56,7 +56,7 @@ Train YOLO11n-obb on the DOTA8 dataset for 100 [epochs](https://www.ultralytics.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-obb.yaml")  # build a new model from YAML
@@ -104,7 +104,7 @@ Validate trained YOLO11n-obb model [accuracy](https://www.ultralytics.com/glossa
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-obb.pt")  # load an official model
@@ -134,7 +134,7 @@ Use a trained YOLO11n-obb model to run predictions on images.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-obb.pt")  # load an official model
@@ -180,7 +180,7 @@ Export a YOLO11n-obb model to a different format like ONNX, CoreML, etc.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-obb.pt")  # load an official model
@@ -218,7 +218,7 @@ To train a YOLO11n-obb model with a custom dataset, follow the example below usi
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n-obb.pt")
@@ -248,7 +248,7 @@ Exporting a YOLO11-OBB model to ONNX format is straightforward using either Pyth
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-obb.pt")
@@ -274,7 +274,7 @@ To validate a YOLO11n-obb model, you can use Python or CLI commands as shown bel
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-obb.pt")

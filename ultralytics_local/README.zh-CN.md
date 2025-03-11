@@ -87,7 +87,7 @@ yolo predict model=yolo11n.pt source='https://ultralytics.com/images/bus.jpg'
 YOLO 也可以直接在 Python 环境中使用，并接受与上述 CLI 示例中相同的[参数](https://docs.ultralytics.com/usage/cfg/)：
 
 ```python
-from ultralytics import YOLO
+from ultralytics_l import YOLO
 
 # 加载模型
 model = YOLO("yolo11n.pt")

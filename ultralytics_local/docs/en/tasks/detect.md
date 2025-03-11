@@ -47,7 +47,7 @@ Train YOLO11n on the COCO8 dataset for 100 [epochs](https://www.ultralytics.com/
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.yaml")  # build a new model from YAML
@@ -84,7 +84,7 @@ Validate trained YOLO11n model [accuracy](https://www.ultralytics.com/glossary/a
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official model
@@ -114,7 +114,7 @@ Use a trained YOLO11n model to run predictions on images.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official model
@@ -151,7 +151,7 @@ Export a YOLO11n model to a different format like ONNX, CoreML, etc.
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load an official model
@@ -189,7 +189,7 @@ Training a YOLO11 model on a custom dataset involves a few steps:
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a pretrained model
         model = YOLO("yolo11n.pt")
@@ -227,7 +227,7 @@ To validate the accuracy of your trained YOLO11 model, you can use the `.val()` 
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the model
         model = YOLO("path/to/best.pt")
@@ -254,7 +254,7 @@ Ultralytics YOLO11 allows exporting models to various formats such as ONNX, Tens
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the model
         model = YOLO("yolo11n.pt")

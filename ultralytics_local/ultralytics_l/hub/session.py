@@ -9,9 +9,9 @@ from urllib.parse import parse_qs, urlparse
 
 import requests
 
-from ultralytics.hub.utils import HELP_MSG, HUB_WEB_ROOT, PREFIX, TQDM
-from ultralytics.utils import IS_COLAB, LOGGER, SETTINGS, __version__, checks, emojis
-from ultralytics.utils.errors import HUBModelError
+from ultralytics_l.hub.utils import HELP_MSG, HUB_WEB_ROOT, PREFIX, TQDM
+from ultralytics_l.utils import IS_COLAB, LOGGER, SETTINGS, __version__, checks, emojis
+from ultralytics_l.utils.errors import HUBModelError
 
 AGENT_NAME = f"python-{__version__}-colab" if IS_COLAB else f"python-{__version__}-local"
 
@@ -26,7 +26,7 @@ class HUBTrainingSession:
         rate_limits (dict): Rate limits for different API calls (in seconds).
         timers (dict): Timers for rate limiting.
         metrics_queue (dict): Queue for the model's metrics.
-        model (dict): Model data fetched from Ultralytics HUB.
+        model (dict): Model data fetched from ultralytics_l HUB.
     """
 
     def __init__(self, identifier):
@@ -90,7 +90,7 @@ class HUBTrainingSession:
             return None
 
     def load_model(self, model_id):
-        """Loads an existing model from Ultralytics HUB using the provided model identifier."""
+        """Loads an existing model from ultralytics_l HUB using the provided model identifier."""
         self.model = self.client.model(model_id)
         if not self.model.data:  # then model does not exist
             raise ValueError(emojis("❌ The specified HUB model does not exist"))  # TODO: improve error handling

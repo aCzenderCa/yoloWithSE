@@ -132,7 +132,7 @@ The `ultra.examples` snippets are very useful for anyone looking to learn how to
     Just like the animation shows at the [top] of this page, you can use the snippet `ultra.example-yolo-predict` to insert the following code example. Once inserted, the only configurable option is for the model scale which can be any one of: `n`, `s`, `m`, `l`, or `x`.
 
     ```python
-    from ultralytics import ASSETS, YOLO
+    from ultralytics_l import ASSETS, YOLO
 
     model = YOLO("yolo11n.pt", task="detect")
     results = model(source=ASSETS / "bus.jpg")

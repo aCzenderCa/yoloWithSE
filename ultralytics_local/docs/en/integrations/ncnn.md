@@ -72,7 +72,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
           ```python
-          from ultralytics import YOLO
+          from ultralytics_l import YOLO
 
           # Load the YOLO11 model
           model = YOLO("yolo11n.pt")
@@ -137,7 +137,7 @@ To export your Ultralytics YOLO11 model to NCNN format, follow these steps:
 - **Python**: Use the `export` function from the YOLO class.
 
     ```python
-    from ultralytics import YOLO
+    from ultralytics_l import YOLO
 
     # Load the YOLO11 model
     model = YOLO("yolo11n.pt")

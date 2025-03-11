@@ -32,7 +32,7 @@ To test a deep learning model on the ImageNet10 dataset with an image size of 22
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -91,7 +91,7 @@ To test your deep learning model on the ImageNet10 dataset with an image size of
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)

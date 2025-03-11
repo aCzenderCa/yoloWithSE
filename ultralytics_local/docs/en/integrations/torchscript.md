@@ -80,7 +80,7 @@ Before diving into the usage instructions, it's important to note that while all
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")
@@ -150,7 +150,7 @@ To export a YOLO11 model to TorchScript, you can use the following example code:
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load the YOLO11 model
         model = YOLO("yolo11n.pt")

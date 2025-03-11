@@ -39,7 +39,7 @@ To train a CNN model on the MNIST dataset for 100 [epochs](https://www.ultralyti
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)
@@ -100,7 +100,7 @@ To train a model on the MNIST dataset using Ultralytics YOLO, you can follow the
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n-cls.pt")  # load a pretrained model (recommended for training)

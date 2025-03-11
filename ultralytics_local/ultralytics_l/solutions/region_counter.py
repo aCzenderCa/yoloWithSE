@@ -1,8 +1,8 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
-from ultralytics.solutions.solutions import BaseSolution
-from ultralytics.utils import LOGGER
-from ultralytics.utils.plotting import Annotator, colors
+from ultralytics_l.solutions.solutions import BaseSolution
+from ultralytics_l.utils import LOGGER
+from ultralytics_l.utils.plotting import Annotator, colors
 
 
 class RegionCounter(BaseSolution):

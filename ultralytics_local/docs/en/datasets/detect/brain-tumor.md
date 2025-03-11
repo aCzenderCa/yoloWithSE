@@ -51,7 +51,7 @@ To train a YOLO11n model on the brain tumor dataset for 100 [epochs](https://www
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -72,7 +72,7 @@ To train a YOLO11n model on the brain tumor dataset for 100 [epochs](https://www
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("path/to/best.pt")  # load a brain-tumor fine-tuned model
@@ -117,7 +117,7 @@ You can train a YOLO11 model on the brain tumor dataset for 100 epochs with an i
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("yolo11n.pt")  # load a pretrained model (recommended for training)
@@ -149,7 +149,7 @@ Inference using a fine-tuned YOLO11 model can be performed with either Python or
     === "Python"
 
         ```python
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         # Load a model
         model = YOLO("path/to/best.pt")  # load a brain-tumor fine-tuned model

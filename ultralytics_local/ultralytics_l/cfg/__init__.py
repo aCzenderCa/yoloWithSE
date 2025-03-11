@@ -9,7 +9,7 @@ from typing import Dict, List, Union
 
 import cv2
 
-from ultralytics.utils import (
+from ultralytics_l.utils import (
     ASSETS,
     DEFAULT_CFG,
     DEFAULT_CFG_DICT,
@@ -286,7 +286,7 @@ def get_cfg(cfg: Union[str, Path, Dict, SimpleNamespace] = DEFAULT_CFG_DICT, ove
         (SimpleNamespace): Namespace containing the merged configuration arguments.
 
     Examples:
-        >>> from ultralytics.cfg import get_cfg
+        >>> from ultralytics_l.cfg import get_cfg
         >>> config = get_cfg()  # Load default configuration
         >>> config_with_overrides = get_cfg("path/to/config.yaml", overrides={"epochs": 50, "batch_size": 16})
 
@@ -406,7 +406,7 @@ def get_save_dir(args, name=None):
     if getattr(args, "save_dir", None):
         save_dir = args.save_dir
     else:
-        from ultralytics.utils.files import increment_path
+        from ultralytics_l.utils.files import increment_path
 
         project = args.project or (ROOT.parent / "tests/tmp/runs" if TESTS_RUNNING else RUNS_DIR) / args.task
         name = name or args.name or f"{args.mode}"
@@ -569,18 +569,18 @@ def handle_yolo_hub(args: List[str]) -> None:
         ```
 
     Notes:
-        - The function imports the 'hub' module from ultralytics to perform login and logout operations.
+        - The function imports the 'hub' module from ultralytics_l to perform login and logout operations.
         - For the 'login' command, if no API key is provided, an empty string is passed to the login function.
         - The 'logout' command does not require any additional arguments.
     """
-    from ultralytics import hub
+    from ultralytics_l import hub
 
     if args[0] == "login":
         key = args[1] if len(args) > 1 else ""
         # Log in to Ultralytics HUB using the provided API key
         hub.login(key)
     elif args[0] == "logout":
-        # Log out from Ultralytics HUB
+        # Log out from ultralytics_l HUB
         hub.logout()
 
 
@@ -707,7 +707,7 @@ def handle_yolo_solutions(args: List[str]) -> None:
     else:
         cls, method = SOLUTION_MAP[s_n]  # solution class name, method name and default source
 
-        from ultralytics import solutions  # import ultralytics solutions
+        from ultralytics_l import solutions  # import ultralytics solutions
 
         solution = getattr(solutions, cls)(IS_CLI=True, **overrides)  # get solution class i.e ObjectCounter
         process = getattr(
@@ -720,7 +720,7 @@ def handle_yolo_solutions(args: List[str]) -> None:
         import os  # for directory creation
         from pathlib import Path
 
-        from ultralytics.utils.files import increment_path  # for output directory path update
+        from ultralytics_l.utils.files import increment_path  # for output directory path update
 
         w, h, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH, cv2.CAP_PROP_FRAME_HEIGHT, cv2.CAP_PROP_FPS))
         if s_n == "analytics":  # analytical graphs follow fixed shape for output i.e w=1920, h=1080
@@ -940,19 +940,19 @@ def entrypoint(debug=""):
     overrides["model"] = model
     stem = Path(model).stem.lower()
     if "rtdetr" in stem:  # guess architecture
-        from ultralytics import RTDETR
+        from ultralytics_l import RTDETR
 
         model = RTDETR(model)  # no task argument
     elif "fastsam" in stem:
-        from ultralytics import FastSAM
+        from ultralytics_l import FastSAM
 
         model = FastSAM(model)
     elif "sam_" in stem or "sam2_" in stem or "sam2.1_" in stem:
-        from ultralytics import SAM
+        from ultralytics_l import SAM
 
         model = SAM(model)
     else:
-        from ultralytics import YOLO
+        from ultralytics_l import YOLO
 
         model = YOLO(model, task=task)
     if isinstance(overrides.get("pretrained"), str):

@@ -12,9 +12,9 @@ import torch
 from PIL import Image
 from torch.utils.data import ConcatDataset
 
-from ultralytics.utils import LOCAL_RANK, NUM_THREADS, TQDM, colorstr
-from ultralytics.utils.ops import resample_segments
-from ultralytics.utils.torch_utils import TORCHVISION_0_18
+from ultralytics_l.utils import LOCAL_RANK, NUM_THREADS, TQDM, colorstr
+from ultralytics_l.utils.ops import resample_segments
+from ultralytics_l.utils.torch_utils import TORCHVISION_0_18
 
 from .augment import (
     Compose,

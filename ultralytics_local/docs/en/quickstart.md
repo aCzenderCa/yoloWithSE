@@ -271,7 +271,7 @@ For example, users can load a model, train it, evaluate its performance on a val
 !!! example
 
     ```python
-    from ultralytics import YOLO
+    from ultralytics_l import YOLO
 
     # Create a new YOLO model from scratch
     model = YOLO("yolo11n.yaml")
@@ -308,7 +308,7 @@ To gain insight into the current configuration of your settings, you can view th
 
         You can use Python to view your settings. Start by importing the `settings` object from the `ultralytics` module. Print and return settings using the following commands:
         ```python
-        from ultralytics import settings
+        from ultralytics_l import settings
 
         # View all settings
         print(settings)
@@ -334,7 +334,7 @@ Ultralytics allows users to easily modify their settings. Changes can be perform
 
         Within the Python environment, call the `update` method on the `settings` object to change your settings:
         ```python
-        from ultralytics import settings
+        from ultralytics_l import settings
 
         # Update a setting
         settings.update({"runs_dir": "/path/to/runs"})
@@ -366,7 +366,7 @@ The table below provides an overview of the settings available for adjustment wi
 
 | Name               | Example Value         | Data Type | Description                                                                                                       |
 | ------------------ | --------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
-| `settings_version` | `'0.0.4'`             | `str`     | Ultralytics _settings_ version (different from Ultralytics [pip] version)                                         |
+| `settings_version` | `'0.0.4'`             | `str`     | Ultralytics _settings_ version (different from ultralytics_l [pip] version)                                         |
 | `datasets_dir`     | `'/path/to/datasets'` | `str`     | The directory where the datasets are stored                                                                       |
 | `weights_dir`      | `'/path/to/weights'`  | `str`     | The directory where the model weights are stored                                                                  |
 | `runs_dir`         | `'/path/to/runs'`     | `str`     | The directory where the experiment runs are stored                                                                |
@@ -424,7 +424,7 @@ For more instructions, visit the [Conda quickstart guide](guides/conda-quickstar
 
 ### What are the advantages of using Docker to run Ultralytics YOLO?
 
-Using Docker to run Ultralytics YOLO provides an isolated and consistent environment, ensuring smooth performance across different systems. It also eliminates the complexity of local installation. Official Docker images from Ultralytics are available on [Docker Hub](https://hub.docker.com/r/ultralytics/ultralytics), with different variants tailored for GPU, CPU, ARM64, NVIDIA Jetson, and Conda environments. Below are the commands to pull and run the latest image:
+Using Docker to run Ultralytics YOLO provides an isolated and consistent environment, ensuring smooth performance across different systems. It also eliminates the complexity of local installation. Official Docker images from ultralytics_l are available on [Docker Hub](https://hub.docker.com/r/ultralytics/ultralytics), with different variants tailored for GPU, CPU, ARM64, NVIDIA Jetson, and Conda environments. Below are the commands to pull and run the latest image:
 
 ```bash
 # Pull the latest ultralytics image from Docker Hub
