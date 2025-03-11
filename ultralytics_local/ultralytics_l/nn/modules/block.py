@@ -954,8 +954,8 @@ class PSABlock(nn.Module):
 
     def forward(self, x):
         """Executes a forward pass through PSABlock, applying attention and feed-forward layers to the input tensor."""
-        # x = x + self.attn(x) if self.add else self.attn(x)
-        x = x + self.cbam(x) if self.add else self.cbam(x)
+        x = x + self.attn(x) if self.add else self.attn(x)
+        # x = x + self.cbam(x) if self.add else self.cbam(x)
         x = x + self.ffn(x) if self.add else self.ffn(x)
         return x
 
