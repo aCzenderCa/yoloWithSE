@@ -35,7 +35,7 @@ Object blurring with [Ultralytics YOLO11](https://github.com/ultralytics/ultraly
         import cv2
 
         from ultralytics_l import YOLO
-        from ultralytics_l.utils.plotting import Annotator, colors
+        from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         names = model.names

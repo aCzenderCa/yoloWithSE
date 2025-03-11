@@ -139,7 +139,7 @@ To automatically annotate your dataset using the Ultralytics framework, utilize 
     === "Python"
 
         ```python
-        from ultralytics_l.data.annotator import auto_annotate
+        from ultralytics.data.annotator import auto_annotate
 
         auto_annotate(data="path/to/images", det_model="yolo11x.pt", sam_model="mobile_sam.pt")
         ```

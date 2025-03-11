@@ -30,7 +30,7 @@ The `ultralytics` package comes with a myriad of utilities that can support, enh
 Dataset annotation is a very resource intensive and time-consuming process. If you have a YOLO [object detection](https://www.ultralytics.com/glossary/object-detection) model trained on a reasonable amount of data, you can use it and [SAM](../models/sam.md) to auto-annotate additional data (segmentation format).
 
 ```{ .py .annotate }
-from ultralytics_l.data.annotator import auto_annotate
+from ultralytics.data.annotator import auto_annotate
 
 auto_annotate(
     data="path/to/new/data",
@@ -51,7 +51,7 @@ This function does not return any value. For further details on how the function
 This function visualizes YOLO annotations on an image before training, helping to identify and correct any wrong annotations that could lead to incorrect detection results. It draws bounding boxes, labels objects with class names, and adjusts text color based on the background's luminance for better readability.
 
 ```{ .py .annotate }
-from ultralytics_l.data.utils import visualize_image_annotations
+from ultralytics.data.utils import visualize_image_annotations
 
 label_map = {  # Define the label map with all annotated class labels.
     0: "person",
@@ -76,7 +76,7 @@ This function takes the directory containing the binary format mask images and c
 The converted masks will be saved in the specified output directory.
 
 ```python
-from ultralytics_l.data.converter import convert_segment_masks_to_yolo_seg
+from ultralytics.data.converter import convert_segment_masks_to_yolo_seg
 
 # The classes here is the total classes in the dataset.
 # for COCO dataset we have 80 classes.
@@ -88,7 +88,7 @@ convert_segment_masks_to_yolo_seg(masks_dir="path/to/masks_dir", output_dir="pat
 Use to convert COCO JSON annotations into proper YOLO format. For object detection (bounding box) datasets, `use_segments` and `use_keypoints` should both be `False`
 
 ```{ .py .annotate }
-from ultralytics_l.data.converter import convert_coco
+from ultralytics.data.converter import convert_coco
 
 convert_coco(  # (1)!
     "../datasets/coco/annotations/",
@@ -105,7 +105,7 @@ For additional information about the `convert_coco` function, [visit the referen
 ### Get [Bounding Box](https://www.ultralytics.com/glossary/bounding-box) Dimensions
 
 ```{.py .annotate }
-from ultralytics_l.utils.plotting import Annotator
+from ultralytics.utils.plotting import Annotator
 from ultralytics_l import YOLO
 import cv2
 
@@ -143,7 +143,7 @@ data
 ```
 
 ```{ .py .annotate }
-from ultralytics_l.data.converter import yolo_bbox2segment
+from ultralytics.data.converter import yolo_bbox2segment
 
 yolo_bbox2segment(  # (1)!
     im_dir="path/to/images",
@@ -163,7 +163,7 @@ If you have a dataset that uses the [segmentation dataset format](../datasets/se
 ```python
 import numpy as np
 
-from ultralytics_l.utils.ops import segments2boxes
+from ultralytics.utils.ops import segments2boxes
 
 segments = np.array(
     [
@@ -191,7 +191,7 @@ Compresses a single image file to reduced size while preserving its aspect ratio
 ```{ .py .annotate }
 from pathlib import Path
 
-from ultralytics_l.data.utils import compress_one_image
+from ultralytics.data.utils import compress_one_image
 
 for f in Path("path/to/dataset").rglob("*.jpg"):
     compress_one_image(f)  # (1)!
@@ -204,7 +204,7 @@ for f in Path("path/to/dataset").rglob("*.jpg"):
 Automatically split a dataset into `train`/`val`/`test` splits and save the resulting splits into `autosplit_*.txt` files. This function will use random sampling, which is not included when using [`fraction` argument for training](../modes/train.md#train-settings).
 
 ```{ .py .annotate }
-from ultralytics_l.data.utils import autosplit
+from ultralytics.data.utils import autosplit
 
 autosplit(  # (1)!
     path="path/to/images",
@@ -228,7 +228,7 @@ Convert a single polygon (as list) to a binary mask of the specified image size.
 ```python
 import numpy as np
 
-from ultralytics_l.data.utils import polygon2mask
+from ultralytics.data.utils import polygon2mask
 
 imgsz = (1080, 810)
 polygon = np.array([805, 392, 797, 400, ..., 808, 714, 808, 392])  # (238, 2)
@@ -250,7 +250,7 @@ To manage bounding box data, the `Bboxes` class will help to convert between box
 ```python
 import numpy as np
 
-from ultralytics_l.utils.instance import Bboxes
+from ultralytics.utils.instance import Bboxes
 
 boxes = Bboxes(
     bboxes=np.array(
@@ -295,7 +295,7 @@ When scaling and image up or down, corresponding bounding box coordinates can be
 import cv2 as cv
 import numpy as np
 
-from ultralytics_l.utils.ops import scale_boxes
+from ultralytics.utils.ops import scale_boxes
 
 image = cv.imread("ultralytics/assets/bus.jpg")
 h, w, c = image.shape
@@ -344,7 +344,7 @@ Convert bounding box coordinates from (x1, y1, x2, y2) format to (x, y, width, h
 ```python
 import numpy as np
 
-from ultralytics_l.utils.ops import xyxy2xywh
+from ultralytics.utils.ops import xyxy2xywh
 
 xyxy_boxes = np.array(
     [
@@ -372,7 +372,7 @@ print(xywh)
 ### All Bounding Box Conversions
 
 ```python
-from ultralytics_l.utils.ops import (
+from ultralytics.utils.ops import (
     ltwh2xywh,
     ltwh2xyxy,
     xywh2ltwh,  # xywh → top-left corner, w, h
@@ -404,7 +404,7 @@ Ultralytics includes an Annotator class that can be used to annotate any kind of
     import cv2
 
     from ultralytics_l import YOLO
-    from ultralytics_l.utils.plotting import Annotator, colors
+    from ultralytics.utils.plotting import Annotator, colors
 
     # User defined video path and model file
     cap = cv2.VideoCapture("Path/to/video/file.mp4")
@@ -485,7 +485,7 @@ Ultralytics includes an Annotator class that can be used to annotate any kind of
 import cv2 as cv
 import numpy as np
 
-from ultralytics_l.utils.plotting import Annotator, colors
+from ultralytics.utils.plotting import Annotator, colors
 
 names = {  # (1)!
     0: "person",
@@ -529,7 +529,7 @@ image_with_bboxes = ann.result()
 import cv2 as cv
 import numpy as np
 
-from ultralytics_l.utils.plotting import Annotator, colors
+from ultralytics.utils.plotting import Annotator, colors
 
 obb_names = {10: "small vehicle"}
 obb_image = cv.imread("datasets/dota8/images/train/P1142__1024__0___824.jpg")
@@ -578,7 +578,7 @@ image_with_obb = ann.result()
 import cv2
 
 from ultralytics_l import YOLO
-from ultralytics_l.utils.plotting import Annotator
+from ultralytics.utils.plotting import Annotator
 
 model = YOLO("yolo11s.pt")
 names = model.names
@@ -617,7 +617,7 @@ cv2.destroyAllWindows()
 import cv2
 
 from ultralytics_l import YOLO
-from ultralytics_l.utils.plotting import Annotator
+from ultralytics.utils.plotting import Annotator
 
 model = YOLO("yolo11s.pt")
 names = model.names
@@ -659,7 +659,7 @@ See the [`Annotator` Reference Page](../reference/utils/plotting.md#ultralytics.
 Check duration for code to run/process either using `with` or as a decorator.
 
 ```python
-from ultralytics_l.utils.ops import Profile
+from ultralytics.utils.ops import Profile
 
 with Profile(device="cuda:0") as dt:
     pass  # operation to measure
@@ -673,7 +673,7 @@ print(dt)
 Want or need to use the formats of [images or videos types supported](../modes/predict.md#image-and-video-formats) by Ultralytics programmatically? Use these constants if you need.
 
 ```python
-from ultralytics_l.data.utils import IMG_FORMATS, VID_FORMATS
+from ultralytics.data.utils import IMG_FORMATS, VID_FORMATS
 
 print(IMG_FORMATS)
 # {'tiff', 'pfm', 'bmp', 'mpo', 'dng', 'jpeg', 'png', 'webp', 'tif', 'jpg'}
@@ -687,7 +687,7 @@ print(VID_FORMATS)
 Calculates the nearest whole number to `x` to make evenly divisible when divided by `y`.
 
 ```python
-from ultralytics_l.utils.ops import make_divisible
+from ultralytics.utils.ops import make_divisible
 
 make_divisible(7, 3)
 # >>> 9
@@ -706,7 +706,7 @@ The Ultralytics package includes a variety of utilities designed to streamline a
 If you have a pre-trained Ultralytics YOLO object detection model, you can use it with the [SAM](../models/sam.md) model to auto-annotate your dataset in segmentation format. Here's an example:
 
 ```python
-from ultralytics_l.data.annotator import auto_annotate
+from ultralytics.data.annotator import auto_annotate
 
 auto_annotate(
     data="path/to/new/data",
@@ -724,7 +724,7 @@ For more details, check the [auto_annotate reference section](../reference/data/
 To convert COCO JSON annotations into YOLO format for object detection, you can use the `convert_coco` utility. Here's a sample code snippet:
 
 ```python
-from ultralytics_l.data.converter import convert_coco
+from ultralytics.data.converter import convert_coco
 
 convert_coco(
     "../datasets/coco/annotations/",
@@ -745,7 +745,7 @@ The [YOLO Explorer](../datasets/explorer/index.md) is a powerful tool introduced
 To convert existing bounding box data (in `x y w h` format) to segments, you can use the `yolo_bbox2segment` function. Ensure your files are organized with separate directories for images and labels.
 
 ```python
-from ultralytics_l.data.converter import yolo_bbox2segment
+from ultralytics.data.converter import yolo_bbox2segment
 
 yolo_bbox2segment(
     im_dir="path/to/images",

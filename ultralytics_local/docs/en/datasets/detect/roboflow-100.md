@@ -50,7 +50,7 @@ Dataset benchmarking evaluates machine learning model performance on specific da
         import shutil
         from pathlib import Path
 
-        from ultralytics_l.utils.benchmarks import RF100Benchmark
+        from ultralytics.utils.benchmarks import RF100Benchmark
 
         # Initialize RF100Benchmark and set API key
         benchmark = RF100Benchmark()
@@ -148,7 +148,7 @@ To use the Roboflow 100 dataset for benchmarking, you can implement the RF100Ben
         import shutil
         from pathlib import Path
 
-        from ultralytics_l.utils.benchmarks import RF100Benchmark
+        from ultralytics.utils.benchmarks import RF100Benchmark
 
         # Initialize RF100Benchmark and set API key
         benchmark = RF100Benchmark()

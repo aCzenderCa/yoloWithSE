@@ -151,7 +151,7 @@ Note: This works using LLMs under the hood so the results are probabilistic and 
 
     ```python
     from ultralytics_l import Explorer
-    from ultralytics_l.data.explorer import plot_query_result
+    from ultralytics.data.explorer import plot_query_result
 
     # create an Explorer object
     exp = Explorer(data="coco128.yaml", model="yolo11n.pt")

@@ -203,7 +203,7 @@ SAM 2 can be utilized across a broad spectrum of tasks, including real-time vide
     === "Python"
 
         ```python
-        from ultralytics_l.models.sam import SAM2VideoPredictor
+        from ultralytics.models.sam import SAM2VideoPredictor
 
         # Create SAM2VideoPredictor
         overrides = dict(conf=0.25, task="segment", mode="predict", imgsz=1024, model="sam2_b.pt")
@@ -287,7 +287,7 @@ To auto-annotate your dataset using SAM 2, follow this example:
 !!! example "Auto-Annotation Example"
 
     ```python
-    from ultralytics_l.data.annotator import auto_annotate
+    from ultralytics.data.annotator import auto_annotate
 
     auto_annotate(data="path/to/images", det_model="yolo11x.pt", sam_model="sam2_b.pt")
     ```

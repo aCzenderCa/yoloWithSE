@@ -170,7 +170,7 @@ Benchmark mode in Ultralytics YOLO11 is used to analyze the speed and [accuracy]
     === "Python"
 
         ```python
-        from ultralytics_l.utils.benchmarks import benchmark
+        from ultralytics.utils.benchmarks import benchmark
 
         # Run benchmark on GPU (device 0)
         # You can adjust parameters like model, dataset, image size, and precision as needed

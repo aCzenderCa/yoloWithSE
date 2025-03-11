@@ -106,7 +106,7 @@ You can easily convert labels from the popular COCO dataset format to the YOLO f
     === "Python"
 
         ```python
-        from ultralytics_l.data.converter import convert_coco
+        from ultralytics.data.converter import convert_coco
 
         convert_coco(labels_dir="path/to/coco/annotations/")
         ```
@@ -140,7 +140,7 @@ Labels are saved in `*.txt` files with one file per image, formatted as `class x
 You can convert a COCO dataset to the YOLO format using the Ultralytics conversion tools. Here's a quick method:
 
 ```python
-from ultralytics_l.data.converter import convert_coco
+from ultralytics.data.converter import convert_coco
 
 convert_coco(labels_dir="path/to/coco/annotations/")
 ```

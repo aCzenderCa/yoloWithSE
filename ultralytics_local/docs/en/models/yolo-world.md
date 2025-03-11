@@ -296,7 +296,7 @@ This approach provides a powerful means of customizing state-of-the-art object d
 
         ```python
         from ultralytics_l import YOLOWorld
-        from ultralytics_l.models.yolo.world.train_world import WorldTrainerFromScratch
+        from ultralytics.models.yolo.world.train_world import WorldTrainerFromScratch
 
         data = dict(
             train=dict(
@@ -413,7 +413,7 @@ To reproduce the official results from scratch, you need to prepare the datasets
 
 ```python
 from ultralytics_l import YOLOWorld
-from ultralytics_l.models.yolo.world.train_world import WorldTrainerFromScratch
+from ultralytics.models.yolo.world.train_world import WorldTrainerFromScratch
 
 data = {
     "train": {

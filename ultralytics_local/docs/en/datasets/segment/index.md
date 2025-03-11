@@ -113,7 +113,7 @@ You can easily convert labels from the popular COCO dataset format to the YOLO f
     === "Python"
 
         ```python
-        from ultralytics_l.data.converter import convert_coco
+        from ultralytics.data.converter import convert_coco
 
         convert_coco(labels_dir="path/to/coco/annotations/", use_segments=True)
         ```
@@ -135,7 +135,7 @@ To auto-annotate your dataset using the Ultralytics framework, you can use the `
     === "Python"
 
         ```python
-        from ultralytics_l.data.annotator import auto_annotate
+        from ultralytics.data.annotator import auto_annotate
 
         auto_annotate(data="path/to/images", det_model="yolo11x.pt", sam_model="sam_b.pt")
         ```
@@ -157,7 +157,7 @@ Ultralytics YOLO supports several dataset formats for instance segmentation, wit
 Converting COCO format annotations to YOLO format is straightforward using Ultralytics tools. You can use the `convert_coco` function from the `ultralytics.data.converter` module:
 
 ```python
-from ultralytics_l.data.converter import convert_coco
+from ultralytics.data.converter import convert_coco
 
 convert_coco(labels_dir="path/to/coco/annotations/", use_segments=True)
 ```
@@ -187,7 +187,7 @@ Ensure you update the paths and class names according to your dataset. For more 
 Auto-annotation in Ultralytics YOLO allows you to generate segmentation annotations for your dataset using a pre-trained detection model. This significantly reduces the need for manual labeling. You can use the `auto_annotate` function as follows:
 
 ```python
-from ultralytics_l.data.annotator import auto_annotate
+from ultralytics.data.annotator import auto_annotate
 
 auto_annotate(data="path/to/images", det_model="yolo11x.pt", sam_model="sam_b.pt")  # or sam_model="mobile_sam.pt"
 ```

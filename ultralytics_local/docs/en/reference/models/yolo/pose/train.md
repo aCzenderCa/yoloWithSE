@@ -1,5 +1,5 @@
 ---
-description: Explore the PoseTrainer class for training pose models using YOLO from ultralytics_l. Includes initialization, model configuration, and plotting methods.
+description: Explore the PoseTrainer class for training pose models using YOLO from ultralytics. Includes initialization, model configuration, and plotting methods.
 keywords: PoseTrainer, YOLO, Ultralytics, pose models, training, model configuration, deep learning, machine learning, pose estimation
 ---
 

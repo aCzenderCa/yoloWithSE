@@ -248,7 +248,7 @@ Benchmark mode is used to profile the speed and accuracy of various export forma
 
         Benchmark an official YOLO11n model across all export formats.
         ```python
-        from ultralytics_l.utils.benchmarks import benchmark
+        from ultralytics.utils.benchmarks import benchmark
 
         # Benchmark
         benchmark(model="yolo11n.pt", data="coco8.yaml", imgsz=640, half=False, device=0)
@@ -263,7 +263,7 @@ Benchmark mode is used to profile the speed and accuracy of various export forma
 !!! tip "Detection Trainer Example"
 
     ```python
-    from ultralytics_l.models.yolo import DetectionPredictor, DetectionTrainer, DetectionValidator
+    from ultralytics.models.yolo import DetectionPredictor, DetectionTrainer, DetectionValidator
 
     # trainer
     trainer = DetectionTrainer(overrides={})

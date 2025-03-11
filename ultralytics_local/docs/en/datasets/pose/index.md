@@ -149,7 +149,7 @@ Ultralytics provides a convenient conversion tool to convert labels from the pop
     === "Python"
 
         ```python
-        from ultralytics_l.data.converter import convert_coco
+        from ultralytics.data.converter import convert_coco
 
         convert_coco(labels_dir="path/to/coco/annotations/", use_keypoints=True)
         ```
@@ -222,7 +222,7 @@ Read more about creating YAML configuration files in [Dataset YAML format](#data
 Ultralytics provides a conversion tool to convert COCO dataset labels to the YOLO format, including keypoint information:
 
 ```python
-from ultralytics_l.data.converter import convert_coco
+from ultralytics.data.converter import convert_coco
 
 convert_coco(labels_dir="path/to/coco/annotations/", use_keypoints=True)
 ```

@@ -25,7 +25,7 @@ keywords: VisionEye, YOLO11, Ultralytics, object mapping, object tracking, dista
         import cv2
 
         from ultralytics_l import YOLO
-        from ultralytics_l.utils.plotting import Annotator, colors
+        from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         names = model.model.names
@@ -69,7 +69,7 @@ keywords: VisionEye, YOLO11, Ultralytics, object mapping, object tracking, dista
         import cv2
 
         from ultralytics_l import YOLO
-        from ultralytics_l.utils.plotting import Annotator, colors
+        from ultralytics.utils.plotting import Annotator, colors
 
         model = YOLO("yolo11n.pt")
         cap = cv2.VideoCapture("path/to/video/file.mp4")
@@ -116,7 +116,7 @@ keywords: VisionEye, YOLO11, Ultralytics, object mapping, object tracking, dista
         import cv2
 
         from ultralytics_l import YOLO
-        from ultralytics_l.utils.plotting import Annotator
+        from ultralytics.utils.plotting import Annotator
 
         model = YOLO("yolo11n.pt")
         cap = cv2.VideoCapture("Path/to/video/file.mp4")

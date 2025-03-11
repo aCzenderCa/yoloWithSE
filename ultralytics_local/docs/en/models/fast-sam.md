@@ -105,7 +105,7 @@ This snippet demonstrates the simplicity of loading a pre-trained model and runn
     === "Prompt inference"
 
         ```python
-        from ultralytics_l.models.fastsam import FastSAMPredictor
+        from ultralytics.models.fastsam import FastSAMPredictor
 
         # Create FastSAMPredictor
         overrides = dict(conf=0.25, task="segment", mode="predict", model="FastSAM-s.pt", save=False, imgsz=1024)

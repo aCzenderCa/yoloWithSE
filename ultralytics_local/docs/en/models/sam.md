@@ -106,7 +106,7 @@ The Segment Anything Model can be employed for a multitude of downstream tasks t
     === "Prompt inference"
 
         ```python
-        from ultralytics_l.models.sam import Predictor as SAMPredictor
+        from ultralytics.models.sam import Predictor as SAMPredictor
 
         # Create SAMPredictor
         overrides = dict(conf=0.25, task="segment", mode="predict", imgsz=1024, model="mobile_sam.pt")
@@ -135,7 +135,7 @@ The Segment Anything Model can be employed for a multitude of downstream tasks t
     === "Segment everything"
 
         ```python
-        from ultralytics_l.models.sam import Predictor as SAMPredictor
+        from ultralytics.models.sam import Predictor as SAMPredictor
 
         # Create SAMPredictor
         overrides = dict(conf=0.25, task="segment", mode="predict", imgsz=1024, model="mobile_sam.pt")
@@ -203,7 +203,7 @@ To auto-annotate your dataset with the Ultralytics framework, use the `auto_anno
     === "Python"
 
         ```python
-        from ultralytics_l.data.annotator import auto_annotate
+        from ultralytics.data.annotator import auto_annotate
 
         auto_annotate(data="path/to/images", det_model="yolo11x.pt", sam_model="sam_b.pt")
         ```
@@ -284,7 +284,7 @@ Compared to YOLOv8, SAM models like SAM-b and FastSAM-s are larger and slower bu
 Ultralytics' SAM offers an auto-annotation feature that allows generating segmentation datasets using a pre-trained detection model. Here's an example in Python:
 
 ```python
-from ultralytics_l.data.annotator import auto_annotate
+from ultralytics.data.annotator import auto_annotate
 
 auto_annotate(data="path/to/images", det_model="yolov8x.pt", sam_model="sam_b.pt")
 ```
