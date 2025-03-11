@@ -33,12 +33,12 @@ if len(args.resume) == 0:
             if m1.__class__ == m2.__class__:
                 m1.load_state_dict(m2.state_dict())
 
-    results = model.train(data='DOTAv1.5.yaml', epochs=args.epoch, imgsz=args.imgsz, batch=0.3,
+    results = model.train(data='DOTAv1.5.yaml', epochs=args.epoch, imgsz=args.imgsz, batch=0.6,
                           multi_scale=args.multi_scale, val=not args.no_val)
 else:
     model = YOLO(args.resume)
 
-    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz, batch=0.5, multi_scale=args.multi_scale,
+    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz, batch=0.6, multi_scale=args.multi_scale,
                           val=not args.no_val)
 
 if model.trainer.best:
