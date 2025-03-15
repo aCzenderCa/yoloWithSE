@@ -22,6 +22,7 @@ args.add_argument('--batch', type=float, default=0.7)
 args.add_argument('--optimizer', type=str, default='auto')
 args.add_argument('--freeze', type=str, default='')
 args.add_argument('--lr0', type=float, default=0.1)
+args.add_argument('--auto_augment', type=str, default='autoaugment')
 
 args = args.parse_args()
 
@@ -41,6 +42,7 @@ train_args.val = not args.no_val
 train_args.optimizer = args.optimizer
 train_args.lr0 = args.lr0
 train_args.plots = True
+train_args.auto_augment = args.auto_augment
 
 if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
