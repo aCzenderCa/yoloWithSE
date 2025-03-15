@@ -18,6 +18,7 @@ args.add_argument('--imgsz', type=int, default=640)
 args.add_argument('--multi_scale', action='store_true', default=False)
 args.add_argument('--no_val', action='store_true', default=False)
 args.add_argument('--pretrained', type=str, default='')
+args.add_argument('--batch', type=float, default=0.7)
 
 args = args.parse_args()
 
@@ -33,12 +34,12 @@ if len(args.resume) == 0:
             if m1.__class__ == m2.__class__:
                 m1.load_state_dict(m2.state_dict())
 
-    results = model.train(data='DOTAv1.5.yaml', epochs=args.epoch, imgsz=args.imgsz, batch=0.6,
+    results = model.train(data='DOTAv1.5.yaml', epochs=args.epoch, imgsz=args.imgsz, batch=args.batch,
                           multi_scale=args.multi_scale, val=not args.no_val)
 else:
     model = YOLO(args.resume)
 
-    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz, batch=0.6, multi_scale=args.multi_scale,
+    results = model.train(resume=True, epochs=args.epoch, imgsz=args.imgsz, batch=args.batch, multi_scale=args.multi_scale,
                           val=not args.no_val)
 
 if model.trainer.best:
