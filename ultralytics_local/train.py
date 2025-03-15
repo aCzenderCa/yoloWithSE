@@ -24,10 +24,11 @@ args.add_argument('--freeze', type=str, default='')
 args.add_argument('--lr0', type=float, default=0.1)
 
 args = args.parse_args()
-train_args = {}
 
-train_args.model = str.replace(args.model, 'yolo11', 'yolo11{0}', 1)
-train_args.model = str.replace(args.model, 'yolo12', 'yolo12{0}', 1)
+args.model = str.replace(args.model, 'yolo11', 'yolo11{0}', 1)
+args.model = str.replace(args.model, 'yolo12', 'yolo12{0}', 1)
+
+train_args = {}
 if args.freeze != '':
     train_args.freeze = list(map(int, str.split(args.freeze, '|')))
 else:
