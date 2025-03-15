@@ -31,18 +31,18 @@ args.model = str.replace(args.model, 'yolo12', 'yolo12{0}', 1)
 
 train_args = {}
 if args.freeze != '':
-    train_args.freeze = list(map(int, str.split(args.freeze, '|')))
+    train_args['freeze'] = list(map(int, str.split(args.freeze, '|')))
 else:
-    train_args.freeze = []
-train_args.epochs = args.epoch
-train_args.imgsz = args.imgsz
-train_args.batch = args.batch
-train_args.multi_scale = args.multi_scale
-train_args.val = not args.no_val
-train_args.optimizer = args.optimizer
-train_args.lr0 = args.lr0
-train_args.plots = True
-train_args.auto_augment = args.auto_augment
+    train_args['freeze'] = []
+train_args['epochs'] = args.epoch
+train_args['imgsz'] = args.imgsz
+train_args['batch'] = args.batch
+train_args['multi_scale'] = args.multi_scale
+train_args['val'] = not args.no_val
+train_args['optimizer'] = args.optimizer
+train_args['lr0'] = args.lr0
+train_args['plots'] = True
+train_args['auto_augment'] = args.auto_augment
 
 if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
