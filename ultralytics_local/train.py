@@ -23,6 +23,7 @@ args.add_argument('--optimizer', type=str, default='auto')
 args.add_argument('--freeze', type=str, default='')
 args.add_argument('--lr0', type=float, default=0.1)
 args.add_argument('--auto_augment', type=str, default='autoaugment')
+args.add_argument('--data', type=str, default='DOTAv1.yaml')
 
 args = args.parse_args()
 
@@ -53,7 +54,7 @@ if len(args.resume) == 0:
             if m1.__class__ == m2.__class__:
                 m1.load_state_dict(m2.state_dict())
 
-    results = model.train(data='DOTAv1.5.yaml', **train_args)
+    results = model.train(data=args.data, **train_args)
 else:
     model = YOLO(args.resume)
 
