@@ -48,6 +48,7 @@ class ViTBlock2(nn.Module):
         self.stride = stride
         self.bn1 = nn.BatchNorm2d(int(in_channel * ch_scale))
 
+
     def forward(self, x: torch.Tensor):
         raw_x = x
         x = self.dwconv(x)
