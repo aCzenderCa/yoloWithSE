@@ -18,11 +18,10 @@ args.model = str.split(args.model, '|')
 
 for model in args.model:
     print(model, end="")
+    model = YOLO(model, task='obb')
     if args.only_model_structure:
-        model = YOLO(model, task='obb')
         model.predict(torch.zeros(3, 3, args.imgsz, args.imgsz))
     else:
-        # benchmark(model=model, data=args.dataset, imgsz=args.imgsz, half=True, device=args.device)
         metrics = model.val(data=args.dataset, imgsz=args.imgsz)
         print(f"mAP50:{metrics.box.map50}")
 
