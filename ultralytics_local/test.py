@@ -21,7 +21,7 @@ for model in args.model:
         model = YOLO(model, task='obb')
         model.predict(torch.zeros(3, 3, args.imgsz, args.imgsz))
     else:
-        benchmark(model=model, data=args.dataset, imgsz=args.imgsz)
+        benchmark(model=model, data=args.dataset, imgsz=args.imgsz, half=True)
         metrics = model.val(data=args.dataset)
         print(f"mAP50:{metrics.box.map50}")
 
