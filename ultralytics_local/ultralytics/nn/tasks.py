@@ -9,7 +9,7 @@ from pathlib import Path
 
 import torch
 
-from ultralytics.formerBackbone.blocks.vitblk import ViTBlock
+from ultralytics.formerBackbone.blocks.vitblk import ViTBlock,ViTBlock2
 
 from ultralytics.nn.modules import (
     AIFI,
@@ -990,6 +990,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             C2fCIB,
             A2C2f,
             ViTBlock,
+            ViTBlock2,
         }
     )
     repeat_modules = frozenset(  # modules with 'repeat' arguments
