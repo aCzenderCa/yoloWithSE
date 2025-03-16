@@ -52,7 +52,10 @@ if len(args.resume) == 0:
         pretrained: OBBModel = torch.load(args.pretrained)
         for (m1, m2) in itertools.zip_longest(oms, pretrained['model'].model):
             if m1.__class__ == m2.__class__:
-                m1.load_state_dict(m2.state_dict())
+                try:
+                    m1.load_state_dict(m2.state_dict())
+                except Exception as e:
+                    print(e)
 
     results = model.train(data=args.data, **train_args)
 else:
