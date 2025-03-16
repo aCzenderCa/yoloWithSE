@@ -11,4 +11,5 @@ args.add_argument('--dataset', type=str, default='DOTAv1.5.yaml')
 args = args.parse_args()
 
 model = YOLO(args.model, task='obb')
-model.val(data=args.dataset)
+metrics = model.val(data=args.dataset)
+print(f"mAP50:{metrics.box.map50}")
