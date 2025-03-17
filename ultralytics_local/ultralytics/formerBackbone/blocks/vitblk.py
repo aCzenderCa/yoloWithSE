@@ -81,7 +81,7 @@ class ViTBlock3(nn.Module):
         self.stride = stride
         self.bn1 = nn.BatchNorm2d(int(in_channel * ch_scale))
         self.pconv = nn.Conv2d(in_channel, int(in_channel * ch_scale), kernel_size=1, stride=stride,
-                               groups=int(in_channel * ch_scale))
+                               groups=int(in_channel * ch_scale) if ch_scale <= 1 else in_channel)
         init.constant_(self.pconv.weight, 1)
 
     def forward(self, x: torch.Tensor):
