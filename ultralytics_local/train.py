@@ -44,7 +44,6 @@ train_args['optimizer'] = args.optimizer
 train_args['lr0'] = args.lr0
 train_args['plots'] = True
 train_args['auto_augment'] = args.auto_augment
-train_args['device'] = "cuda:1"
 
 if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
