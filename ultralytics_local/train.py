@@ -68,4 +68,4 @@ if model.trainer.best:
 else:
     model.best = model.trainer.last
 
-# python train.py --model last.pt --imgsz 1024 --epoch 600 --no_val --optimizer AdamW --lr0 0.02 --freeze 0
+# python train.py --model last.pt --imgsz 1024 --epoch 500 --no_val --optimizer AdamW --lr0 0.002 --multi_scale --batch 0.55
