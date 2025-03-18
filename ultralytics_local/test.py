@@ -8,9 +8,9 @@ args = ArgumentParser()
 
 args.add_argument('--model', type=str, default='best.pt')
 args.add_argument('--imgsz', type=int, default=1024)
-args.add_argument('--dataset', type=str, default='DOTAv1.5.yaml')
+args.add_argument('--dataset', type=str, default='DOTAv1.yaml')
 args.add_argument('--only_model_structure', action='store_true', default=False)
-args.add_argument('--device', type=str, default="cuda:0")
+args.add_argument('--device', type=str, default=None)
 
 args = args.parse_args()
 
