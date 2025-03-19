@@ -161,15 +161,10 @@ class ViTBlock5(nn.Module):
 
         init.constant_(self.pconv.weight, 1)
         init.kaiming_uniform_(self.dwconv.weight)
-        init.kaiming_uniform_(self.dwconv.bias)
         init.kaiming_uniform_(self.cbam.channel_attention.fc.weight)
-        init.kaiming_uniform_(self.cbam.channel_attention.fc.bias)
         init.kaiming_uniform_(self.cbam.spatial_attention.cv1.weight)
-        init.kaiming_uniform_(self.cbam.spatial_attention.cv1.bias)
         init.kaiming_uniform_(self.bn0.weight)
-        init.kaiming_uniform_(self.bn0.bias)
         init.kaiming_uniform_(self.bn1.weight)
-        init.kaiming_uniform_(self.bn1.bias)
 
     def forward(self, x: torch.Tensor):
         raw_x = x
