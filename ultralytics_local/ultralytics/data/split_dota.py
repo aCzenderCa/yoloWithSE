@@ -178,7 +178,6 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
     im = cv2.imread(anno["filepath"])
     name = Path(anno["filepath"]).stem
     count = 0
-    random.shuffle(windows)
     for i, window in enumerate(windows):
         if max_of_per_img > 0 and i >= max_of_per_img:
             break

@@ -6,7 +6,7 @@ args = ArgumentParser()
 args.add_argument('--data', type=str, default='')
 args.add_argument('--max_count_train', type=float, default=-1)
 args.add_argument('--max_count_val', type=float, default=-1)
-args.add_argument('--max_of_per_img', type=float, default=2)
+args.add_argument('--max_of_per_img', type=float, default=1)
 
 args = args.parse_args()
 
