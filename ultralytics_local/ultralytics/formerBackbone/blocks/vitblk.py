@@ -160,6 +160,11 @@ class ViTBlock5(nn.Module):
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
 
         init.constant_(self.pconv.weight, 1)
+        init.uniform_(self.dwconv.bias, -0.1, 0.1)
+        init.uniform_(self.cbam.channel_attention.fc.bias, -0.1, 0.1)
+        init.uniform_(self.cbam.spatial_attention.cv1.bias, -0.1, 0.1)
+        init.uniform_(self.bn0.bias, -0.1, 0.1)
+        init.uniform_(self.bn1.bias, -0.1, 0.1)
 
     def forward(self, x: torch.Tensor):
         raw_x = x
