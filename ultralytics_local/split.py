@@ -4,8 +4,9 @@ from argparse import ArgumentParser
 args = ArgumentParser()
 
 args.add_argument('--data', type=str, default='')
-args.add_argument('--max_count_train', type=float, default=10000)
-args.add_argument('--max_count_val', type=float, default=1000)
+args.add_argument('--max_count_train', type=float, default=-1)
+args.add_argument('--max_count_val', type=float, default=-1)
+args.add_argument('--max_of_per_img', type=float, default=2)
 
 args = args.parse_args()
 
@@ -18,4 +19,5 @@ if len(args.data) > 0:
         gap=500,
         max_count_train=args.max_count_train,
         max_count_val=args.max_count_val,
+        max_of_per_img=args.max_of_per_img
     )

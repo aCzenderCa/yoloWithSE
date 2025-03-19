@@ -153,7 +153,7 @@ def get_window_obj(anno, windows, iof_thr=0.7):
         return [np.zeros((0, 9), dtype=np.float32) for _ in range(len(windows))]  # window_anns
 
 
-def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_images=True):
+def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_images=True, max_of_per_img=-1):
     """
     Crop images and save new labels.
 
@@ -179,6 +179,8 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
     name = Path(anno["filepath"]).stem
     count = 0
     for i, window in enumerate(windows):
+        if max_of_per_img > 0 and i >= max_of_per_img:
+            break
         count += 1
         x_start, y_start, x_stop, y_stop = window.tolist()
         new_name = f"{name}__{x_stop - x_start}__{x_start}___{y_start}"
@@ -202,7 +204,8 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
     return count
 
 
-def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024,), gaps=(200,), max_count=-1):
+def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024,), gaps=(200,), max_count=-1,
+                            max_of_per_img=-1):
     """
     Split both images and labels.
 
@@ -226,17 +229,18 @@ def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024
     lb_dir.mkdir(parents=True, exist_ok=True)
 
     annos = load_yolo_dota(data_root, split=split)
-    random.shuffle(annos)
     total_count = 0
     for anno in TQDM(annos, total=len(annos), desc=split):
         if max_count > 0 and total_count > max_count:
             break
         windows = get_windows(anno["ori_size"], crop_sizes, gaps)
         window_objs = get_window_obj(anno, windows)
-        total_count += crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir))
+        total_count += crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir),
+                                     max_of_per_img=max_of_per_img)
 
 
-def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), max_count_train=-1, max_count_val=-1):
+def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), max_count_train=-1, max_count_val=-1,
+                   max_of_per_img=-1):
     """
     Split train and val set of DOTA.
 
