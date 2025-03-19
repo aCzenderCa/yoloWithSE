@@ -95,7 +95,7 @@ def load_yolo_dota(data_root, split="train"):
     return annos
 
 
-def get_windows(im_size, crop_sizes=(1024,), gaps=(200,), im_rate_thr=0.6, eps=0.01):
+def get_windows(im_size, crop_sizes=(1024,), gaps=(200,), im_rate_thr=0.6, eps=0.01, max_of_per_img=-1):
     """
     Get the coordinates of windows.
 
@@ -109,6 +109,8 @@ def get_windows(im_size, crop_sizes=(1024,), gaps=(200,), im_rate_thr=0.6, eps=0
     h, w = im_size
     windows = []
     for crop_size, gap in zip(crop_sizes, gaps):
+        if max_of_per_img > 0 and len(windows) >= max_of_per_img:
+            break
         assert crop_size > gap, f"invalid crop_size gap pair [{crop_size} {gap}]"
         step = crop_size - gap
 
@@ -233,7 +235,7 @@ def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024
     for anno in TQDM(annos, total=len(annos), desc=split):
         if max_count > 0 and total_count > max_count:
             break
-        windows = get_windows(anno["ori_size"], crop_sizes, gaps)
+        windows = get_windows(anno["ori_size"], crop_sizes, gaps, max_of_per_img=max_of_per_img)
         window_objs = get_window_obj(anno, windows)
         total_count += crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir),
                                      max_of_per_img=max_of_per_img)
@@ -267,8 +269,10 @@ def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), m
         crop_sizes.append(int(crop_size / r))
         gaps.append(int(gap / r))
 
-    split_images_and_labels(data_root, save_dir, "train", crop_sizes, gaps, max_count=max_count_train)
-    split_images_and_labels(data_root, save_dir, "val", crop_sizes, gaps, max_count=max_count_val)
+    split_images_and_labels(data_root, save_dir, "train", crop_sizes, gaps, max_count=max_count_train,
+                            max_of_per_img=max_of_per_img)
+    split_images_and_labels(data_root, save_dir, "val", crop_sizes, gaps, max_count=max_count_val,
+                            max_of_per_img=max_of_per_img)
 
 
 def split_test(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,)):
