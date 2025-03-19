@@ -150,8 +150,12 @@ class ViTBlock5(nn.Module):
         self.ch_scale = ch_scale
         self.stride = stride
         self.bn1 = nn.BatchNorm2d(int(in_channel * ch_scale))
+        p_gp = int(in_channel * ch_scale) if ch_scale <= 1 else in_channel
+        if ((out_channel > in_channel and out_channel % in_channel != 0) or
+                (out_channel < in_channel and in_channel % out_channel != 0)):
+            p_gp = 1
         self.pconv = nn.Conv2d(in_channel, int(in_channel * ch_scale), kernel_size=1,
-                               groups=int(in_channel * ch_scale) if ch_scale <= 1 else in_channel)
+                               groups=p_gp)
         self.scale = nn.Sequential()
         if stride > 1:
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
