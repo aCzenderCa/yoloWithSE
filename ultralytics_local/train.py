@@ -20,7 +20,7 @@ args.add_argument('--no_val', action='store_true', default=False)
 args.add_argument('--pretrained', type=str, default='')
 args.add_argument('--batch', type=float, default=0.7)
 args.add_argument('--optimizer', type=str, default='auto')
-args.add_argument('--freeze', type=str, default='')
+args.add_argument('--freeze', type=str, default='')#2|4|6|8|9|10|13|16|19|22|23
 args.add_argument('--lr0', type=float, default=0.1)
 args.add_argument('--auto_augment', type=str, default='autoaugment')
 args.add_argument('--data', type=str, default='DOTAv1.yaml')
