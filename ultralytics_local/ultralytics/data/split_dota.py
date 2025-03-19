@@ -1,6 +1,7 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import itertools
+import random
 from glob import glob
 from math import ceil
 from pathlib import Path
@@ -225,6 +226,7 @@ def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024
     lb_dir.mkdir(parents=True, exist_ok=True)
 
     annos = load_yolo_dota(data_root, split=split)
+    random.shuffle(annos)
     total_count = 0
     for anno in TQDM(annos, total=len(annos), desc=split):
         if max_count > 0 and total_count > max_count:
