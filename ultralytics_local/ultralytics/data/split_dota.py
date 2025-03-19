@@ -152,7 +152,7 @@ def get_window_obj(anno, windows, iof_thr=0.7):
         return [np.zeros((0, 9), dtype=np.float32) for _ in range(len(windows))]  # window_anns
 
 
-def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_images=True, max_count=-1):
+def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_images=True):
     """
     Crop images and save new labels.
 
@@ -176,9 +176,9 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
     """
     im = cv2.imread(anno["filepath"])
     name = Path(anno["filepath"]).stem
+    count = 0
     for i, window in enumerate(windows):
-        if max_count > 0 and i >= max_count:
-            break
+        count += 1
         x_start, y_start, x_stop, y_stop = window.tolist()
         new_name = f"{name}__{x_stop - x_start}__{x_start}___{y_start}"
         patch_im = im[y_start:y_stop, x_start:x_stop]
@@ -197,6 +197,8 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
                 for lb in label:
                     formatted_coords = [f"{coord:.6g}" for coord in lb[1:]]
                     f.write(f"{int(lb[0])} {' '.join(formatted_coords)}\n")
+
+    return count
 
 
 def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024,), gaps=(200,), max_count=-1):
@@ -223,10 +225,13 @@ def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024
     lb_dir.mkdir(parents=True, exist_ok=True)
 
     annos = load_yolo_dota(data_root, split=split)
+    total_count = 0
     for anno in TQDM(annos, total=len(annos), desc=split):
+        if max_count > 0 and total_count > max_count:
+            break
         windows = get_windows(anno["ori_size"], crop_sizes, gaps)
         window_objs = get_window_obj(anno, windows)
-        crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir), max_count=max_count)
+        total_count += crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir))
 
 
 def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), max_count=-1):
