@@ -152,7 +152,7 @@ def get_window_obj(anno, windows, iof_thr=0.7):
         return [np.zeros((0, 9), dtype=np.float32) for _ in range(len(windows))]  # window_anns
 
 
-def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_images=True):
+def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_images=True, max_count=-1):
     """
     Crop images and save new labels.
 
@@ -177,6 +177,8 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
     im = cv2.imread(anno["filepath"])
     name = Path(anno["filepath"]).stem
     for i, window in enumerate(windows):
+        if max_count > 0 and i >= max_count:
+            break
         x_start, y_start, x_stop, y_stop = window.tolist()
         new_name = f"{name}__{x_stop - x_start}__{x_start}___{y_start}"
         patch_im = im[y_start:y_stop, x_start:x_stop]
@@ -197,7 +199,7 @@ def crop_and_save(anno, windows, window_objs, im_dir, lb_dir, allow_background_i
                     f.write(f"{int(lb[0])} {' '.join(formatted_coords)}\n")
 
 
-def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024,), gaps=(200,)):
+def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024,), gaps=(200,), max_count=-1):
     """
     Split both images and labels.
 
@@ -224,10 +226,10 @@ def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024
     for anno in TQDM(annos, total=len(annos), desc=split):
         windows = get_windows(anno["ori_size"], crop_sizes, gaps)
         window_objs = get_window_obj(anno, windows)
-        crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir))
+        crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir), max_count=max_count)
 
 
-def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,)):
+def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), max_count=-1):
     """
     Split train and val set of DOTA.
 
@@ -254,7 +256,7 @@ def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,)):
         crop_sizes.append(int(crop_size / r))
         gaps.append(int(gap / r))
     for split in ["train", "val"]:
-        split_images_and_labels(data_root, save_dir, split, crop_sizes, gaps)
+        split_images_and_labels(data_root, save_dir, split, crop_sizes, gaps, max_count=max_count)
 
 
 def split_test(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,)):
