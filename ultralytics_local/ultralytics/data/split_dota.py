@@ -234,7 +234,7 @@ def split_images_and_labels(data_root, save_dir, split="train", crop_sizes=(1024
         total_count += crop_and_save(anno, windows, window_objs, str(im_dir), str(lb_dir))
 
 
-def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), max_count=-1):
+def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), max_count_train=-1, max_count_val=-1):
     """
     Split train and val set of DOTA.
 
@@ -260,8 +260,9 @@ def split_trainval(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,), m
     for r in rates:
         crop_sizes.append(int(crop_size / r))
         gaps.append(int(gap / r))
-    for split in ["train", "val"]:
-        split_images_and_labels(data_root, save_dir, split, crop_sizes, gaps, max_count=max_count)
+
+    split_images_and_labels(data_root, save_dir, "train", crop_sizes, gaps, max_count=max_count_train)
+    split_images_and_labels(data_root, save_dir, "val", crop_sizes, gaps, max_count=max_count_val)
 
 
 def split_test(data_root, save_dir, crop_size=1024, gap=200, rates=(1.0,)):
