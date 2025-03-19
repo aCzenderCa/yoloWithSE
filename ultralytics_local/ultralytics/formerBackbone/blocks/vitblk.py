@@ -160,11 +160,6 @@ class ViTBlock5(nn.Module):
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
 
         init.constant_(self.pconv.weight, 1)
-        init.kaiming_uniform_(self.dwconv.weight)
-        init.kaiming_uniform_(self.cbam.channel_attention.fc.weight)
-        init.kaiming_uniform_(self.cbam.spatial_attention.cv1.weight)
-        init.kaiming_uniform_(self.bn0.weight)
-        init.kaiming_uniform_(self.bn1.weight)
 
     def forward(self, x: torch.Tensor):
         raw_x = x
