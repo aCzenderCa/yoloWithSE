@@ -97,6 +97,7 @@ class ViTBlock3(nn.Module):
         y = self.pconv(raw_x) + y
         return y
 
+
 class ViTBlock4(nn.Module):
     def __init__(self, in_channel, out_channel, stride=None):
         super().__init__()
@@ -116,7 +117,7 @@ class ViTBlock4(nn.Module):
                                groups=int(in_channel * ch_scale) if ch_scale <= 1 else in_channel)
         self.scale = nn.Sequential()
         if stride > 1:
-            self.scale.append(nn.MaxPool2d(stride + 1, stride, padding=1))
+            self.scale.append(nn.MaxPool2d(stride + 1, stride, padding=int((stride + 1) / 2)))
         init.constant_(self.pconv.weight, 1)
 
     def forward(self, x: torch.Tensor):
