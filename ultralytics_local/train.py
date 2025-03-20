@@ -20,7 +20,7 @@ args.add_argument('--no_val', action='store_true', default=False)
 args.add_argument('--pretrained', type=str, default='')
 args.add_argument('--batch', type=float, default=0.7)
 args.add_argument('--optimizer', type=str, default='auto')
-args.add_argument('--freeze', type=str, default='')  # 2|4|6|8|9|10|13|16|19|22|23
+args.add_argument('--freeze', type=str, default='')  # 2|4|6|8|9|10|13|16|19|22|23   0|1|2|3|4|5|6
 args.add_argument('--lr0', type=float, default=0.1)
 args.add_argument('--auto_augment', type=str, default='autoaugment')
 args.add_argument('--data', type=str, default='DOTAv1.yaml')
@@ -69,4 +69,4 @@ else:
     model.best = model.trainer.last
 
 # python train.py --model last.pt --imgsz 1024 --epoch 500 --no_val --optimizer AdamW --lr0 0.002 --multi_scale --batch 0.55
-# python train.py --pretrained yolo11n-obb.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb-withTransform_5.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --freeze "0|2|4|6|8|9|10|13|16|19|22|23" --epoch 50
+# python train.py --pretrained yolo11n-obb.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb-withTransform_5.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --freeze "0|1|2|3|4|5|6" --epoch 50
