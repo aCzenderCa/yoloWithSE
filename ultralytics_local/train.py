@@ -12,7 +12,7 @@ args = ArgumentParser()
 
 args.add_argument('--resume', type=str, default='')
 args.add_argument('--epoch', type=int, default=50)
-args.add_argument('--model', type=str, default='yolo11-obb-withTransform.yaml')
+args.add_argument('--model', type=str, default='yolo11-obb-vit_pp.yaml')
 args.add_argument('--scale', type=str, default='n')
 args.add_argument('--imgsz', type=int, default=640)
 args.add_argument('--multi_scale', action='store_true', default=False)
@@ -49,8 +49,8 @@ if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
     oms: nn.Sequential = model.model.model
     if len(args.pretrained) > 0:
-        pretrained: OBBModel = torch.load(args.pretrained)
-        for (m1, m2) in itertools.zip_longest(oms, pretrained['model'].model):
+        pretrained: OBBModel = torch.load(args.pretrained)['model']
+        for (m1, m2) in itertools.zip_longest(oms, pretrained.model):
             if m1.__class__ == m2.__class__:
                 try:
                     m1.load_state_dict(m2.state_dict())
@@ -68,5 +68,6 @@ if model.trainer.best:
 else:
     model.best = model.trainer.last
 
-# python train.py --model last.pt --imgsz 1024 --epoch 500 --no_val --optimizer AdamW --lr0 0.002 --multi_scale --batch 0.55
-# python train.py --pretrained yolo11n-obb.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb-withTransform_5.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --freeze "0|1|2|3|4|5|6" --epoch 50
+# ython train.py --model last.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.001 --multi_scale --batch 0.5 --data DOTAv1_split.yaml --epoch 150
+# python train.py --pretrained yolo11n-obb.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb-withTransform_5.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --freeze "0|1|2|3|4|5" --epoch 50
+# python train.py --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --epoch 50

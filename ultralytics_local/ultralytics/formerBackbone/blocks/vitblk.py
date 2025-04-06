@@ -142,6 +142,7 @@ class ViTBlock5(nn.Module):
         if not stride:
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
+        # 5x5*inc*w*h + inc*w*h*3 + inc*outc*inc*w*h + outc*w*h*3
         self.dwconv = nn.Conv2d(in_channel, in_channel, kernel_size=5, stride=stride, padding=2, groups=in_channel)
         self.cbam = CBAM(in_channel)
         self.bn0 = nn.BatchNorm2d(in_channel)
@@ -162,8 +163,6 @@ class ViTBlock5(nn.Module):
         init.constant_(self.pconv.weight, 1)
         init.uniform_(self.dwconv.bias, -0.1, 0.1)
         init.uniform_(self.cbam.channel_attention.fc.bias, -0.1, 0.1)
-        init.uniform_(self.bn0.bias, -0.1, 0.1)
-        init.uniform_(self.bn1.bias, -0.1, 0.1)
 
     def forward(self, x: torch.Tensor):
         raw_x = x
@@ -176,5 +175,56 @@ class ViTBlock5(nn.Module):
 
         y = self.conv(x)
         y = self.bn1(y)
+        y = self.pconv(raw_x) + y
+        return y
+
+
+class ViTBlock6P(nn.Module):
+    def __init__(self, in_channel, out_channel, stride=None, rep=1):
+        super().__init__()
+        ch_scale = out_channel / in_channel
+        if not stride:
+            stride = int(ch_scale) if ch_scale >= 1 else 1
+
+        self.dwconv = nn.Conv2d(in_channel, in_channel, kernel_size=5, stride=stride, padding=2, groups=in_channel)
+        self.cbam = CBAM(in_channel)
+        self.bn0 = nn.BatchNorm2d(in_channel)
+        self.act = nn.GELU()
+        self.ch_scale = ch_scale
+        self.stride = stride
+
+        self.post = []
+        for i in range(rep):
+            if i == 0:
+                self.post.append(nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=1))
+            else:
+                self.post.append(
+                    nn.Conv2d(out_channel, out_channel, kernel_size=3, stride=1, padding=1, groups=out_channel))
+            self.post.append(nn.BatchNorm2d(out_channel))
+        self.post = nn.Sequential(*self.post)
+
+        p_gp = int(in_channel * ch_scale) if ch_scale <= 1 else in_channel
+        if ((out_channel > in_channel and out_channel % in_channel != 0) or
+                (out_channel < in_channel and in_channel % out_channel != 0)):
+            p_gp = 1
+        self.pconv = nn.Conv2d(in_channel, int(in_channel * ch_scale), kernel_size=1, groups=p_gp, bias=False)
+        self.scale = nn.Sequential()
+        if stride > 1:
+            self.scale.append(nn.MaxPool2d(5, stride, padding=2))
+
+        init.constant_(self.pconv.weight, 1)
+        init.uniform_(self.dwconv.bias, -0.1, 0.1)
+        init.uniform_(self.cbam.channel_attention.fc.bias, -0.1, 0.1)
+
+    def forward(self, x: torch.Tensor):
+        raw_x = x
+        x = self.dwconv(x)
+        x = self.cbam(x)
+        x = self.bn0(x)
+        x = self.act(x)
+        raw_x = self.scale(raw_x)
+        x = x + raw_x
+
+        y = self.post(x)
         y = self.pconv(raw_x) + y
         return y
