@@ -183,39 +183,31 @@ class ViTBlock5(nn.Module):
 
 
 class ViTBlock6P(nn.Module):
-    def __init__(self, in_channel, out_channel, stride=None, rep=1):
+    def __init__(self, in_channel, out_channel, stride=None):
         super().__init__()
         ch_scale = out_channel / in_channel
         if not stride:
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
-        self.dwconv = nn.Conv2d(in_channel, in_channel, kernel_size=5, stride=stride, padding=2, groups=in_channel)
-        self.ca0 = ChannelAttention(in_channel)
-        self.cbam = CBAM(in_channel)
-        self.bn0 = nn.BatchNorm2d(in_channel)
+        self.small_blk = nn.Sequential(
+            nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, groups=in_channel),
+            CBAM(in_channel),
+            nn.BatchNorm2d(in_channel),
+        )
         self.act = nn.GELU()
         self.ch_scale = ch_scale
         self.stride = stride
 
-        self.post = []
-        for i in range(rep):
-            if i == 0:
-                self.post.append(nn.Conv2d(in_channel, out_channel, kernel_size=1))
-            else:
-                self.post.append(
-                    nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
-            self.post.append(nn.BatchNorm2d(out_channel))
-        self.post = nn.Sequential(*self.post)
+        self.post = nn.Sequential(
+            nn.Conv2d(in_channel, out_channel, kernel_size=1),
+            nn.BatchNorm2d(out_channel),
+        )
 
         p_gp = math.gcd(in_channel, out_channel)
         self.pconv = nn.Sequential(
             nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, groups=p_gp, bias=False),
             nn.BatchNorm2d(out_channel),
         )
-        for i in range(rep - 1):
-            self.pconv.append(
-                nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel, bias=False))
-            self.pconv.append(nn.BatchNorm2d(out_channel))
 
         self.scale = nn.Sequential()
         if stride > 1:
@@ -226,10 +218,7 @@ class ViTBlock6P(nn.Module):
 
     def forward(self, x: torch.Tensor):
         raw_x = x
-        x = self.ca0(x)
-        x = self.dwconv(x)
-        x = self.bn0(x)
-        x = self.cbam(x)
+        x = self.small_blk(x)
         x = self.act(x)
         raw_x = self.scale(raw_x)
         x = x + raw_x
@@ -252,23 +241,18 @@ class ViTBlock6PRep(nn.Module):
         self.net = nn.Sequential(
         )
         for i in range(rep - 1):
-            self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel // 2))
+            self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel))
             self.net.append(nn.BatchNorm2d(in_channel * 2))
-            self.net.append(nn.ChannelShuffle(in_channel * 2))
+            self.net.append(ChannelAttention(in_channel * 2))
             self.net.append(nn.ReLU())
-            self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel // 2))
+            self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
             self.net.append(nn.BatchNorm2d(in_channel))
         self.act = nn.GELU()
 
-        self.post = []
-        for i in range(rep):
-            if i == 0:
-                self.post.append(nn.Conv2d(in_channel, out_channel, kernel_size=1))
-            else:
-                self.post.append(
-                    nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
-            self.post.append(nn.BatchNorm2d(out_channel))
-        self.post = nn.Sequential(*self.post)
+        self.post = nn.Sequential(
+            nn.Conv2d(in_channel, out_channel, kernel_size=1),
+            nn.BatchNorm2d(out_channel),
+        )
 
     def forward(self, x: torch.Tensor):
         raw_x = x
