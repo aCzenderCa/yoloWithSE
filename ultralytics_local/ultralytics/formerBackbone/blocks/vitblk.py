@@ -4,7 +4,7 @@ import torch
 from torch import nn
 from torch.nn import init
 
-from ultralytics.nn.modules import CBAM, Bottleneck
+from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention
 
 
 class ViTBlock(nn.Module):
@@ -251,13 +251,14 @@ class ViTBlockS1P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
         self.token_mixer = nn.Sequential(
-            CBAM(in_channel),
+            ChannelAttention(in_channel),
             nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride),
             nn.BatchNorm2d(out_channel),
         )
         self.channel_mixer = nn.Sequential(
-            nn.Conv2d(out_channel, out_channel * 2, kernel_size=1, groups=out_channel),
+            nn.Conv2d(out_channel, out_channel * 2, kernel_size=3, padding=1, groups=out_channel),
             nn.GELU(),
+            ChannelAttention(out_channel * 2),
             nn.Conv2d(out_channel * 2, out_channel, kernel_size=3, padding=1, groups=out_channel),
             nn.BatchNorm2d(out_channel),
         )
