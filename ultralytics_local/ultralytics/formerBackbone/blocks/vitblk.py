@@ -5,7 +5,7 @@ from torch import nn
 from torch.nn import init
 import torch.nn.functional as F
 
-from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention
+from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention, RepVGGDW, RepConv
 
 
 class ViTBlock(nn.Module):
@@ -190,7 +190,7 @@ class ViTBlock6P(nn.Module):
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
         self.small_blk = nn.Sequential(
-            nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, stride=stride, groups=in_channel),
+            RepVGGDW(in_channel),
             CBAM(in_channel),
             nn.BatchNorm2d(in_channel),
         )
@@ -205,7 +205,7 @@ class ViTBlock6P(nn.Module):
 
         p_gp = math.gcd(in_channel, out_channel)
         self.pconv = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, groups=p_gp, bias=False),
+            RepConv(in_channel, out_channel, g=p_gp),
             SpatialAttention(),
             nn.BatchNorm2d(out_channel),
         )
@@ -231,7 +231,7 @@ class ViTBlock6PRep(nn.Module):
         super().__init__()
 
         self.small_blk = nn.Sequential(
-            nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, groups=in_channel),
+            RepVGGDW(in_channel),
             ChannelAttention(in_channel),
             nn.BatchNorm2d(in_channel),
         )
@@ -239,12 +239,9 @@ class ViTBlock6PRep(nn.Module):
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel))
-            self.net.append(nn.BatchNorm2d(in_channel * 2))
+            RepConv(in_channel, in_channel * 2, k=5, p=2, g=in_channel),
             self.net.append(SpatialAttention())
-            self.net.append(nn.ReLU())
-            self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
-            self.net.append(nn.BatchNorm2d(in_channel))
+            RepConv(in_channel * 2, in_channel, k=5, p=2, g=in_channel),
         self.act = nn.GELU()
 
         self.post = nn.Sequential(
