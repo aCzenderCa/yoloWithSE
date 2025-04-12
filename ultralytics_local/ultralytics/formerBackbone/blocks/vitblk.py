@@ -217,8 +217,6 @@ class ViTBlock6P(nn.Module):
 
         self.pconv = nn.Sequential(
         )
-        if stride > 1:
-            self.pconv.append(nn.MaxPool2d(5, stride, padding=2))
         if out_channel > in_channel:
             self.pconv.append(einn.Reduce(f"b c w h -> b (c {out_channel // in_channel}) w h", "repeat"))
         if out_channel < in_channel:
@@ -227,10 +225,11 @@ class ViTBlock6P(nn.Module):
     def forward(self, x: torch.Tensor):
         raw_x = x
         x = self.small_blk(x)
-        x = x + self.scale(raw_x)
+        raw_x1 = self.scale(raw_x)
+        x = x + raw_x1
 
         y = self.post(x)
-        y = self.pconv(raw_x) + y
+        y = self.pconv(raw_x1) + y
         return y
 
 
@@ -240,7 +239,7 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
-            ChannelAttention(out_channel),
+            CBAM(out_channel),
         )
 
         self.net = nn.Sequential(
