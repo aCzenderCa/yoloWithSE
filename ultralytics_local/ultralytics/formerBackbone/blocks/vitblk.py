@@ -228,19 +228,19 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
-            ChannelAttention(in_channel),
-            nn.BatchNorm2d(in_channel),
+            ChannelAttention(out_channel),
+            nn.BatchNorm2d(out_channel),
         )
 
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(DWConv(in_channel, in_channel * 2, k=5))
+            self.net.append(DWConv(out_channel, out_channel * 2, k=5))
             self.net.append(SpatialAttention())
-            self.net.append(DWConv(in_channel * 2, in_channel, k=5))
+            self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
-            LightConv(in_channel, out_channel, k=1),
+            LightConv(out_channel, out_channel, k=1),
         )
 
     def forward(self, x: torch.Tensor):
