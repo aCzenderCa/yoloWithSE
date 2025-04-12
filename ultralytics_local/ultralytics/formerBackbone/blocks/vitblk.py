@@ -240,25 +240,30 @@ class ViTBlockS1P(nn.Module):
         self.in_seq = nn.Sequential(
             nn.Conv2d(in_channel, in_channel // 2, kernel_size=1, stride=stride),
         )
-
-        gcd_for_out = math.gcd(self.extra_ch, in_channel)
-        self.out_seq = nn.Sequential(
-            nn.Conv2d(in_channel, self.extra_ch, kernel_size=1, stride=stride),
-            nn.BatchNorm2d(self.extra_ch),
-            nn.Conv2d(self.extra_ch, self.extra_ch, kernel_size=5, stride=stride, groups=self.extra_ch),
-            CBAM(self.extra_ch),
-        )
+        if self.extra_ch <= 0:
+            self.in_seq.append(nn.Conv2d(in_channel // 2, out_channel - 1, kernel_size=1))
 
         self.act = nn.GELU()
         self.bnY = nn.BatchNorm2d(out_channel)
 
-        for _ in range(rep - 1):
-            self.in_seq.append(nn.BatchNorm2d(in_channel // 2))
-            self.in_seq.append(nn.Conv2d(in_channel // 2, in_channel // 2, kernel_size=1, stride=1))
+        if self.extra_ch > 0:
+            gcd_for_out = math.gcd(self.extra_ch, in_channel)
+            self.out_seq = nn.Sequential(
+                nn.Conv2d(in_channel, self.extra_ch, kernel_size=5, stride=stride, groups=gcd_for_out),
+                nn.BatchNorm2d(self.extra_ch),
+                CBAM(self.extra_ch),
+            )
 
-            self.out_seq.append(
-                nn.Conv2d(self.extra_ch, self.extra_ch, kernel_size=5, stride=stride, groups=self.extra_ch))
-            self.out_seq.append(nn.BatchNorm2d(self.extra_ch))
+            for _ in range(rep - 1):
+                self.in_seq.append(nn.BatchNorm2d(in_channel // 2))
+                self.in_seq.append(nn.Conv2d(in_channel // 2, in_channel // 2, kernel_size=1, stride=1))
+
+                self.out_seq.append(
+                    nn.Conv2d(self.extra_ch, self.extra_ch, kernel_size=5, stride=stride, groups=self.extra_ch))
+                self.out_seq.append(nn.BatchNorm2d(self.extra_ch))
+        else:
+            self.out_seq = nn.Conv2d(in_channel, 1, kernel_size=5, stride=stride, groups=in_channel)
+
 
     def forward(self, x: torch.Tensor):
         y1 = self.in_seq(x)
