@@ -207,7 +207,6 @@ class ViTBlock6P(nn.Module):
             DWConv(in_channel, in_channel, k=5, s=stride),
             CBAM(in_channel),
         )
-        self.act = nn.GELU()
         self.scale = nn.Sequential()
         if stride > 1:
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
@@ -228,7 +227,6 @@ class ViTBlock6P(nn.Module):
     def forward(self, x: torch.Tensor):
         raw_x = x
         x = self.small_blk(x)
-        x = self.act(x)
         x = x + self.scale(raw_x)
 
         y = self.post(x)
@@ -248,7 +246,6 @@ class ViTBlock6PRep(nn.Module):
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(DWConv(out_channel, out_channel, k=5))
             self.net.append(SAWithBn())
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
