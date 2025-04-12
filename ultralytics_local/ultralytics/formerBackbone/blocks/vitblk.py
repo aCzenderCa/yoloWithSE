@@ -250,23 +250,29 @@ class Insp(nn.Module):
 class ViTBlockS1P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
-        assert in_channel % 2 == 0
-        self.seq = nn.Sequential(
-            Insp(in_channel, [out_channel // 2, out_channel // 2], [(1, 3), (3, 1)], [(0, 1), (1, 0)], stride),
+        self.token_mixer = nn.Sequential(
+            nn.Conv2d(in_channel, in_channel, kernel_size=1, stride=stride),
+            nn.BatchNorm2d(in_channel),
+            CBAM(in_channel),
+            nn.Conv2d(in_channel, out_channel, kernel_size=1),
+            nn.BatchNorm2d(out_channel),
+        )
+        self.channel_mixer = nn.Sequential(
+            nn.Conv2d(out_channel, out_channel * 2, kernel_size=1, groups=out_channel * 2),
+            nn.BatchNorm2d(out_channel * 2),
+            nn.GELU(),
+            nn.Conv2d(out_channel * 2, out_channel, kernel_size=1, groups=out_channel),
             nn.BatchNorm2d(out_channel),
         )
         self.cbam = CBAM(out_channel)
-        self.bnY = nn.BatchNorm2d(out_channel)
-        self.act = nn.GELU()
 
-        for _ in range(rep - 1):
-            self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
-            self.seq.append(nn.BatchNorm2d(out_channel))
+        # for _ in range(rep - 1):
+        #     self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
+        #     self.seq.append(nn.BatchNorm2d(out_channel))
 
     def forward(self, x: torch.Tensor):
-        y = self.seq(x)  # b c x y
-        y = y + self.cbam(y)
-        y = self.bnY(y)
-        y = self.act(y)
+        y = self.token_mixer(x)
+        y = self.channel_mixer(y) + y
+        y = self.cbam(y) + y
 
         return y
