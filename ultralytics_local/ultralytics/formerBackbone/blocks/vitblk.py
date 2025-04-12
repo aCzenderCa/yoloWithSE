@@ -238,7 +238,6 @@ class ViTBlock6PRep(nn.Module):
             self.net.append(DWConv(in_channel, in_channel * 2, k=5))
             self.net.append(SpatialAttention())
             self.net.append(DWConv(in_channel * 2, in_channel, k=5))
-        self.act = nn.GELU()
 
         self.post = nn.Sequential(
             LightConv(in_channel, out_channel, k=1),
@@ -248,7 +247,6 @@ class ViTBlock6PRep(nn.Module):
         raw_x = x
         x = self.small_blk(x)
         x = self.net(x)
-        x = self.act(x)
         x = x + raw_x
 
         y = self.post(x)
