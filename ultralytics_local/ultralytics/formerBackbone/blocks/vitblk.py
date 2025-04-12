@@ -213,9 +213,6 @@ class ViTBlock6P(nn.Module):
         if stride > 1:
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
 
-        init.uniform_(self.dwconv.bias, -0.1, 0.1)
-        init.uniform_(self.cbam.channel_attention.fc.bias, -0.1, 0.1)
-
     def forward(self, x: torch.Tensor):
         raw_x = x
         x = self.small_blk(x)
