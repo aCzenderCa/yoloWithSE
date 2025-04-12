@@ -239,6 +239,49 @@ class ViTBlock6P(nn.Module):
         return y
 
 
+class ViTBlock6PRep(nn.Module):
+    def __init__(self, in_channel, out_channel, rep=1):
+        super().__init__()
+
+        self.small_blk = nn.Sequential(
+            nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, groups=in_channel),
+            CBAM(in_channel),
+            nn.BatchNorm2d(in_channel),
+        )
+
+        self.net = nn.Sequential(
+        )
+        for i in range(rep - 1):
+            self.net.append(
+                nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel, stride=2))
+            self.net.append(nn.BatchNorm2d(in_channel * 2))
+            self.net.append(nn.ReLU())
+            self.net.append(nn.Upsample(scale_factor=2))
+            self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
+            self.net.append(nn.BatchNorm2d(in_channel))
+        self.act = nn.GELU()
+
+        self.post = []
+        for i in range(rep):
+            if i == 0:
+                self.post.append(nn.Conv2d(in_channel, out_channel, kernel_size=1))
+            else:
+                self.post.append(
+                    nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
+            self.post.append(nn.BatchNorm2d(out_channel))
+        self.post = nn.Sequential(*self.post)
+
+    def forward(self, x: torch.Tensor):
+        raw_x = x
+        x = self.small_blk(x)
+        x = self.net(x)
+        x = self.act(x)
+        x = x + raw_x
+
+        y = self.post(x)
+        return y
+
+
 class ViTBlockS1P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()

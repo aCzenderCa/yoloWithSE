@@ -10,7 +10,7 @@ from pathlib import Path
 import torch
 
 from ultralytics.formerBackbone.blocks.vitblk import ViTBlock, ViTBlock2, ViTBlock3, ViTBlock4, ViTBlock5, ViTBlock6P, \
-    ViTBlockS1P
+    ViTBlockS1P, ViTBlock6PRep
 
 from ultralytics.nn.modules import (
     AIFI,
@@ -996,6 +996,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ViTBlock4,
             ViTBlock5,
             ViTBlock6P,
+            ViTBlock6PRep,
             ViTBlockS1P,
         }
     )
