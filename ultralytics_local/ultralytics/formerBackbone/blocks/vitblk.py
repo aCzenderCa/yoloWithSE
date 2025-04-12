@@ -5,7 +5,7 @@ from torch import nn
 from torch.nn import init
 import torch.nn.functional as F
 
-from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention
+from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention
 
 
 class ViTBlock(nn.Module):
@@ -231,16 +231,16 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, groups=in_channel),
-            CBAM(in_channel),
+            ChannelAttention(in_channel),
             nn.BatchNorm2d(in_channel),
         )
 
         self.net = nn.Sequential(
         )
-        for i in range(rep - 1):
+        for i in range(rep):
             self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel))
             self.net.append(nn.BatchNorm2d(in_channel * 2))
-            self.net.append(ChannelAttention(in_channel * 2))
+            self.net.append(SpatialAttention())
             self.net.append(nn.ReLU())
             self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
             self.net.append(nn.BatchNorm2d(in_channel))
