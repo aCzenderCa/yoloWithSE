@@ -270,6 +270,6 @@ class ViTBlockS1P(nn.Module):
 
     def forward(self, x: torch.Tensor):
         y = self.token_mixer(x)
-        y = self.channel_mixer(y) + y
+        y = self.channel_mixer(y)
 
         return y
