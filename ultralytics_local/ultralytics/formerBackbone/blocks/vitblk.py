@@ -263,7 +263,7 @@ class ViTBlockS1P(nn.Module):
                 self.out_seq.append(nn.BatchNorm2d(self.extra_ch))
         else:
             self.out_seq = nn.Sequential(
-                nn.Conv2d(in_channel, 1, kernel_size=5, stride=stride, groups=in_channel),
+                nn.Conv2d(in_channel, 1, kernel_size=5, stride=stride),
                 CBAM(1),
             )
 
