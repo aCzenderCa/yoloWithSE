@@ -185,6 +185,17 @@ class ViTBlock5(nn.Module):
         return y
 
 
+class SAWithBn(nn.Module):
+    def __init__(self, ch):
+        super().__init__()
+        self.sa = SpatialAttention(ch)
+
+    def forward(self, x):
+        raw_x = x
+        x = self.sa(x)
+        return torch.cat([raw_x, x], dim=1)
+
+
 class ViTBlock6P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=None):
         super().__init__()
@@ -214,7 +225,6 @@ class ViTBlock6P(nn.Module):
         if out_channel < in_channel:
             self.pconv.append(einn.Reduce(f"b (c {in_channel // out_channel}) w h -> b c w h", "mean"))
 
-
     def forward(self, x: torch.Tensor):
         raw_x = x
         x = self.small_blk(x)
@@ -238,8 +248,8 @@ class ViTBlock6PRep(nn.Module):
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(DWConv(out_channel, out_channel * 2, k=5))
-            self.net.append(SpatialAttention())
+            self.net.append(DWConv(out_channel, out_channel, k=5))
+            self.net.append(SAWithBn(out_channel))
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
