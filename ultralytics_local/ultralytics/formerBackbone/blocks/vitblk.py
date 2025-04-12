@@ -199,7 +199,7 @@ class ViTBlock6P(nn.Module):
         self.stride = stride
 
         self.post = nn.Sequential(
-            LightConv(out_channel, out_channel, k=1),
+            LightConv(out_channel, out_channel, k=3),
         )
 
         self.pconv = nn.Sequential(
@@ -240,7 +240,7 @@ class ViTBlock6PRep(nn.Module):
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
-            LightConv(out_channel, out_channel, k=1),
+            LightConv(out_channel, out_channel, k=3),
         )
 
     def forward(self, x: torch.Tensor):

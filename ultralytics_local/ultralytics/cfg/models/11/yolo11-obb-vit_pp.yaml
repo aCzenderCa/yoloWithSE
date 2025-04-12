@@ -22,11 +22,11 @@ backbone:
   - [-1, 1, ViTBlock6P, [128, 2]] # 2-P2/4
   - [-1, 1, ViTBlock6PRep, [128, 2]]
   - [-1, 1, ViTBlock6P, [256, 2]] # 4-P3/8
-  - [-1, 1, ViTBlock6PRep, [256, 3]]
+  - [-1, 1, ViTBlock6PRep, [256, 2]]
   - [-1, 1, ViTBlock6P, [512, 2]] # 6-P4/16
-  - [-1, 1, ViTBlock6PRep, [512, 4]]
+  - [-1, 1, ViTBlock6PRep, [512, 3]]
   - [-1, 1, ViTBlock6P, [1024, 2]] # 8-P5/32
-  - [-1, 1, ViTBlock6PRep, [1024, 5]]
+  - [-1, 1, ViTBlock6PRep, [1024, 3]]
   - [-1, 1, SPPF, [1024, 5]] # 10
   - [-1, 2, C2PSA, [1024]] # 11 head P5/32
 
