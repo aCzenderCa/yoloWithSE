@@ -3,6 +3,7 @@ import math
 import torch
 from torch import nn
 from torch.nn import init
+import torch.nn.functional as F
 
 from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention
 
@@ -247,11 +248,26 @@ class Insp(nn.Module):
         return y
 
 
+class CA(nn.Module):
+    def __init__(self, ch, k):
+        super().__init__()
+        self.pool = nn.AdaptiveAvgPool2d(k)
+        self.ch = ch
+
+    def forward(self, x):
+        a = self.pool(x)
+        results = torch.zeros_like(x)
+        for i in range(a.shape[0]):
+            results[i] = F.conv2d(x[i], a, padding=self.k // 2, groups=self.ch)
+
+        return results
+
+
 class ViTBlockS1P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
         self.token_mixer = nn.Sequential(
-            ChannelAttention(in_channel),
+            CA(in_channel),
             nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride),
             nn.BatchNorm2d(out_channel),
         )
