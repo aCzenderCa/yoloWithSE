@@ -193,8 +193,9 @@ class ViTBlock6P(nn.Module):
             RepVGGDW(in_channel),
             CBAM(in_channel),
             nn.BatchNorm2d(in_channel),
-            nn.MaxPool2d(3, 2, 1)
         )
+        if stride != 1:
+            self.small_blk.append(nn.AvgPool2d(5, stride, 2))
         self.act = nn.GELU()
         self.ch_scale = ch_scale
         self.stride = stride
