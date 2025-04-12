@@ -190,6 +190,7 @@ class ViTBlock6P(nn.Module):
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
         self.dwconv = nn.Conv2d(in_channel, in_channel, kernel_size=5, stride=stride, padding=2, groups=in_channel)
+        self.ca0 = ChannelAttention(in_channel)
         self.cbam = CBAM(in_channel)
         self.bn0 = nn.BatchNorm2d(in_channel)
         self.act = nn.GELU()
@@ -225,9 +226,10 @@ class ViTBlock6P(nn.Module):
 
     def forward(self, x: torch.Tensor):
         raw_x = x
+        x = self.ca0(x)
         x = self.dwconv(x)
-        x = self.cbam(x)
         x = self.bn0(x)
+        x = self.cbam(x)
         x = self.act(x)
         raw_x = self.scale(raw_x)
         x = x + raw_x
