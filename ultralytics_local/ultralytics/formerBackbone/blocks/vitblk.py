@@ -258,7 +258,7 @@ class ViTBlockS1P(nn.Module):
             nn.BatchNorm2d(out_channel),
         )
         self.channel_mixer = nn.Sequential(
-            nn.Conv2d(out_channel, out_channel * 2, kernel_size=1, groups=out_channel * 2),
+            nn.Conv2d(out_channel, out_channel * 2, kernel_size=1, groups=out_channel),
             nn.BatchNorm2d(out_channel * 2),
             nn.GELU(),
             nn.Conv2d(out_channel * 2, out_channel, kernel_size=1, groups=out_channel),
