@@ -249,6 +249,7 @@ class ViTBlockS1P(nn.Module):
         )
 
         self.act = nn.GELU()
+        self.bnY = nn.BatchNorm2d(out_channel)
 
         for _ in range(rep - 1):
             self.in_seq.append(nn.BatchNorm2d(in_channel // 2))
@@ -262,6 +263,7 @@ class ViTBlockS1P(nn.Module):
         y1 = self.in_seq(x)
         y2 = self.out_seq(x)
         y = torch.cat([y1, y2], 1) # b c x y
+        y = self.bnY(y)
         y = self.act(y)
 
         return y
