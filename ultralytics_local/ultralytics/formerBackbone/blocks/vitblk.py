@@ -232,16 +232,34 @@ class ViTBlock6P(nn.Module):
         return y
 
 
+class Insp(nn.Module):
+    def __init__(self, in_ch, out_chs, ks, pds, stride):
+        super().__init__()
+        self.convs = nn.ModuleList()
+        for ch, k, pd in zip(out_chs, ks, pds):
+            self.convs.append(nn.Conv2d(in_ch, ch, kernel_size=k, padding=pd, stride=stride))
+
+    def forward(self, x):
+        y = self.convs[0](x)
+        for conv in self.convs[1:]:
+            y = torch.cat([y, conv(x)], 1)
+
+        return y
+
+
 class ViTBlockS1P(nn.Module):
-    def __init__(self, in_channel, out_channel, stride=None, rep=1):
+    def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
         assert in_channel % 2 == 0
         self.in_seq = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel // 2, kernel_size=3, padding=1, stride=stride),
+            Insp(in_channel, [out_channel // 4, out_channel // 8, out_channel // 8],
+                 [3, (7, 3), (3, 7)],
+                 [1, (3, 1), (1, 3)], stride),
+            nn.BatchNorm2d(out_channel // 2),
         )
 
-        self.act = nn.GELU()
         self.bnY = nn.BatchNorm2d(out_channel)
+        self.act = nn.GELU()
 
         gcd_for_out = math.gcd(out_channel // 2, in_channel)
         self.out_seq = nn.Sequential(
@@ -251,8 +269,8 @@ class ViTBlockS1P(nn.Module):
         )
 
         for _ in range(rep - 1):
+            self.in_seq.append(nn.Conv2d(out_channel // 2, out_channel // 2, kernel_size=3, stride=1))
             self.in_seq.append(nn.BatchNorm2d(out_channel // 2))
-            self.in_seq.append(nn.Conv2d(out_channel // 2, out_channel // 2, kernel_size=1, stride=1))
 
             self.out_seq.append(nn.Conv2d(out_channel // 2, out_channel // 2, kernel_size=5, padding=2,
                                           stride=stride, groups=out_channel // 2))
