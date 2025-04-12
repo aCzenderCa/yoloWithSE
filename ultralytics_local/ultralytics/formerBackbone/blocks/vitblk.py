@@ -253,6 +253,7 @@ class CA(nn.Module):
         super().__init__()
         self.pool = nn.AdaptiveAvgPool2d(k)
         self.ch = ch
+        self.k = k
 
     def forward(self, x):
         a = self.pool(x)
