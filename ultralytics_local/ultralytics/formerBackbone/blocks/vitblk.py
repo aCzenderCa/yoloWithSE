@@ -1,5 +1,7 @@
 import math
 
+import einops
+import einops.layers.torch as einn
 import torch
 from torch import nn
 from torch.nn import init
@@ -204,12 +206,14 @@ class ViTBlock6P(nn.Module):
         )
 
         self.pconv = nn.Sequential(
-            DWConv(in_channel, out_channel, k=1, s=stride),
         )
-
-        self.scale = nn.Sequential()
         if stride > 1:
-            self.scale.append(nn.MaxPool2d(5, stride, padding=2))
+            self.pconv.append(nn.MaxPool2d(5, stride, padding=2))
+        if out_channel > in_channel:
+            self.pconv.append(einn.Reduce(f"b c w h -> b (c {out_channel // in_channel}) w h", "repeat"))
+        if out_channel < in_channel:
+            self.pconv.append(einn.Reduce(f"b (c {in_channel // out_channel}) w h -> b c w h", "mean"))
+
 
     def forward(self, x: torch.Tensor):
         raw_x = x
