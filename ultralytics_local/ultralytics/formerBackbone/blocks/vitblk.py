@@ -191,9 +191,8 @@ class ViTBlock6P(nn.Module):
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
         self.small_blk = nn.Sequential(
-            DWConv(in_channel, out_channel, k=5, s=stride),
-            CBAM(out_channel),
-            nn.BatchNorm2d(out_channel),
+            DWConv(in_channel, in_channel, k=5, s=stride),
+            CBAM(in_channel),
         )
         self.act = nn.GELU()
         self.stride = stride
@@ -205,7 +204,6 @@ class ViTBlock6P(nn.Module):
         self.pconv = nn.Sequential(
             DWConv(in_channel, out_channel, k=5, s=stride),
             SpatialAttention(),
-            nn.BatchNorm2d(out_channel),
         )
 
         self.scale = nn.Sequential()
@@ -216,6 +214,7 @@ class ViTBlock6P(nn.Module):
         raw_x = x
         x = self.small_blk(x)
         x = self.act(x)
+        x = x + raw_x
 
         y = self.post(x)
         y = self.pconv(raw_x) + y
@@ -229,7 +228,6 @@ class ViTBlock6PRep(nn.Module):
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
             ChannelAttention(out_channel),
-            nn.BatchNorm2d(out_channel),
         )
 
         self.net = nn.Sequential(
