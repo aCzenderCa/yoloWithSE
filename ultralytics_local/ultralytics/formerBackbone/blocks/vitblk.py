@@ -233,49 +233,18 @@ class ViTBlock6P(nn.Module):
         return y
 
 
-class Insp(nn.Module):
-    def __init__(self, in_ch, out_chs, ks, pds, stride):
-        super().__init__()
-        self.convs = nn.ModuleList()
-        for ch, k, pd in zip(out_chs, ks, pds):
-            self.convs.append(nn.Conv2d(in_ch, ch, kernel_size=k, padding=pd, stride=stride))
-
-    def forward(self, x):
-        y = self.convs[0](x)
-        for conv in self.convs[1:]:
-            y = torch.cat([y, conv(x)], 1)
-
-        return y
-
-
-class CA(nn.Module):
-    def __init__(self, ch, k):
-        super().__init__()
-        self.pool = nn.AdaptiveAvgPool2d(k)
-        self.ch = ch
-        self.k = k
-
-    def forward(self, x):
-        a = self.pool(x)
-        results = torch.zeros_like(x)
-        for i in range(a.shape[0]):
-            results[i] = F.conv2d(x[i:i+1], a[i], padding=self.k // 2, groups=self.ch)
-
-        return results
-
-
 class ViTBlockS1P(nn.Module):
-    def __init__(self, in_channel, out_channel, stride=1, rep=1):
+    def __init__(self, in_channel, out_channel, upscale=1, rep=1):
         super().__init__()
         self.token_mixer = nn.Sequential(
             ChannelAttention(in_channel),
-            nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride),
+            nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, stride=upscale),
             nn.BatchNorm2d(out_channel),
+            nn.Upsample(scale_factor=upscale),
         )
         self.channel_mixer = nn.Sequential(
             nn.Conv2d(out_channel, out_channel * 2, kernel_size=3, padding=1, groups=out_channel),
             nn.GELU(),
-            ChannelAttention(out_channel * 2),
             nn.Conv2d(out_channel * 2, out_channel, kernel_size=3, padding=1, groups=out_channel),
             nn.BatchNorm2d(out_channel),
         )

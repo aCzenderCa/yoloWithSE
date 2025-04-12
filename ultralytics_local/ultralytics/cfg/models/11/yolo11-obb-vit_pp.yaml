@@ -24,10 +24,10 @@ backbone:
   - [-1, 1, ViTBlockS1P, [512, 1, 2]]
   - [-1, 1, ViTBlockS1P, [512, 2]] # 5-P4/16
   - [-1, 1, ViTBlockS1P, [512, 1, 2]]
-  - [-1, 1, ViTBlockS1P, [1024, 2]] # 7-P5/32
-  - [-1, 1, ViTBlockS1P, [1024, 1, 2]]
-  - [-1, 1, SPPF, [1024, 5]] # 9
-  - [-1, 2, C2PSA, [1024]] # 10
+  - [-1, 1, ViTBlockS1P, [512, 2]] # 7-P5/32
+  - [-1, 1, ViTBlockS1P, [512, 1, 2]]
+  - [-1, 1, SPPF, [512, 5]] # 9
+  - [-1, 2, C2PSA, [512]] # 10
 
 # YOLO11n head
 head:
