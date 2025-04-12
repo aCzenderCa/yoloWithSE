@@ -183,7 +183,7 @@ class ViTBlock5(nn.Module):
 
 
 class ViTBlock6P(nn.Module):
-    def __init__(self, in_channel, out_channel, stride=None, rep=1):
+    def __init__(self, in_channel, out_channel, rep=1, stride=None):
         super().__init__()
         ch_scale = out_channel / in_channel
         if not stride:
