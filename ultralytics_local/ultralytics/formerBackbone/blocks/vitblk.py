@@ -242,7 +242,7 @@ class ViTBlockS1P(nn.Module):
         )
 
         gcd_for_out = math.gcd(self.extra_ch, in_channel)
-        print(gcd_for_out)
+        print(gcd_for_out, self.extra_ch, in_channel)
         self.out_seq = nn.Sequential(
             nn.Conv2d(in_channel, self.extra_ch, kernel_size=5, stride=stride, groups=gcd_for_out),
             nn.BatchNorm2d(self.extra_ch),
