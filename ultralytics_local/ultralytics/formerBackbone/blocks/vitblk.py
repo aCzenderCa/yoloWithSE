@@ -234,22 +234,20 @@ class ViTBlock6P(nn.Module):
 
 
 class ViTBlockS1P(nn.Module):
-    def __init__(self, in_channel, out_channel, upscale=1, downscale=1, rep=1):
+    def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
         self.token_mixer = nn.Sequential(
-            CBAM(in_channel),
-            nn.Conv2d(in_channel, out_channel, kernel_size=max(3, upscale + 1), padding=max(3, upscale + 1) // 2,
-                      stride=upscale),
+            ChannelAttention(in_channel),
+            nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride),
             nn.BatchNorm2d(out_channel),
         )
         self.channel_mixer = nn.Sequential(
             nn.Conv2d(out_channel, out_channel * 2, kernel_size=3, padding=1, groups=out_channel),
             nn.GELU(),
+            ChannelAttention(out_channel * 2),
             nn.Conv2d(out_channel * 2, out_channel, kernel_size=3, padding=1, groups=out_channel),
             nn.BatchNorm2d(out_channel),
         )
-
-        self.scale = nn.Upsample(scale_factor=upscale // downscale)
 
         for _ in range(rep - 1):
             self.channel_mixer.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
@@ -258,6 +256,5 @@ class ViTBlockS1P(nn.Module):
     def forward(self, x: torch.Tensor):
         y = self.token_mixer(x)
         y = self.channel_mixer(y) + y
-        y = self.scale(y)
 
         return y
