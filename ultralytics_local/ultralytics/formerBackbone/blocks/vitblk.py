@@ -241,13 +241,13 @@ class ViTBlockS1P(nn.Module):
             nn.Conv2d(in_channel, out_channel, kernel_size=max(3, upscale + 1), padding=max(3, upscale + 1) // 2,
                       stride=upscale),
             nn.BatchNorm2d(out_channel),
-            nn.Upsample(scale_factor=upscale),
         )
         self.channel_mixer = nn.Sequential(
             nn.Conv2d(out_channel, out_channel * 2, kernel_size=3, padding=1, groups=out_channel),
             nn.GELU(),
             nn.Conv2d(out_channel * 2, out_channel, kernel_size=3, padding=1, groups=out_channel),
             nn.BatchNorm2d(out_channel),
+            nn.Upsample(scale_factor=upscale),
         )
 
         for _ in range(rep - 1):
