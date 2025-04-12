@@ -249,7 +249,7 @@ class ViTBlock6PRep(nn.Module):
     def forward(self, x: torch.Tensor):
         raw_x = x
         x = self.small_blk(x)
-        x = self.net(x)
+        x = self.net(x + raw_x)
         x = x + raw_x
 
         y = self.post(x)
