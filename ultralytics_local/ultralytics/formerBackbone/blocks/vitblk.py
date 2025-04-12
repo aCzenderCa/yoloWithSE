@@ -252,7 +252,7 @@ class ViTBlockS1P(nn.Module):
         super().__init__()
         assert in_channel % 2 == 0
         self.seq = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, stride=stride),
+            Insp(in_channel, [out_channel // 2, out_channel // 2], [(1, 3), (3, 1)], [(0, 1), (1, 0)], stride),
             nn.BatchNorm2d(out_channel),
         )
         self.cbam = CBAM(out_channel)
@@ -261,7 +261,7 @@ class ViTBlockS1P(nn.Module):
 
         for _ in range(rep - 1):
             self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2,
-                                          stride=stride, groups=out_channel // 2))
+                                      stride=stride, groups=out_channel))
             self.seq.append(nn.BatchNorm2d(out_channel))
 
     def forward(self, x: torch.Tensor):
