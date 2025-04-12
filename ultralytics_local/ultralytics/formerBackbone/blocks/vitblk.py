@@ -237,7 +237,7 @@ class ViTBlockS1P(nn.Module):
         super().__init__()
         assert in_channel % 2 == 0
         self.in_seq = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel // 2, kernel_size=1, stride=stride),
+            nn.Conv2d(in_channel, out_channel // 2, kernel_size=3, padding=1, stride=stride),
         )
 
         self.act = nn.GELU()
