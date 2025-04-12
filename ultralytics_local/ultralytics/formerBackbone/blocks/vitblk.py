@@ -191,23 +191,19 @@ class ViTBlock6P(nn.Module):
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
         self.small_blk = nn.Sequential(
-            RepVGGDW(in_channel),
-            CBAM(in_channel),
-            nn.BatchNorm2d(in_channel),
+            DWConv(in_channel, out_channel, k=5, s=stride),
+            CBAM(out_channel),
+            nn.BatchNorm2d(out_channel),
         )
-        if stride != 1:
-            self.small_blk.append(nn.AvgPool2d(5, stride, 2))
         self.act = nn.GELU()
-        self.ch_scale = ch_scale
         self.stride = stride
 
         self.post = nn.Sequential(
-            LightConv(in_channel, out_channel, k=1),
+            LightConv(out_channel, out_channel, k=1),
         )
 
-        p_gp = math.gcd(in_channel, out_channel)
         self.pconv = nn.Sequential(
-            RepConv(in_channel, out_channel, g=p_gp),
+            DWConv(in_channel, out_channel, k=5),
             SpatialAttention(),
             nn.BatchNorm2d(out_channel),
         )
@@ -220,8 +216,6 @@ class ViTBlock6P(nn.Module):
         raw_x = x
         x = self.small_blk(x)
         x = self.act(x)
-        raw_x = self.scale(raw_x)
-        x = x + raw_x
 
         y = self.post(x)
         y = self.pconv(raw_x) + y
@@ -233,7 +227,7 @@ class ViTBlock6PRep(nn.Module):
         super().__init__()
 
         self.small_blk = nn.Sequential(
-            RepVGGDW(in_channel),
+            DWConv(in_channel, out_channel, k=5),
             ChannelAttention(in_channel),
             nn.BatchNorm2d(in_channel),
         )
