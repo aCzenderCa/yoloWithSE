@@ -204,8 +204,7 @@ class ViTBlock6P(nn.Module):
         )
 
         self.pconv = nn.Sequential(
-            DWConv(in_channel, out_channel, k=5, s=stride),
-            SpatialAttention(),
+            DWConv(in_channel, out_channel, k=1, s=stride),
         )
 
         self.scale = nn.Sequential()
