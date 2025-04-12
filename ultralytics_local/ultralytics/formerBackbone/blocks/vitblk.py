@@ -251,9 +251,10 @@ class ViTBlockS1P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
         self.token_mixer = nn.Sequential(
-            Insp(in_channel, [in_channel // 2, in_channel // 2], [(1, 3), (3, 1)], [(0, 1), (1, 0)], stride),
-            CBAM(in_channel),
-            nn.Conv2d(in_channel, out_channel, kernel_size=1),
+            nn.Conv2d(in_channel, in_channel * 2, kernel_size=1, groups=in_channel),
+            Insp(in_channel * 2, [in_channel, in_channel], [(1, 3), (3, 1)], [(0, 1), (1, 0)], stride),
+            CBAM(in_channel * 2),
+            nn.Conv2d(in_channel * 2, out_channel, kernel_size=1),
         )
         self.channel_mixer = nn.Sequential(
             nn.Conv2d(out_channel, out_channel * 4, kernel_size=1, groups=out_channel),
