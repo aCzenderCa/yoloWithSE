@@ -198,7 +198,7 @@ class ViTBlock6P(nn.Module):
         self.stride = stride
 
         self.post = nn.Sequential(
-            LightConv(out_channel, out_channel, k=3),
+            LightConv(in_channel, out_channel, k=3),
         )
 
         self.pconv = nn.Sequential(
