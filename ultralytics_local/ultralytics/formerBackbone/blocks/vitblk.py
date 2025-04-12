@@ -195,7 +195,9 @@ class ViTBlock6P(nn.Module):
             CBAM(in_channel),
         )
         self.act = nn.GELU()
-        self.stride = stride
+        self.scale = nn.Sequential()
+        if stride > 1:
+            self.scale.append(nn.MaxPool2d(5, stride, padding=2))
 
         self.post = nn.Sequential(
             LightConv(in_channel, out_channel, k=3),
@@ -214,7 +216,7 @@ class ViTBlock6P(nn.Module):
         raw_x = x
         x = self.small_blk(x)
         x = self.act(x)
-        x = x + raw_x
+        x = x + self.scale(raw_x)
 
         y = self.post(x)
         y = self.pconv(raw_x) + y
