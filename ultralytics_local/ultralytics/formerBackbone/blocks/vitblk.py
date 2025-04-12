@@ -252,7 +252,7 @@ class ViTBlockS1P(nn.Module):
         super().__init__()
         self.token_mixer = nn.Sequential(
             CBAM(in_channel),
-            nn.Conv2d(in_channel, out_channel, kernel_size=1),
+            nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride),
             nn.BatchNorm2d(out_channel),
         )
         self.channel_mixer = nn.Sequential(
