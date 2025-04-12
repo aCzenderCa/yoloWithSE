@@ -23,7 +23,7 @@ args.add_argument('--optimizer', type=str, default='auto')
 args.add_argument('--freeze', type=str, default='')  # 2|4|6|8|9|10|13|16|19|22|23   0|1|2|3|4|5|6
 args.add_argument('--lr0', type=float, default=0.1)
 args.add_argument('--auto_augment', type=str, default='autoaugment')
-args.add_argument('--data', type=str, default='DOTAv1.yaml')
+args.add_argument('--data', type=str, default='DOTAv1_split.yaml')
 
 args = args.parse_args()
 

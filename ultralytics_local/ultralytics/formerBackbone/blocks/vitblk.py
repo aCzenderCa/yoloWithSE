@@ -1,8 +1,10 @@
+import math
+
 import torch
 from torch import nn
 from torch.nn import init
 
-from ultralytics.nn.modules import CBAM
+from ultralytics.nn.modules import CBAM, Bottleneck
 
 
 class ViTBlock(nn.Module):
@@ -228,3 +230,39 @@ class ViTBlock6P(nn.Module):
         y = self.post(x)
         y = self.pconv(raw_x) + y
         return y
+
+
+class ViTBlockS1P(nn.Module):
+    def __init__(self, in_channel, out_channel, stride=None, rep=1):
+        super().__init__()
+        assert in_channel % 2 == 0
+        self.extra_ch = out_channel - in_channel // 2
+        self.in_seq = nn.Sequential(
+            nn.Conv2d(in_channel, in_channel // 2, kernel_size=1, stride=stride),
+        )
+
+        gcd_for_out = math.gcd(self.extra_ch, in_channel)
+        self.out_seq = nn.Sequential(
+            nn.Conv2d(in_channel, self.extra_ch, kernel_size=5, stride=stride, groups=gcd_for_out),
+            nn.BatchNorm2d(self.extra_ch),
+            CBAM(self.extra_ch),
+        )
+
+        self.act = nn.GELU()
+
+        for _ in range(rep - 1):
+            self.in_seq.append(nn.BatchNorm2d(in_channel // 2))
+            self.in_seq.append(nn.Conv2d(in_channel // 2, in_channel // 2, kernel_size=1, stride=1))
+
+            self.out_seq.append(
+                nn.Conv2d(self.extra_ch, self.extra_ch, kernel_size=5, stride=stride, groups=self.extra_ch))
+            self.out_seq.append(nn.BatchNorm2d(self.extra_ch))
+
+    def forward(self, x: torch.Tensor):
+        y1 = self.in_seq(x)
+        y2 = self.out_seq(x)
+        y = torch.cat([y1, y2], 1) # b c x y
+        y = self.act(y)
+
+        return y
+
