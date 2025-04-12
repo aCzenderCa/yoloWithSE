@@ -239,9 +239,11 @@ class ViTBlock6PRep(nn.Module):
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            RepConv(in_channel, in_channel * 2, k=5, p=2, g=in_channel),
+            self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel))
+            self.net.append(nn.ReLU())
             self.net.append(SpatialAttention())
-            RepConv(in_channel * 2, in_channel, k=5, p=2, g=in_channel),
+            self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
+            self.net.append(nn.BatchNorm2d(in_channel))
         self.act = nn.GELU()
 
         self.post = nn.Sequential(
