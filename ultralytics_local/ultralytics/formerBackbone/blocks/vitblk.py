@@ -186,9 +186,9 @@ class ViTBlock5(nn.Module):
 
 
 class SAWithBn(nn.Module):
-    def __init__(self, ch):
+    def __init__(self):
         super().__init__()
-        self.sa = SpatialAttention(ch)
+        self.sa = SpatialAttention()
 
     def forward(self, x):
         raw_x = x
@@ -249,7 +249,7 @@ class ViTBlock6PRep(nn.Module):
         )
         for i in range(rep):
             self.net.append(DWConv(out_channel, out_channel, k=5))
-            self.net.append(SAWithBn(out_channel))
+            self.net.append(SAWithBn())
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
