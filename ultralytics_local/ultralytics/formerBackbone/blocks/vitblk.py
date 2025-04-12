@@ -248,7 +248,7 @@ class ViTBlock6PRep(nn.Module):
         x = x + raw_x
 
         y = self.post(x)
-        return y
+        return y + raw_x
 
 
 class ViTBlockS1P(nn.Module):
