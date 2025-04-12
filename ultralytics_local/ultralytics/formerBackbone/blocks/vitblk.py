@@ -256,13 +256,12 @@ class ViTBlockS1P(nn.Module):
             nn.Conv2d(in_channel, out_channel, kernel_size=1),
         )
         self.channel_mixer = nn.Sequential(
-            nn.Conv2d(out_channel, out_channel * 2, kernel_size=1, groups=out_channel),
-            nn.BatchNorm2d(out_channel * 2),
+            nn.Conv2d(out_channel, out_channel * 4, kernel_size=1, groups=out_channel),
+            nn.Upsample(scale_factor=2),
             nn.GELU(),
-            nn.Conv2d(out_channel * 2, out_channel, kernel_size=1, groups=out_channel),
+            nn.Conv2d(out_channel, out_channel, kernel_size=3, padding=1, stride=2, groups=out_channel),
             nn.BatchNorm2d(out_channel),
         )
-        self.cbam = CBAM(out_channel)
 
         # for _ in range(rep - 1):
         #     self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
@@ -271,6 +270,5 @@ class ViTBlockS1P(nn.Module):
     def forward(self, x: torch.Tensor):
         y = self.token_mixer(x)
         y = self.channel_mixer(y) + y
-        y = self.cbam(y) + y
 
         return y
