@@ -254,10 +254,10 @@ class ViTBlockS1P(nn.Module):
             nn.Conv2d(in_channel, in_channel * 2, kernel_size=1, groups=in_channel),
             Insp(in_channel * 2, [in_channel, in_channel], [(1, 3), (3, 1)], [(0, 1), (1, 0)], stride),
             CBAM(in_channel * 2),
-            nn.Conv2d(in_channel * 2, out_channel, kernel_size=1),
+            nn.Conv2d(in_channel * 2, out_channel * 2, kernel_size=1),
         )
         self.channel_mixer = nn.Sequential(
-            nn.Conv2d(out_channel, out_channel * 4, kernel_size=1, groups=out_channel),
+            nn.Conv2d(out_channel * 2, out_channel * 4, kernel_size=1, groups=out_channel * 2),
             nn.Upsample(scale_factor=2),
             nn.GELU(),
             nn.Conv2d(out_channel, out_channel, kernel_size=3, padding=1, stride=2, groups=out_channel),
