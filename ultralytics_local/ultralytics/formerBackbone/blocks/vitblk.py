@@ -206,7 +206,7 @@ class ViTBlock6P(nn.Module):
         p_gp = math.gcd(in_channel, out_channel)
         self.pconv = nn.Sequential(
             nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, groups=p_gp, bias=False),
-            SpatialAttention(out_channel),
+            SpatialAttention(),
             nn.BatchNorm2d(out_channel),
         )
 
