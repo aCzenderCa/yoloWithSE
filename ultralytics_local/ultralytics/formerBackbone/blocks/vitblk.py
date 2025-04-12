@@ -254,10 +254,8 @@ class ViTBlock6PRep(nn.Module):
 
         self.pconv = nn.Sequential(
         )
-        if out_channel > in_channel:
-            self.pconv.append(einn.Reduce(f"b c w h -> b (c {out_channel // in_channel}) w h", "repeat"))
-        if out_channel < in_channel:
-            self.pconv.append(einn.Reduce(f"b (c {in_channel // out_channel}) w h -> b c w h", "mean"))
+        if out_channel != in_channel:
+            self.pconv.append(DWConv(in_channel, out_channel, k=1))
 
     def forward(self, x: torch.Tensor):
         raw_x = self.pconv(x)
