@@ -199,18 +199,23 @@ class ViTBlock6P(nn.Module):
         self.post = []
         for i in range(rep):
             if i == 0:
-                self.post.append(nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=1))
+                self.post.append(nn.Conv2d(in_channel, out_channel, kernel_size=1))
             else:
                 self.post.append(
-                    nn.Conv2d(out_channel, out_channel, kernel_size=3, stride=1, padding=1, groups=out_channel))
+                    nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
             self.post.append(nn.BatchNorm2d(out_channel))
         self.post = nn.Sequential(*self.post)
 
-        p_gp = int(in_channel * ch_scale) if ch_scale <= 1 else in_channel
-        if ((out_channel > in_channel and out_channel % in_channel != 0) or
-                (out_channel < in_channel and in_channel % out_channel != 0)):
-            p_gp = 1
-        self.pconv = nn.Conv2d(in_channel, int(in_channel * ch_scale), kernel_size=1, groups=p_gp, bias=False)
+        p_gp = math.gcd(in_channel, out_channel)
+        self.pconv = nn.Sequential(
+            nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, groups=p_gp, bias=False),
+            nn.BatchNorm2d(out_channel),
+        )
+        for i in range(rep - 1):
+            self.pconv.append(
+                nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel, bias=False))
+            self.pconv.append(nn.BatchNorm2d(out_channel))
+
         self.scale = nn.Sequential()
         if stride > 1:
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
