@@ -251,30 +251,21 @@ class ViTBlockS1P(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, rep=1):
         super().__init__()
         assert in_channel % 2 == 0
-        self.in_seq = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel // 2, kernel_size=3, padding=1, stride=stride),
-            nn.BatchNorm2d(out_channel // 2),
+        self.seq = nn.Sequential(
+            nn.Conv2d(in_channel, out_channel, kernel_size=3, padding=1, stride=stride),
+            nn.BatchNorm2d(out_channel),
         )
-
         self.cbam = CBAM(out_channel)
         self.bnY = nn.BatchNorm2d(out_channel)
         self.act = nn.GELU()
 
-        gcd_for_out = math.gcd(out_channel // 2, in_channel)
-        self.out_seq = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel // 2, kernel_size=5, padding=2, stride=stride, groups=gcd_for_out),
-            nn.BatchNorm2d(out_channel // 2),
-        )
-
         for _ in range(rep - 1):
-            self.out_seq.append(nn.Conv2d(out_channel // 2, out_channel // 2, kernel_size=5, padding=2,
+            self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2,
                                           stride=stride, groups=out_channel // 2))
-            self.out_seq.append(nn.BatchNorm2d(out_channel // 2))
+            self.seq.append(nn.BatchNorm2d(out_channel))
 
     def forward(self, x: torch.Tensor):
-        y1 = self.in_seq(x)
-        y2 = self.out_seq(x)
-        y = torch.cat([y1, y2], 1)  # b c x y
+        y = self.seq(x)  # b c x y
         y = self.cbam(y)
         y = self.bnY(y)
         y = self.act(y)
