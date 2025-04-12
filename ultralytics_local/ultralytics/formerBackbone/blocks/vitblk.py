@@ -254,6 +254,7 @@ class ViTBlock6PRep(nn.Module):
         for i in range(rep - 1):
             self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel))
             self.net.append(nn.BatchNorm2d(in_channel * 2))
+            self.net.append(nn.ChannelShuffle(in_channel * 2))
             self.net.append(nn.ReLU())
             self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
             self.net.append(nn.BatchNorm2d(in_channel))
