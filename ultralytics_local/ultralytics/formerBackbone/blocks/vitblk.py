@@ -260,13 +260,13 @@ class ViTBlock6PRep(nn.Module):
             self.pconv.append(einn.Reduce(f"b (c {in_channel // out_channel}) w h -> b c w h", "mean"))
 
     def forward(self, x: torch.Tensor):
-        raw_x = x
+        raw_x = self.pconv(x)
         x = self.small_blk(x)
         x = self.net(x + raw_x)
         x = x + raw_x
 
         y = self.post(x)
-        return y + self.pconv(raw_x)
+        return y + raw_x
 
 
 class ViTBlockS1P(nn.Module):
