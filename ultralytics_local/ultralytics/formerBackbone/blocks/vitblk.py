@@ -262,7 +262,10 @@ class ViTBlockS1P(nn.Module):
                     nn.Conv2d(self.extra_ch, self.extra_ch, kernel_size=5, stride=stride, groups=self.extra_ch))
                 self.out_seq.append(nn.BatchNorm2d(self.extra_ch))
         else:
-            self.out_seq = nn.Conv2d(in_channel, 1, kernel_size=5, stride=stride, groups=in_channel)
+            self.out_seq = nn.Sequential(
+                nn.Conv2d(in_channel, 1, kernel_size=5, stride=stride, groups=in_channel),
+                CBAM(1),
+            )
 
 
     def forward(self, x: torch.Tensor):
