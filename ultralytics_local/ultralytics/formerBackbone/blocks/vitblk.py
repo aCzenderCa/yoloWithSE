@@ -267,9 +267,6 @@ class ViTBlockS1P(nn.Module):
         )
 
         for _ in range(rep - 1):
-            self.in_seq.append(nn.Conv2d(out_channel // 2, out_channel // 2, kernel_size=3, padding=1, stride=1))
-            self.in_seq.append(nn.BatchNorm2d(out_channel // 2))
-
             self.out_seq.append(nn.Conv2d(out_channel // 2, out_channel // 2, kernel_size=5, padding=2,
                                           stride=stride, groups=out_channel // 2))
             self.out_seq.append(nn.BatchNorm2d(out_channel // 2))
