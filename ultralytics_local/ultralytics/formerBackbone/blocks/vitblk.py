@@ -259,7 +259,7 @@ class CA(nn.Module):
         a = self.pool(x)
         results = torch.zeros_like(x)
         for i in range(a.shape[0]):
-            results[i] = F.conv2d(x[i], a[i], padding=self.k // 2, groups=self.ch, stride=1)
+            results[i] = F.conv2d(x[i:i], a[i:i], padding=self.k // 2, groups=self.ch)
 
         return results
 
