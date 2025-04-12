@@ -5,7 +5,8 @@ from torch import nn
 from torch.nn import init
 import torch.nn.functional as F
 
-from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention, RepVGGDW, RepConv
+from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention, RepVGGDW, RepConv, DWConv, \
+    Conv, LightConv
 
 
 class ViTBlock(nn.Module):
@@ -201,8 +202,7 @@ class ViTBlock6P(nn.Module):
         self.stride = stride
 
         self.post = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel, kernel_size=1),
-            nn.BatchNorm2d(out_channel),
+            LightConv(in_channel, out_channel, k=1),
         )
 
         p_gp = math.gcd(in_channel, out_channel)
@@ -241,16 +241,13 @@ class ViTBlock6PRep(nn.Module):
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(nn.Conv2d(in_channel, in_channel * 2, kernel_size=5, padding=2, groups=in_channel))
-            self.net.append(nn.ReLU())
+            self.net.append(DWConv(in_channel, in_channel * 2, k=5))
             self.net.append(SpatialAttention())
-            self.net.append(nn.Conv2d(in_channel * 2, in_channel, kernel_size=5, padding=2, groups=in_channel))
-            self.net.append(nn.BatchNorm2d(in_channel))
+            self.net.append(DWConv(in_channel * 2, in_channel, k=5))
         self.act = nn.GELU()
 
         self.post = nn.Sequential(
-            nn.Conv2d(in_channel, out_channel, kernel_size=1),
-            nn.BatchNorm2d(out_channel),
+            LightConv(in_channel, out_channel, k=1),
         )
 
     def forward(self, x: torch.Tensor):
