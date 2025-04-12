@@ -17,7 +17,7 @@ scales: # model compound scaling constants, i.e. 'model=yolo11n-obb.yaml' will c
 # YOLO11n backbone
 backbone:
   # [from, repeats, module, args]
-  - [-1, 1, Conv, [16, 3, 1]] # 0-P1/1
+  - [-1, 1, Conv, [32, 3, 1]] # 0-P1/1
   - [-1, 1, ViTBlock6P, [32, 2]] # 1-P2/2
   - [-1, 1, ViTBlock6P, [64, 1, 2]]
   - [-1, 1, ViTBlock6P, [64, 2]] # 3-P3/4
