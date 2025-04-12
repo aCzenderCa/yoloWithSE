@@ -260,8 +260,7 @@ class ViTBlockS1P(nn.Module):
         self.act = nn.GELU()
 
         for _ in range(rep - 1):
-            self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2,
-                                      stride=stride, groups=out_channel))
+            self.seq.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
             self.seq.append(nn.BatchNorm2d(out_channel))
 
     def forward(self, x: torch.Tensor):
