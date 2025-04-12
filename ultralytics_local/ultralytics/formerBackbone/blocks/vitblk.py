@@ -266,7 +266,7 @@ class ViTBlockS1P(nn.Module):
 
     def forward(self, x: torch.Tensor):
         y = self.seq(x)  # b c x y
-        y = self.cbam(y)
+        y = y + self.cbam(y)
         y = self.bnY(y)
         y = self.act(y)
 
