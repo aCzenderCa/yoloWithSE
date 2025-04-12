@@ -190,7 +190,7 @@ class ViTBlock6P(nn.Module):
             stride = int(ch_scale) if ch_scale >= 1 else 1
 
         self.small_blk = nn.Sequential(
-            nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, groups=in_channel),
+            nn.Conv2d(in_channel, in_channel, kernel_size=5, padding=2, stride=stride, groups=in_channel),
             CBAM(in_channel),
             nn.BatchNorm2d(in_channel),
         )
