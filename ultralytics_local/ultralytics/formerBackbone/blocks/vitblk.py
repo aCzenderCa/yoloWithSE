@@ -285,8 +285,8 @@ class MHSpatialAttentionP(nn.Module):
         self.ch_att = nn.Sequential(
             nn.AdaptiveAvgPool2d(2),
             nn.Flatten(),
-            nn.Linear(ch * 4, ch * 4, bias=False),
-            einn.Reduce("b (c 2 2) -> b c 1 1", "mean"),
+            nn.Linear(ch * 4, ch, bias=False),
+            einn.Rearrange("b c -> b c 1 1")
         )
 
     def forward(self, x: torch.Tensor):
