@@ -273,7 +273,7 @@ class MHSpatialAttentionP(nn.Module):
     def __init__(self, ch, head):
         super().__init__()
         self.att_in = nn.Sequential(
-            einn.Reduce(f"b ({head} c) h w -> b {head} h w", "mean")
+            einn.Reduce(f"b (c {ch//head}) h w -> b c h w", "mean")
         )
         self.att_conv = nn.Sequential(
             LightConv(head, head, k=7, act=False),
