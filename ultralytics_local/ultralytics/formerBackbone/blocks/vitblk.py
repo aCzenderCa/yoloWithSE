@@ -212,7 +212,7 @@ class ViTBlock6P(nn.Module):
             self.scale.append(nn.MaxPool2d(5, stride, padding=2))
 
         self.post = nn.Sequential(
-            LightConv(in_channel, out_channel, k=3),
+            LightConv(in_channel, out_channel, k=3, act=False),
         )
 
         self.pconv = nn.Sequential(
@@ -249,7 +249,7 @@ class ViTBlock6PRep(nn.Module):
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
-            LightConv(out_channel, out_channel, k=3),
+            LightConv(out_channel, out_channel, k=3, act=False),
         )
 
         self.pconv = nn.Sequential(
