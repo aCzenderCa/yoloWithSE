@@ -205,7 +205,7 @@ class ViTBlock6P(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, in_channel, k=5, s=stride),
-            MHSpatialAttentionP(out_channel, 4),
+            MHSpatialAttentionP(in_channel, 4),
         )
         self.scale = nn.Sequential()
         if stride > 1:
