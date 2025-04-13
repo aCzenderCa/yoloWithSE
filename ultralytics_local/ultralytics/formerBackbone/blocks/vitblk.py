@@ -205,7 +205,7 @@ class ViTBlock6P(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, in_channel, k=5, s=stride),
-            SpatialAttention(in_channel),
+            SpatialAttention(),
         )
         self.scale = nn.Sequential()
         if stride > 1:
@@ -237,7 +237,7 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
-            SpatialAttention(out_channel),
+            SpatialAttention(),
         )
 
         self.net = nn.Sequential(
