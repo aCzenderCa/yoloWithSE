@@ -205,7 +205,7 @@ class ViTBlock6P(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, in_channel, k=5, s=stride),
-            MHSpatialAttention(out_channel, 4),
+            MHSpatialAttentionP(out_channel, 4),
         )
         self.scale = nn.Sequential()
         if stride > 1:
@@ -239,7 +239,7 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
-            MHSpatialAttention(out_channel, 4),
+            MHSpatialAttentionP(out_channel, 4),
         )
 
         self.net = nn.Sequential(
@@ -255,7 +255,9 @@ class ViTBlock6PRep(nn.Module):
         self.pconv = nn.Sequential(
         )
         if out_channel != in_channel:
-            self.pconv.append(DWConv(in_channel, out_channel, k=1))
+            pc = DWConv(in_channel, out_channel, k=1)
+            self.pconv.append(pc)
+            init.constant_(pc.conv.weight, 1)
 
     def forward(self, x: torch.Tensor):
         raw_x = self.pconv(x)
@@ -267,7 +269,7 @@ class ViTBlock6PRep(nn.Module):
         return y + raw_x
 
 
-class MHSpatialAttention(nn.Module):
+class MHSpatialAttentionP(nn.Module):
     def __init__(self, ch, head):
         super().__init__()
         self.att_in = nn.Sequential(
@@ -280,17 +282,25 @@ class MHSpatialAttention(nn.Module):
             einn.Reduce(f"b c h w -> b (c {ch // head}) h w", "repeat")
         )
 
+        self.ch_att = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),
+            nn.Flatten(),
+            nn.Linear(ch, ch, bias=False),
+            einn.Rearrange("b c -> b c 1 1")
+        )
+
     def forward(self, x: torch.Tensor):
         att_x = self.att_in(x)
         att_x = self.att_conv(att_x)
         att_x = self.att_out(att_x)
+        att_x = att_x * self.ch_att(att_x)
         return att_x * x
 
 
 class MHSpatialAttentionWithBn(nn.Module):
     def __init__(self, ch, head):
         super().__init__()
-        self.att = MHSpatialAttention(ch, head)
+        self.att = MHSpatialAttentionP(ch, head)
 
     def forward(self, x: torch.Tensor):
         att_x = self.att(x)
