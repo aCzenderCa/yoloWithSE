@@ -53,7 +53,7 @@ if len(args.resume) == 0:
         for (m1, m2) in itertools.zip_longest(oms, pretrained.model):
             if m1.__class__ == m2.__class__:
                 try:
-                    m1.load_state_dict(m2.state_dict(), strict=False)
+                    m1.load_state_dict(m2.state_dict(), strict=False, assign=True)
                 except Exception as e:
                     print(e)
 
