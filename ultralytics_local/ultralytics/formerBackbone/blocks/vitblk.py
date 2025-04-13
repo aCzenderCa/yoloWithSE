@@ -205,7 +205,7 @@ class ViTBlock6P(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, in_channel, k=5, s=stride),
-            MHSpatialAttentionP(in_channel, math.gcd(in_channel, 4)),
+            SpatialAttention(in_channel),
         )
         self.scale = nn.Sequential()
         if stride > 1:
@@ -237,13 +237,13 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
-            MHSpatialAttentionP(out_channel, 4),
+            SpatialAttention(out_channel),
         )
 
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(MHSpatialAttentionWithBn(out_channel, 4))
+            self.net.append(SAWithBn())
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
@@ -280,12 +280,7 @@ class MHSpatialAttentionP(nn.Module):
             einn.Reduce(f"b c h w -> b (c {ch // head}) h w", "repeat")
         )
 
-        self.ch_att = nn.Sequential(
-            nn.AdaptiveAvgPool2d(1),
-            nn.Flatten(),
-            nn.Linear(ch, ch, bias=False),
-            einn.Rearrange("b c -> b c 1 1")
-        )
+        self.ch_att = ChannelAttention(ch)
 
     def forward(self, x: torch.Tensor):
         att_x = self.att_in(x)
