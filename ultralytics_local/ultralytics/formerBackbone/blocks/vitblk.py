@@ -205,7 +205,7 @@ class ViTBlock6P(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, in_channel, k=5, s=stride),
-            CBAM(in_channel),
+            MHSpatialAttention(out_channel, 4),
         )
         self.scale = nn.Sequential()
         if stride > 1:
@@ -239,13 +239,13 @@ class ViTBlock6PRep(nn.Module):
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=5),
-            CBAM(out_channel),
+            MHSpatialAttention(out_channel, 4),
         )
 
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(SAWithBn())
+            self.net.append(MHSpatialAttentionWithBn(out_channel, 4))
             self.net.append(DWConv(out_channel * 2, out_channel, k=5))
 
         self.post = nn.Sequential(
@@ -267,28 +267,31 @@ class ViTBlock6PRep(nn.Module):
         return y + raw_x
 
 
-class ViTBlockS1P(nn.Module):
-    def __init__(self, in_channel, out_channel, stride=1, rep=1):
+class MHSpatialAttention(nn.Module):
+    def __init__(self, ch, head):
         super().__init__()
-        self.token_mixer = nn.Sequential(
-            ChannelAttention(in_channel),
-            nn.Conv2d(in_channel, out_channel, kernel_size=1, stride=stride),
-            nn.BatchNorm2d(out_channel),
+        self.att_in = nn.Sequential(
+            einn.Reduce(f"b ({head} c) h w -> b {head} h w", "mean")
         )
-        self.channel_mixer = nn.Sequential(
-            nn.Conv2d(out_channel, out_channel * 2, kernel_size=3, padding=1, groups=out_channel),
-            nn.GELU(),
-            ChannelAttention(out_channel * 2),
-            nn.Conv2d(out_channel * 2, out_channel, kernel_size=3, padding=1, groups=out_channel),
-            nn.BatchNorm2d(out_channel),
+        self.att_conv = nn.Sequential(
+            LightConv(head, head, k=7, act=False),
         )
-
-        for _ in range(rep - 1):
-            self.channel_mixer.append(nn.Conv2d(out_channel, out_channel, kernel_size=5, padding=2, groups=out_channel))
-            self.channel_mixer.append(nn.BatchNorm2d(out_channel))
+        self.att_out = nn.Sequential(
+            einn.Reduce(f"b c h w -> b (c {ch // head}) h w", "repeat")
+        )
 
     def forward(self, x: torch.Tensor):
-        y = self.token_mixer(x)
-        y = self.channel_mixer(y) + y
+        att_x = self.att_in(x)
+        att_x = self.att_conv(att_x)
+        att_x = self.att_out(att_x)
+        return att_x * x
 
-        return y
+
+class MHSpatialAttentionWithBn(nn.Module):
+    def __init__(self, ch, head):
+        super().__init__()
+        self.att = MHSpatialAttention(ch, head)
+
+    def forward(self, x: torch.Tensor):
+        att_x = self.att(x)
+        return torch.cat([x, att_x], dim=1)
