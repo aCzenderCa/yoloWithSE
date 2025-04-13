@@ -283,9 +283,9 @@ class MHSpatialAttentionP(nn.Module):
         )
 
         self.ch_att = nn.Sequential(
-            nn.AdaptiveAvgPool2d(2),
+            nn.AdaptiveAvgPool2d(1),
             nn.Flatten(),
-            nn.Linear(ch * 4, ch, bias=False),
+            nn.Linear(ch, ch, bias=False),
             einn.Rearrange("b c -> b c 1 1")
         )
 
