@@ -293,7 +293,7 @@ class MHSpatialAttentionP(nn.Module):
         att_x = self.att_in(x)
         att_x = self.att_conv(att_x)
         att_x = self.att_out(att_x)
-        att_x = att_x * self.ch_att(att_x)
+        att_x = att_x * self.ch_att(x)
         return att_x * x
 
 
