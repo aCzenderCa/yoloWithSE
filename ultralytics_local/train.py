@@ -12,9 +12,9 @@ args = ArgumentParser()
 
 args.add_argument('--resume', type=str, default='')
 args.add_argument('--epoch', type=int, default=50)
-args.add_argument('--model', type=str, default='yolo11-obb-vit_pp.yaml')
+args.add_argument('--model', type=str, default='yolo11-obb_p01.yaml')
 args.add_argument('--scale', type=str, default='n')
-args.add_argument('--imgsz', type=int, default=640)
+args.add_argument('--imgsz', type=int, default=1024)
 args.add_argument('--multi_scale', action='store_true', default=False)
 args.add_argument('--no_val', action='store_true', default=False)
 args.add_argument('--pretrained', type=str, default='')
@@ -53,7 +53,7 @@ if len(args.resume) == 0:
         for (m1, m2) in itertools.zip_longest(oms, pretrained.model):
             if m1.__class__ == m2.__class__:
                 try:
-                    m1.load_state_dict(m2.state_dict())
+                    m1.load_state_dict(m2.state_dict(), strict=False)
                 except Exception as e:
                     print(e)
 
