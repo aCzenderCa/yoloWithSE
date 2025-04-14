@@ -236,15 +236,15 @@ class ViTBlock6PRep(nn.Module):
         super().__init__()
 
         self.small_blk = nn.Sequential(
-            DWConv(in_channel, out_channel, k=5),
-            SpatialAttention(),
+            DWConv(in_channel, out_channel, k=7),
+            CBAM(out_channel),
         )
 
         self.net = nn.Sequential(
         )
         for i in range(rep):
             self.net.append(SAWithBn())
-            self.net.append(DWConv(out_channel * 2, out_channel, k=5, act=False))
+            self.net.append(DWConv(out_channel * 2, out_channel, k=7, act=False))
 
         self.post = nn.Sequential(
             LightConv(out_channel, out_channel, k=3, act=False),
