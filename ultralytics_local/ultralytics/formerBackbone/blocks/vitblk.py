@@ -246,7 +246,7 @@ class ViTBlock6PRep(nn.Module):
         super().__init__()
 
         self.small_blk = nn.Sequential(
-            DWConvK(in_channel, out_channel, k=7),
+            DWConv(in_channel, out_channel, k=7),
             CBAM(out_channel),
         )
 
