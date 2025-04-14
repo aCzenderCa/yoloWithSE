@@ -244,7 +244,7 @@ class ViTBlock6PRep(nn.Module):
         )
         for i in range(rep):
             self.net.append(SAWithBn())
-            self.net.append(DWConv(out_channel * 2, out_channel, k=5))
+            self.net.append(DWConv(out_channel * 2, out_channel, k=5, act=False))
 
         self.post = nn.Sequential(
             LightConv(out_channel, out_channel, k=3, act=False),
