@@ -230,21 +230,31 @@ class ViTBlock6P(nn.Module):
         y = self.pconv(raw_x1) + y
         return y
 
+class DWConvK(nn.Module):
+    def __init__(self, in_channel, out_channel, k=3, s=1, act=True):
+        super().__init__()
+        self.dwconv = DWConv(in_channel, out_channel, k, s, act=act)
+        self.add = in_channel == out_channel
+
+    def forward(self, x):
+        if self.add:
+            return x + self.dwconv(x)
+        return self.dwconv(x)
 
 class ViTBlock6PRep(nn.Module):
     def __init__(self, in_channel, out_channel, rep=1):
         super().__init__()
 
         self.small_blk = nn.Sequential(
-            DWConv(in_channel, out_channel, k=7),
+            DWConvK(in_channel, out_channel, k=7),
             CBAM(out_channel),
         )
 
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(SAWithBn())
-            self.net.append(DWConv(out_channel * 2, out_channel, k=7, act=False))
+            self.net.append(SpatialAttention())
+            self.net.append(DWConvK(out_channel, out_channel, k=7, act=False))
 
         self.pconv = nn.Sequential(
         )
