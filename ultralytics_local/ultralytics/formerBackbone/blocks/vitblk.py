@@ -302,21 +302,3 @@ class MHSpatialAttentionWithBn(nn.Module):
     def forward(self, x: torch.Tensor):
         att_x = self.att(x)
         return torch.cat([x, att_x], dim=1)
-
-class SPPAF(nn.Module):
-    """Spatial Pyramid Pooling chanAttention - Fast (SPPAF) layer."""
-
-    def __init__(self, c1, c2, k=5):
-        super().__init__()
-        c_ = c1 // 2  # hidden channels
-        self.cv1 = Conv(c1, c1, 1, 1)
-        self.cv2 = Conv(c1 * 4, c2, 1, 1)
-        self.m = nn.Sequential(
-            nn.MaxPool2d(kernel_size=k, stride=1, padding=k // 2),
-        )
-
-    def forward(self, x):
-        """Forward pass through Ghost Convolution block."""
-        y = [self.cv1(x)]
-        y.extend(self.m(y[-1]) for _ in range(3))
-        return self.cv2(torch.cat(y, 1))
