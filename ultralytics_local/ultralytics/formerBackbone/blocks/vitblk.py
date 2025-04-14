@@ -246,10 +246,6 @@ class ViTBlock6PRep(nn.Module):
             self.net.append(SAWithBn())
             self.net.append(DWConv(out_channel * 2, out_channel, k=7, act=False))
 
-        self.post = nn.Sequential(
-            LightConv(out_channel, out_channel, k=3, act=False),
-        )
-
         self.pconv = nn.Sequential(
         )
         if out_channel != in_channel:
@@ -260,10 +256,8 @@ class ViTBlock6PRep(nn.Module):
     def forward(self, x: torch.Tensor):
         raw_x = self.pconv(x)
         x = self.small_blk(x)
-        x = self.net(x + raw_x)
-        x = x + raw_x
+        y = self.net(x + raw_x)
 
-        y = self.post(x)
         return y + raw_x
 
 
