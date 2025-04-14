@@ -313,7 +313,7 @@ class SPPAF(nn.Module):
         self.cv2 = Conv(c_ * 4, c2, 1, 1)
         self.m = nn.Sequential(
             nn.MaxPool2d(kernel_size=k, stride=1, padding=k // 2),
-            ChannelAttention(c_),
+            ChannelAttentionK(c_),
         )
 
     def forward(self, x):
@@ -322,3 +322,12 @@ class SPPAF(nn.Module):
         y.extend(self.m(y[-1]) for _ in range(3))
         return self.cv2(torch.cat(y, 1))
 
+class ChannelAttentionK(nn.Module):
+    def __init__(self, channels: int) -> None:
+        super().__init__()
+        self.pool = nn.AdaptiveAvgPool2d(1)
+        self.fc = nn.Conv2d(channels, channels, 1, 1, 0, bias=True)
+        self.act = nn.Sigmoid()
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return x * self.act(self.fc(self.pool(x))) + x
