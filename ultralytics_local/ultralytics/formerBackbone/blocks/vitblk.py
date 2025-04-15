@@ -368,14 +368,11 @@ class ChanSpatialAttention(nn.Module):
         padding = 3 if kernel_size == 7 else 1
         self.cv1 = nn.Conv2d(2, 1, kernel_size, padding=padding, bias=False)
         self.act = nn.Sigmoid()
-        self.ch = ch
-        self.liner = nn.Linear(self.ch * 2, 1, bias=False)
+        self.pool = nn.AdaptiveAvgPool2d(1)
+        self.fc = nn.Conv2d(ch, ch, 1, 1, 0, bias=True)
 
     def forward(self, x):
-        x_max = F.adaptive_max_pool2d(x, 1)
-        x_avg = F.adaptive_avg_pool2d(x, 1)
-        x_l = self.liner(torch.cat([torch.flatten(x_max, 1), torch.flatten(x_avg, 1)], 1))
-        x_l = torch.reshape(x_l, [x_l.shape[0], 1, 1, 1])
+        x_l = self.fc(self.pool(x))
 
         f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * x_l)
         return x * (f / 2.0 + 0.5)

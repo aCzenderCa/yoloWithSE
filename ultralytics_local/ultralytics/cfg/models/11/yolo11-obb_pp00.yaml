@@ -19,7 +19,7 @@ backbone:
   # [from, repeats, module, args]
   - [-1, 1, Conv, [64, 3, 2]]             # 0 P1/2
   - [-1, 1, ViTBlock1PP, [128, 2]]         # 1 P2/4
-  - [-1, 1, ViTBlock1PPRep, [128, 2]]     # 2 P2.1/4
+  - [-1, 1, ViTBlock1PPRep, [128, 1]]     # 2 P2.1/4
   - [-1, 1, ViTBlock1PP, [256, 2]]         # 3 P3/8
   - [-1, 1, ViTBlock1PPRep, [256, 2]]     # 4 P3.1/8
   - [-1, 1, ViTBlock1PP, [512, 2]]         # 5 P4/16
@@ -30,7 +30,7 @@ backbone:
 head:
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 8 /8
   - [[-1, 4], 1, Concat, [1]] # cat backbone P3.1
-  - [-1, 1, ViTBlock1PPRep, [256, 2]] # 10 HP0/8
+  - [-1, 1, ViTBlock1PPRep, [256, 1]] # 10 HP0/8
 
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 11 /4
   - [[-1, 2], 1, Concat, [1]] # cat backbone P2.1
