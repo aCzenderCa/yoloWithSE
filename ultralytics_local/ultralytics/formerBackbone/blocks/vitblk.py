@@ -235,7 +235,7 @@ class DWConvK(nn.Module):
     def __init__(self, in_channel, out_channel, k=3, s=1, act=True):
         super().__init__()
         self.dwconv = DWConv(in_channel, out_channel, k, s, act=act)
-        self.add = in_channel == out_channel
+        self.add = in_channel == out_channel and s == 1
 
     def forward(self, x):
         if self.add:
@@ -324,7 +324,7 @@ class ViTBlock1PPRep(nn.Module):
         self.pconv = nn.Sequential(
         )
         if out_channel != in_channel:
-            pc = DWConv(in_channel, out_channel, k=1)
+            pc = DWConv(in_channel, out_channel, k=1, act=False)
             self.pconv.append(pc)
             init.constant_(pc.conv.weight, 1)
 
@@ -334,6 +334,32 @@ class ViTBlock1PPRep(nn.Module):
         y = self.net(x + raw_x)
 
         return y + raw_x + x
+
+
+class ViTBlock1PP(nn.Module):
+    def __init__(self, in_channel, out_channel, stride=None):
+        super().__init__()
+
+        self.small_blk = nn.Sequential(
+            DWConv(in_channel, out_channel, k=7, s=stride),
+            ChanSpatialAttention(out_channel),
+        )
+        self.scale = nn.Sequential()
+        if stride > 1:
+            self.scale.append(nn.MaxPool2d(5, stride, padding=2))
+
+        self.pconv = nn.Sequential(
+        )
+        if out_channel != in_channel:
+            pc = DWConv(in_channel, out_channel, k=1, act=False)
+            self.pconv.append(pc)
+            init.constant_(pc.conv.weight, 1)
+
+    def forward(self, x: torch.Tensor):
+        raw_x = x
+        y = self.small_blk(x)
+        y = y + self.pconv(self.scale(raw_x))
+        return y
 
 
 class ChanSpatialAttention(nn.Module):
