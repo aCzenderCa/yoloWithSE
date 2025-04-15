@@ -375,6 +375,7 @@ class ChanSpatialAttention(nn.Module):
         x_max = F.adaptive_max_pool2d(x, 1)
         x_avg = F.adaptive_avg_pool2d(x, 1)
         x_l = self.liner(torch.cat([torch.flatten(x_max, 1), torch.flatten(x_avg, 1)], 1))
+        x_l = torch.reshape(x_l, [x_l.shape[0], 1, 1, 1])
 
-        f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * torch.reshape(x_l, x.shape))
+        f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * x_l)
         return x * (f / 2.0 + 0.5)
