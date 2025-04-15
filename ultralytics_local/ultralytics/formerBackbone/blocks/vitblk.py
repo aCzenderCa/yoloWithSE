@@ -375,4 +375,4 @@ class ChanSpatialAttention(nn.Module):
         x_l = self.fc(self.pool(x))
 
         f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * x_l)
-        return x * (f / 2.0 + 0.5)
+        return x * f
