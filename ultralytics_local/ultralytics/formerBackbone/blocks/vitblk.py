@@ -230,6 +230,7 @@ class ViTBlock6P(nn.Module):
         y = self.pconv(raw_x1) + y
         return y
 
+
 class DWConvK(nn.Module):
     def __init__(self, in_channel, out_channel, k=3, s=1, act=True):
         super().__init__()
@@ -240,6 +241,7 @@ class DWConvK(nn.Module):
         if self.add:
             return x + self.dwconv(x)
         return self.dwconv(x)
+
 
 class ViTBlock6PRep(nn.Module):
     def __init__(self, in_channel, out_channel, rep=1):
@@ -275,7 +277,7 @@ class MHSpatialAttentionP(nn.Module):
     def __init__(self, ch, head):
         super().__init__()
         self.att_in = nn.Sequential(
-            einn.Reduce(f"b (c {ch//head}) h w -> b c h w", "mean")
+            einn.Reduce(f"b (c {ch // head}) h w -> b c h w", "mean")
         )
         self.att_conv = nn.Sequential(
             LightConv(head, head, k=7, act=False),
@@ -302,3 +304,51 @@ class MHSpatialAttentionWithBn(nn.Module):
     def forward(self, x: torch.Tensor):
         att_x = self.att(x)
         return torch.cat([x, att_x], dim=1)
+
+
+class ViTBlock1PPRep(nn.Module):
+    def __init__(self, in_channel, out_channel, rep=1):
+        super().__init__()
+
+        self.small_blk = nn.Sequential(
+            DWConv(in_channel, out_channel, k=7),
+            ChanSpatialAttention(out_channel),
+        )
+
+        self.net = nn.Sequential(
+        )
+        for i in range(rep):
+            self.net.append(ChanSpatialAttention(out_channel))
+            self.net.append(DWConvK(out_channel, out_channel, k=7, act=False))
+
+        self.pconv = nn.Sequential(
+        )
+        if out_channel != in_channel:
+            pc = DWConv(in_channel, out_channel, k=1)
+            self.pconv.append(pc)
+            init.constant_(pc.conv.weight, 1)
+
+    def forward(self, x: torch.Tensor):
+        raw_x = self.pconv(x)
+        x = self.small_blk(x)
+        y = self.net(x + raw_x)
+
+        return y + raw_x + x
+
+
+class ChanSpatialAttention(nn.Module):
+    def __init__(self, ch, kernel_size=7):
+        super().__init__()
+        padding = 3 if kernel_size == 7 else 1
+        self.cv1 = nn.Conv2d(2, 1, kernel_size, padding=padding, bias=False)
+        self.act = nn.Sigmoid()
+        self.ch = ch
+        self.liner = nn.Linear(self.ch * 2, 1, bias=False)
+
+    def forward(self, x):
+        x_max = F.adaptive_max_pool2d(x, 1)
+        x_avg = F.adaptive_avg_pool2d(x, 1)
+        x_l = self.liner(torch.cat([torch.flatten(x_max, 1), torch.flatten(x_avg, 1)], 1))
+
+        f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * x_l)
+        return x * (f / 2.0 + 0.5)
