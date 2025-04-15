@@ -30,11 +30,11 @@ backbone:
 head:
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 8 /8
   - [[-1, 4], 1, Concat, [1]] # cat backbone P3.1
-  - [-1, 1, ViTBlock1PPRep, [256, 1]] # 10 HP0/8
+  - [-1, 1, ViTBlock1PPRep, [256, 2]] # 10 HP0/8
 
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 11 /4
   - [[-1, 2], 1, Concat, [1]] # cat backbone P2.1
-  - [-1, 1, ViTBlock1PPRep, [64, 2]] # 13 (HP3/4-small)
+  - [-1, 1, ViTBlock1PPRep, [64, 1]] # 13 (HP3/4-small)
 
   - [-1, 1, ViTBlock1PP, [128, 2]] # 14 /8
   - [[-1, 10], 1, Concat, [1]] # cat HP0
