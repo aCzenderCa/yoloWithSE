@@ -24,24 +24,25 @@ backbone:
   - [-1, 1, ViTBlock1PPRep, [256, 2]]     # 4 P3.1/8
   - [-1, 1, ViTBlock1PP, [512, 2]]         # 5 P4/16
   - [-1, 1, ViTBlock1PPRep, [512, 3]]     # 6 P4.1/16
-  - [-1, 2, C2PSA, [512]]                # 7 P4.n/16
+  - [-1, 1, SPPF, [512, 5]]               # 7
+  - [-1, 2, C2PSA, [512]]                # 8 P4.n/16
 
 # YOLO11n head
 head:
-  - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 8 /8
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 9 /8
   - [[-1, 4], 1, Concat, [1]] # cat backbone P3.1
-  - [-1, 1, ViTBlock1PPRep, [256, 2]] # 10 HP0/8
+  - [-1, 1, ViTBlock1PPRep, [256, 2]] # 11 HP0/8
 
-  - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 11 /4
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]] # 12 /4
   - [[-1, 2], 1, Concat, [1]] # cat backbone P2.1
-  - [-1, 1, ViTBlock1PPRep, [64, 1]] # 13 (HP3/4-small)
+  - [-1, 1, ViTBlock1PPRep, [64, 1]] # 14 (HP3/4-small)
 
-  - [-1, 1, ViTBlock1PP, [128, 2]] # 14 /8
-  - [[-1, 10], 1, Concat, [1]] # cat HP0
-  - [-1, 1, ViTBlock1PPRep, [128, 2]] # 16 (HP4/8-medium)
+  - [-1, 1, ViTBlock1PP, [128, 2]] # 15 /8
+  - [[-1, 11], 1, Concat, [1]] # cat HP0
+  - [-1, 1, ViTBlock1PPRep, [128, 2]] # 17 (HP4/8-medium)
 
-  - [-1, 1, ViTBlock1PP, [256, 2]] # 17 /16
-  - [[-1, 7], 1, Concat, [1]] # cat P4.n
-  - [-1, 1, ViTBlock1PPRep, [256, 2]] # 19 (HP5/16-large)
+  - [-1, 1, ViTBlock1PP, [256, 2]] # 18 /16
+  - [[-1, 8], 1, Concat, [1]] # cat P4.n
+  - [-1, 1, ViTBlock1PPRep, [256, 2]] # 20 (HP5/16-large)
 
-  - [[13, 16, 19], 1, OBB, [nc, 1]] # Detect(P3, P4, P5)
+  - [[14, 17, 20], 1, OBB, [nc, 1]] # Detect(P3, P4, P5)
