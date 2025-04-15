@@ -23,7 +23,7 @@ backbone:
   - [-1, 1, ViTBlock1PP, [256, 2]]         # 3 P3/8
   - [-1, 1, ViTBlock1PPRep, [256, 2]]     # 4 P3.1/8
   - [-1, 1, ViTBlock1PP, [512, 2]]         # 5 P4/16
-  - [-1, 1, ViTBlock1PPRep, [512, 3]]     # 6 P4.1/16
+  - [-1, 1, ViTBlock1PPRep, [512, 2]]     # 6 P4.1/16
   - [-1, 1, SPPF, [512, 5]]               # 7
   - [-1, 2, C2PSA, [512]]                # 8 P4.n/16
 
@@ -45,4 +45,6 @@ head:
   - [[-1, 8], 1, Concat, [1]] # cat P4.n
   - [-1, 1, ViTBlock1PPRep, [256, 2]] # 20 (HP5/16-large)
 
-  - [[14, 17, 20], 1, OBB, [nc, 1]] # Detect(P3, P4, P5)
+  - [-1, 1, ViTBlock1PP, [512, 2]] # 21 /32
+
+  - [[15, 18, 21], 1, OBB, [nc, 1]] # Detect(P3, P4, P5)
