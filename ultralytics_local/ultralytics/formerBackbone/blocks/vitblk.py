@@ -348,8 +348,8 @@ class ViTBlock1PPEmb(nn.Module):
         for i in range(emb_head):
             self.emb_heads.append(
                 nn.Sequential(
-                    Conv(in_channel, out_channel // emb_head, k=3, s=stride),
-                    SpatialAttention(),
+                    Conv(in_channel, out_channel // emb_head, k=3, s=stride, g=2),
+                    ChannelAttention(out_channel // emb_head),
                 )
             )
 
