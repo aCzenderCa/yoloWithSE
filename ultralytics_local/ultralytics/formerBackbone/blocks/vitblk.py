@@ -349,11 +349,11 @@ class ViTBlock1PPEmb(nn.Module):
 
         self.small_blk = nn.Sequential(
             Conv(in_channel, out_channel // emb_head, k=3, s=stride),
-            SpatialAttention(out_channel // emb_head),
+            SpatialAttention(),
         )
 
         self.net = nn.Sequential(
-            SpatialAttention(out_channel),
+            SpatialAttention(),
             DWConv(out_channel, out_channel, k=7, act=False),
         )
 
