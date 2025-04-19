@@ -345,6 +345,7 @@ class ViTBlock1PPEmb(nn.Module):
 
         self.emb = nn.Parameter(torch.ones((emb_head, in_channel)))
         self.emb_head = emb_head
+        self.in_c = in_channel
 
         self.small_blk = nn.Sequential(
             Conv(in_channel, out_channel // emb_head, k=3, s=stride),
@@ -359,7 +360,7 @@ class ViTBlock1PPEmb(nn.Module):
     def forward(self, x: torch.Tensor):
         xs = []
         for i in range(self.emb_head):
-            x_i = self.emb[i].reshape((1, x.size(1), 1, 1)) * x
+            x_i = self.emb[i].reshape((1, self.in_c, 1, 1)) * x
             x_i = self.small_blk(x_i)
             xs.append(x_i)
         x = torch.cat(xs, dim=1)
