@@ -348,9 +348,9 @@ class ViTBlock1PPEmb(nn.Module):
         for i in range(emb_head):
             self.emb_heads.append(
                 nn.Sequential(
-                    Conv(in_channel, out_channel // emb_head // 2, k=3, s=stride),
-                    ChannelAttention(out_channel // emb_head // 2),
-                    Conv(out_channel // emb_head // 2, out_channel // emb_head, k=3),
+                    Conv(in_channel, out_channel // emb_head, k=3, s=stride),
+                    CBAM(out_channel // emb_head),
+                    DWConv(out_channel // emb_head, out_channel, k=3),
                 )
             )
 
@@ -363,7 +363,7 @@ class ViTBlock1PPEmb(nn.Module):
         for i in range(self.emb_head):
             x_i = self.emb_heads[i](x)
             xs.append(x_i)
-        x = torch.cat(xs, dim=1)
+        x = torch.mean(xs, 0)
         y = self.net(x)
 
         return y
