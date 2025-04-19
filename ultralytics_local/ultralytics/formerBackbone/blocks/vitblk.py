@@ -307,13 +307,16 @@ class MHSpatialAttentionWithBn(nn.Module):
 
 
 class ViTBlock1PPRep(nn.Module):
-    def __init__(self, in_channel, out_channel, rep=1):
+    def __init__(self, in_channel, out_channel, rep=1, emb_head=None):
         super().__init__()
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=7),
             ChanSpatialAttention(out_channel),
         )
+
+        if emb_head is not None:
+            self.emb = nn.Parameter(torch.ones((emb_head, in_channel)))
 
         self.net = nn.Sequential(
         )
@@ -334,6 +337,35 @@ class ViTBlock1PPRep(nn.Module):
         y = self.net(x + raw_x)
 
         return y + raw_x + x
+
+
+class ViTBlock1PPEmb(nn.Module):
+    def __init__(self, in_channel, out_channel, stride=1, emb_head=1):
+        super().__init__()
+
+        self.emb = nn.Parameter(torch.ones((emb_head, in_channel)))
+        self.emb_head = emb_head
+
+        self.small_blk = nn.Sequential(
+            Conv(in_channel, out_channel // emb_head, k=3, s=stride),
+            SpatialAttention(out_channel // emb_head),
+        )
+
+        self.net = nn.Sequential(
+            SpatialAttention(out_channel),
+            DWConv(out_channel, out_channel, k=7, act=False),
+        )
+
+    def forward(self, x: torch.Tensor):
+        xs = []
+        for i in range(self.emb_head):
+            x_i = self.emb[i].reshape((1, x.size(1), 1, 1)) * x
+            x_i = self.small_blk(x_i)
+            xs.append(x_i)
+        x = torch.cat(xs, dim=1)
+        y = self.net(x)
+
+        return y + x
 
 
 class ViTBlock1PP(nn.Module):
