@@ -344,9 +344,9 @@ class ViTBlock1PPEmb(nn.Module):
         super().__init__()
 
         self.emb_head = nn.Sequential(
-            Conv(in_channel, out_channel // emb_head, k=1),
+            Conv(in_channel, out_channel // emb_head, k=3),
             CBAM(out_channel // emb_head),
-            Conv(out_channel // emb_head, out_channel, k=5, s=stride),
+            Conv(out_channel // emb_head, out_channel, k=3, s=stride, g=emb_head),
         )
 
         self.net = nn.Sequential(
