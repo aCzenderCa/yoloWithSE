@@ -352,14 +352,13 @@ class ViTBlock1PPEmb(nn.Module):
         )
 
         self.net = nn.Sequential(
-            DWConv(out_channel, out_channel, k=7),
+            CBAM(out_channel),
         )
 
     def forward(self, x: torch.Tensor):
         xs = []
         for i in range(self.emb_head):
-            x_i = F.sigmoid(self.emb[i].reshape((1, self.in_c, 1, 1))) * x
-            x_i = self.small_blk(x_i)
+            x_i = self.small_blk(x)
             xs.append(x_i)
         x = torch.cat(xs, dim=1)
         y = self.net(x)
