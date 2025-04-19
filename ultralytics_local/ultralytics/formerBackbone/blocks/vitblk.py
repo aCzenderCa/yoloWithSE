@@ -347,7 +347,7 @@ class ViTBlock1PPEmb(nn.Module):
         for i in range(emb_head):
             self.embs.append(
                 nn.Sequential(
-                    DWConv(in_channel, in_channel, s=5, k=11),
+                    DWConv(in_channel, in_channel, s=4, k=11),
                     nn.Sigmoid(),
                     nn.AdaptiveAvgPool2d(1),
                 )
