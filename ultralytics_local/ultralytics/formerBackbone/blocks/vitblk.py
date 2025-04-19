@@ -349,7 +349,6 @@ class ViTBlock1PPEmb(nn.Module):
             self.emb_heads.append(
                 nn.Sequential(
                     Conv(in_channel, out_channel // emb_head, k=1),
-                    CBAM(out_channel // emb_head),
                     DWConv(out_channel // emb_head, out_channel, k=5, s=stride),
                 )
             )
