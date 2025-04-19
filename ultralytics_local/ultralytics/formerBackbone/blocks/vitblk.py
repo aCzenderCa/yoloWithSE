@@ -359,11 +359,10 @@ class ViTBlock1PPEmb(nn.Module):
         )
 
     def forward(self, x: torch.Tensor):
-        xs = []
-        for i in range(self.emb_head):
-            x_i = self.emb_heads[i](x)
-            xs.append(x_i)
-        x = torch.mean(xs, 0)
+        y = self.emb_heads[0](x)
+        for i in range(self.emb_head - 1):
+            x_i = self.emb_heads[i + 1](x)
+            y += x_i
         y = self.net(x)
 
         return y
