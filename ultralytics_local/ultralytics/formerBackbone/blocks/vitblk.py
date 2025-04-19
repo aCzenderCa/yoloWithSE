@@ -355,6 +355,7 @@ class ViTBlock1PPEmb(nn.Module):
             )
 
         self.net = nn.Sequential(
+            nn.BatchNorm2d(out_channel),
             CBAM(out_channel),
         )
 
