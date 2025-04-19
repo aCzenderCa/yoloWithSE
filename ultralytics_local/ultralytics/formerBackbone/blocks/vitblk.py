@@ -344,7 +344,7 @@ class ViTBlock1PPEmb(nn.Module):
         super().__init__()
 
         self.emb_head = emb_head
-        self.emb_heads = []
+        self.emb_heads = nn.ModuleList()
         for i in range(emb_head):
             self.emb_heads.append(
                 nn.Sequential(
