@@ -343,7 +343,7 @@ class ViTBlock1PPEmb(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, emb_head=1):
         super().__init__()
 
-        self.emb = nn.Parameter(torch.ones((emb_head, in_channel)))
+        self.emb = nn.Parameter(torch.rand((emb_head, in_channel)) * 0.9 + 0.1)
         self.emb_head = emb_head
         self.in_c = in_channel
 
