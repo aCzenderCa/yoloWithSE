@@ -12,7 +12,7 @@ args = ArgumentParser()
 
 args.add_argument('--resume', type=str, default='')
 args.add_argument('--epoch', type=int, default=50)
-args.add_argument('--model', type=str, default='yolo11-obb_pp00.yaml')
+args.add_argument('--model', type=str, default='yolo11-obb_vitE.yaml')
 args.add_argument('--scale', type=str, default='n')
 args.add_argument('--imgsz', type=int, default=1024)
 args.add_argument('--multi_scale', action='store_true', default=False)
