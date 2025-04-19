@@ -365,7 +365,7 @@ class ViTBlock1PPEmb(nn.Module):
         x = torch.cat(xs, dim=1)
         y = self.net(x)
 
-        return y + x
+        return y
 
 
 class ViTBlock1PP(nn.Module):
