@@ -356,7 +356,7 @@ class ViTBlock1PPEmb(nn.Module):
 
     def forward(self, x: torch.Tensor):
         y = self.emb_head(x)
-        y = self.net(y)
+        y = self.net(y) + y
 
         return y
 
