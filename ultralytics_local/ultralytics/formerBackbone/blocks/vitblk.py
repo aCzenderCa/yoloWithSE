@@ -353,7 +353,7 @@ class ViTBlock1PPEmb(nn.Module):
         )
 
         self.net = nn.Sequential(
-            DWConv(out_channel, out_channel, k=7, act=False),
+            DWConv(out_channel, out_channel, k=7),
         )
 
     def forward(self, x: torch.Tensor):
