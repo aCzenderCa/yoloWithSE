@@ -352,6 +352,7 @@ class MyTransLayer(nn.Module):
         self.act = nn.Sigmoid()
 
     def forward(self, x):
+        print(x.shape)
         _x = einops.reduce(x, "b c h w -> b 1 c", reduction="mean")
         _xs = torch.cat([self.linear0(_x), self.linear1(_x), self.linear2(_x), self.linear3(_x)], dim=1)
         _xs = self.trans(_xs, _xs)
