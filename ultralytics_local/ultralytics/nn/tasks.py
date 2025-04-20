@@ -10,7 +10,7 @@ from pathlib import Path
 import torch
 
 from ultralytics.formerBackbone.blocks.vitblk import ViTBlock, ViTBlock2, ViTBlock3, ViTBlock4, ViTBlock5, ViTBlock6P, \
-     ViTBlock6PRep, ViTBlock1PPRep, ViTBlock1PP, ViTBlock1PPEmb, MyTransLayer
+     ViTBlock6PRep, ViTBlock1PPRep, ViTBlock1PP, ViTBlock1PPEmb, MyTransLayer, MyTransStepDownsample
 
 from ultralytics.nn.modules import (
     AIFI,
@@ -1001,6 +1001,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             ViTBlock1PP,
             ViTBlock1PPEmb,
             MyTransLayer,
+            MyTransStepDownsample,
         }
     )
     repeat_modules = frozenset(  # modules with 'repeat' arguments

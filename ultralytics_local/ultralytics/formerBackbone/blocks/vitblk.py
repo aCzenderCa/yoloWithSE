@@ -379,7 +379,27 @@ class MyTransLayer(nn.Module):
         self.decoder = nn.Sequential(
             DWConv(hide_ch + in_ch, hide_ch, k=3),
             *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_de)],
-            DWConv(hide_ch, in_ch, k=3),
+            DWConv(hide_ch, out_ch, k=3),
+        )
+
+    def forward(self, x):
+        _x = self.encoder(x)
+        y = self.decoder(torch.cat([_x, x], dim=1))
+
+        return y
+
+
+class MyTransStepDownsample(nn.Module):
+    def __init__(self, in_ch, out_ch, hide_ch = 0.5, layer=1, mlp_layer=2):
+        super().__init__()
+        hide_ch = int(out_ch * hide_ch)
+        self.encoder = nn.Sequential(
+            DWConv(in_ch, hide_ch, k=3),
+            *[ABlk(hide_ch, mlp_with_dw=mlp_layer) for _ in range(layer)],
+        )
+
+        self.decoder = nn.Sequential(
+            DWConv(hide_ch + in_ch, out_ch, k=3, s=2),
         )
 
     def forward(self, x):
