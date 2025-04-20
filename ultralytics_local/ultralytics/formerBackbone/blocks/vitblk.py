@@ -350,6 +350,7 @@ class MyTransLayer(nn.Module):
     def forward(self, x):
         _x = einops.rearrange(x, "b c h w -> b (h w) c")
         _x = self.trans(_x, _x)
+        y = einops.rearrange(_x, "b n c -> b c n").reshape(x.shape)
 
         return _x
 
