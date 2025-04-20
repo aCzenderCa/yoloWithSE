@@ -343,7 +343,7 @@ class MyTransLayer(nn.Module):
     def __init__(self, in_ch, out_ch, head=4, layer=2):
         assert in_ch == out_ch
         super().__init__()
-        self.trans = nn.Transformer(in_ch, head, layer, layer)
+        self.trans = nn.Transformer(in_ch, head, layer, layer, norm_first=True)
 
     def forward(self, x):
         _x = einops.rearrange(x, "b c h w -> (h w) b c")
