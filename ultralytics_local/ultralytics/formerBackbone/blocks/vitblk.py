@@ -390,7 +390,7 @@ class MyTransLayer(nn.Module):
 
 
 class MyTransStepDownsample(nn.Module):
-    def __init__(self, in_ch, out_ch, hide_ch = 0.5, layer=1, mlp_layer=2):
+    def __init__(self, in_ch, out_ch, hide_ch = 0.5, layer=2, mlp_layer=1):
         super().__init__()
         hide_ch = int(out_ch * hide_ch)
         self.encoder = nn.Sequential(
