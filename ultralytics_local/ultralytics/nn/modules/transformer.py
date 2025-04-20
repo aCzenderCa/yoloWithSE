@@ -37,8 +37,7 @@ class TransformerEncoderLayer(nn.Module):
             raise ModuleNotFoundError(
                 "TransformerEncoderLayer() requires torch>=1.9 to use nn.MultiheadAttention(batch_first=True)."
             )
-        # self.ma = nn.MultiheadAttention(c1, num_heads, dropout=dropout, batch_first=True)
-        self.cbam = CBAM(c1)
+        self.ma = nn.MultiheadAttention(c1, num_heads, dropout=dropout, batch_first=True)
         # Implementation of Feedforward model
         self.fc1 = nn.Linear(c1, cm)
         self.fc2 = nn.Linear(cm, c1)
@@ -60,8 +59,7 @@ class TransformerEncoderLayer(nn.Module):
     def forward_post(self, src, src_mask=None, src_key_padding_mask=None, pos=None):
         """Performs forward pass with post-normalization."""
         q = k = self.with_pos_embed(src, pos)
-        # src2 = self.ma(q, k, value=src, attn_mask=src_mask, key_padding_mask=src_key_padding_mask)[0]
-        src2 = self.cbam(q)
+        src2 = self.ma(q, k, value=src, attn_mask=src_mask, key_padding_mask=src_key_padding_mask)[0]
         src = src + self.dropout1(src2)
         src = self.norm1(src)
         src2 = self.fc2(self.dropout(self.act(self.fc1(src))))
@@ -123,18 +121,14 @@ class TransformerLayer(nn.Module):
     def __init__(self, c, num_heads):
         """Initializes a self-attention mechanism using linear transformations and multi-head attention."""
         super().__init__()
-        # self.q = nn.Linear(c, c, bias=False)
-        # self.k = nn.Linear(c, c, bias=False)
-        # self.v = nn.Linear(c, c, bias=False)
-        # self.ma = nn.MultiheadAttention(embed_dim=c, num_heads=num_heads)
-        self.cbam = CBAM(c)
-        self.fc1 = nn.Linear(c, c, bias=False)
-        self.fc2 = nn.Linear(c, c, bias=False)
+        self.q = nn.Linear(c, c, bias=False)
+        self.k = nn.Linear(c, c, bias=False)
+        self.v = nn.Linear(c, c, bias=False)
+        self.ma = nn.MultiheadAttention(embed_dim=c, num_heads=num_heads)
 
     def forward(self, x):
         """Apply a transformer block to the input x and return the output."""
-        # x = self.ma(self.q(x), self.k(x), self.v(x))[0] + x
-        x = self.cbam(x) + x
+        x = self.ma(self.q(x), self.k(x), self.v(x))[0] + x
         return self.fc2(self.fc1(x)) + x
 
 

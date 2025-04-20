@@ -5,10 +5,9 @@ import einops.layers.torch as einn
 import torch
 from torch import nn
 from torch.nn import init
-import torch.nn.functional as F
 
 from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention, RepVGGDW, RepConv, DWConv, \
-    Conv, LightConv
+    Conv, LightConv, TransformerLayer, TransformerEncoderLayer, DeformableTransformerDecoderLayer
 
 
 class ViTBlock(nn.Module):
@@ -307,16 +306,13 @@ class MHSpatialAttentionWithBn(nn.Module):
 
 
 class ViTBlock1PPRep(nn.Module):
-    def __init__(self, in_channel, out_channel, rep=1, emb_head=None):
+    def __init__(self, in_channel, out_channel, rep=1):
         super().__init__()
 
         self.small_blk = nn.Sequential(
             DWConv(in_channel, out_channel, k=7),
             ChanSpatialAttention(out_channel),
         )
-
-        if emb_head is not None:
-            self.emb = nn.Parameter(torch.ones((emb_head, in_channel)))
 
         self.net = nn.Sequential(
         )
@@ -340,15 +336,20 @@ class ViTBlock1PPRep(nn.Module):
 
 
 class MyTransLayer(nn.Module):
-    def __init__(self, in_ch, out_ch, head=4, layer=2):
+    def __init__(self, in_ch, out_ch, layer_en=2, layer_de=2):
         assert in_ch == out_ch
         super().__init__()
-        self.trans = nn.Transformer(in_ch, head, layer, layer, norm_first=True)
+        self.encoder = nn.Sequential(
+            ViTBlock1PPRep(in_ch, out_ch, rep=layer_en),
+        )
+
+        self.decoder = nn.Sequential(
+            ViTBlock1PPRep(in_ch + out_ch, out_ch, rep=layer_de),
+        )
 
     def forward(self, x):
-        _x = einops.rearrange(x, "b c h w -> (h w) b c")
-        _x = self.trans(_x, _x)
-        y = einops.rearrange(_x, "n b c -> b c n").reshape(x.shape)
+        _x = self.encoder(x)
+        y = self.decoder(torch.cat([_x, x], dim=1))
 
         return y
 
