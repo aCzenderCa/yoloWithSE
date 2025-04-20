@@ -344,21 +344,14 @@ class MyTransLayer(nn.Module):
         assert in_ch == out_ch
         super().__init__()
         self.trans = nn.Transformer(in_ch, 4, 2, 2)
-        self.linear0 = nn.Linear(in_ch, out_ch)
-        self.linear1 = nn.Linear(in_ch, out_ch)
-        self.linear2 = nn.Linear(in_ch, out_ch)
-        self.linear3 = nn.Linear(in_ch, out_ch)
 
         self.act = nn.Sigmoid()
 
     def forward(self, x):
-        print(x.shape)
-        _x = einops.reduce(x, "b c h w -> b 1 c", reduction="mean")
-        _xs = torch.cat([self.linear0(_x), self.linear1(_x), self.linear2(_x), self.linear3(_x)], dim=1)
-        _xs = self.trans(_xs, _xs)
-        _xs = einops.reduce(self.act(_xs), "b n c -> b c", reduction="max")
+        _x = einops.rearrange(x, "b c h w -> b (h w) c")
+        _x = self.trans(_x, _x)
 
-        return x * _xs
+        return _x
 
 
 class ViTBlock1PPEmb(nn.Module):
