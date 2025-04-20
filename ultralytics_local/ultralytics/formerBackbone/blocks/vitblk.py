@@ -334,6 +334,7 @@ class ViTBlock1PPRep(nn.Module):
 
         return y + raw_x + x
 
+
 class ViTBlock2PPRep(nn.Module):
     def __init__(self, in_channel, out_channel, rep=1):
         super().__init__()
@@ -368,13 +369,16 @@ class MyTransLayer(nn.Module):
     def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
         assert in_ch == out_ch
         super().__init__()
+        hide_ch = int(in_ch * hide_ch)
 
         self.encoder = nn.Sequential(
-            *[ABlk(in_ch, hide_ch) for _ in range(layer_en)],
+            DWConv(in_ch, hide_ch, k=3),
+            *[ABlk(hide_ch) for _ in range(layer_en)],
         )
 
         self.decoder = nn.Sequential(
-            *[ABlk(in_ch, hide_ch) for _ in range(layer_de)],
+            *[ABlk(hide_ch) for _ in range(layer_de)],
+            DWConv(hide_ch, in_ch, k=3),
         )
 
     def forward(self, x):
@@ -446,6 +450,7 @@ class ChanSpatialAttention(nn.Module):
 
         f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * x_l)
         return x * f
+
 
 class ABlk(nn.Module):
     def __init__(self, ch, mlp_ratio=1.2):
