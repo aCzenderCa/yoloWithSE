@@ -339,15 +339,15 @@ class ViTBlock2PPRep(nn.Module):
         super().__init__()
 
         self.small_blk = nn.Sequential(
-            DWConv(in_channel, out_channel, k=7),
+            Conv(in_channel, out_channel, k=3),
             Attention(out_channel),
         )
 
         self.net = nn.Sequential(
         )
         for i in range(rep):
-            self.net.append(Conv(out_channel, out_channel, k=1))
-            self.net.append(DWConvK(out_channel, out_channel, k=7, act=False))
+            self.net.append(Conv(out_channel, out_channel, k=3))
+            self.net.append(ChannelAttention(out_channel))
 
         self.pconv = nn.Sequential(
         )
