@@ -45,6 +45,8 @@ train_args['lr0'] = args.lr0
 train_args['plots'] = True
 train_args['auto_augment'] = args.auto_augment
 
+torch.use_deterministic_algorithms(True, warn_only=False)
+
 if len(args.resume) == 0:
     model = YOLO(str.format(args.model, args.scale), task='obb')
     oms: nn.Sequential = model.model.model
