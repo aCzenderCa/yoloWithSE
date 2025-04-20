@@ -369,13 +369,12 @@ class MyTransLayer(nn.Module):
         assert in_ch == out_ch
         super().__init__()
 
-        hide_ch = int(in_ch * hide_ch)
         self.encoder = nn.Sequential(
-            ViTBlock2PPRep(in_ch, hide_ch, rep=layer_en),
+            *[ABlk(in_ch, hide_ch) for _ in range(layer_en)],
         )
 
         self.decoder = nn.Sequential(
-            ViTBlock2PPRep(in_ch + hide_ch, out_ch, rep=layer_de),
+            *[ABlk(in_ch, hide_ch) for _ in range(layer_de)],
         )
 
     def forward(self, x):
@@ -447,3 +446,23 @@ class ChanSpatialAttention(nn.Module):
 
         f = self.act(self.cv1(torch.cat([torch.mean(x, 1, keepdim=True), torch.max(x, 1, keepdim=True)[0]], 1)) * x_l)
         return x * f
+
+class ABlk(nn.Module):
+    def __init__(self, ch, mlp_ratio=1.2):
+        super().__init__()
+
+        self.attn = CBAM(ch)
+        mlp_hidden_dim = int(ch * mlp_ratio)
+        self.mlp = nn.Sequential(Conv(ch, mlp_hidden_dim, 1), Conv(mlp_hidden_dim, ch, 1, act=False))
+
+        self.apply(self._init_weights)
+
+    def _init_weights(self, m):
+        if isinstance(m, nn.Conv2d):
+            nn.init.trunc_normal_(m.weight, std=0.02)
+            if m.bias is not None:
+                nn.init.constant_(m.bias, 0)
+
+    def forward(self, x):
+        x = x + self.attn(x)
+        return x + self.mlp(x)
