@@ -377,6 +377,7 @@ class MyTransLayer(nn.Module):
         )
 
         self.decoder = nn.Sequential(
+            DWConv(hide_ch +  in_ch, hide_ch, k=3),
             *[ABlk(hide_ch) for _ in range(layer_de)],
             DWConv(hide_ch, in_ch, k=3),
         )
