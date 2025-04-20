@@ -352,7 +352,7 @@ class MyTransLayer(nn.Module):
         _x = self.trans(_x, _x)
         y = einops.rearrange(_x, "b n c -> b c n").reshape(x.shape)
 
-        return _x
+        return y
 
 
 class ViTBlock1PPEmb(nn.Module):
