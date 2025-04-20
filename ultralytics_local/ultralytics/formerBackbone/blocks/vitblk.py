@@ -345,8 +345,6 @@ class MyTransLayer(nn.Module):
         super().__init__()
         self.trans = nn.Transformer(in_ch, head, layer, layer)
 
-        self.act = nn.Sigmoid()
-
     def forward(self, x):
         _x = einops.rearrange(x, "b c h w -> (h w) b c")
         _x = self.trans(_x, _x)
