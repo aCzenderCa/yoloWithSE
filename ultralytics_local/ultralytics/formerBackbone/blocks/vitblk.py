@@ -7,7 +7,7 @@ from torch import nn
 from torch.nn import init
 
 from ultralytics.nn.modules import CBAM, Bottleneck, ChannelAttention, SpatialAttention, RepVGGDW, RepConv, DWConv, \
-    Conv, LightConv, TransformerLayer, TransformerEncoderLayer, DeformableTransformerDecoderLayer
+    Conv, LightConv, TransformerLayer, TransformerEncoderLayer, DeformableTransformerDecoderLayer, Attention
 
 
 class ViTBlock(nn.Module):
@@ -334,6 +334,34 @@ class ViTBlock1PPRep(nn.Module):
 
         return y + raw_x + x
 
+class ViTBlock2PPRep(nn.Module):
+    def __init__(self, in_channel, out_channel, rep=1):
+        super().__init__()
+
+        self.small_blk = nn.Sequential(
+            DWConv(in_channel, out_channel, k=7),
+        )
+
+        self.net = nn.Sequential(
+        )
+        for i in range(rep):
+            self.net.append(Attention(out_channel))
+            self.net.append(DWConvK(out_channel, out_channel, k=7, act=False))
+
+        self.pconv = nn.Sequential(
+        )
+        if out_channel != in_channel:
+            pc = DWConv(in_channel, out_channel, k=1, act=False)
+            self.pconv.append(pc)
+            init.constant_(pc.conv.weight, 1)
+
+    def forward(self, x: torch.Tensor):
+        raw_x = self.pconv(x)
+        x = self.small_blk(x)
+        y = self.net(x + raw_x)
+
+        return y + raw_x + x
+
 
 class MyTransLayer(nn.Module):
     def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
@@ -342,11 +370,11 @@ class MyTransLayer(nn.Module):
 
         hide_ch = int(in_ch * hide_ch)
         self.encoder = nn.Sequential(
-            ViTBlock1PPRep(in_ch, hide_ch, rep=layer_en),
+            ViTBlock2PPRep(in_ch, hide_ch, rep=layer_en),
         )
 
         self.decoder = nn.Sequential(
-            ViTBlock1PPRep(in_ch + hide_ch, out_ch, rep=layer_de),
+            ViTBlock2PPRep(in_ch + hide_ch, out_ch, rep=layer_de),
         )
 
     def forward(self, x):
