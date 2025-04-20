@@ -336,15 +336,17 @@ class ViTBlock1PPRep(nn.Module):
 
 
 class MyTransLayer(nn.Module):
-    def __init__(self, in_ch, out_ch, layer_en=2, layer_de=2):
+    def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
         assert in_ch == out_ch
         super().__init__()
+
+        hide_ch = int(in_ch * hide_ch)
         self.encoder = nn.Sequential(
-            ViTBlock1PPRep(in_ch, out_ch, rep=layer_en),
+            ViTBlock1PPRep(in_ch, hide_ch, rep=layer_en),
         )
 
         self.decoder = nn.Sequential(
-            ViTBlock1PPRep(in_ch + out_ch, out_ch, rep=layer_de),
+            ViTBlock1PPRep(in_ch + hide_ch, out_ch, rep=layer_de),
         )
 
     def forward(self, x):
