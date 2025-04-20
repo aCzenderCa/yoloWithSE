@@ -343,14 +343,14 @@ class MyTransLayer(nn.Module):
     def __init__(self, in_ch, out_ch, head=4, layer=2):
         assert in_ch == out_ch
         super().__init__()
-        self.trans = nn.Transformer(in_ch, head, layer, layer, batch_first=True)
+        self.trans = nn.Transformer(in_ch, head, layer, layer)
 
         self.act = nn.Sigmoid()
 
     def forward(self, x):
-        _x = einops.rearrange(x, "b c h w -> b (h w) c")
+        _x = einops.rearrange(x, "b c h w -> (h w) b c")
         _x = self.trans(_x, _x)
-        y = einops.rearrange(_x, "b n c -> b c n").reshape(x.shape)
+        y = einops.rearrange(_x, "n b c -> b c n").reshape(x.shape)
 
         return y
 
