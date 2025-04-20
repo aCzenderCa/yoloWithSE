@@ -361,7 +361,7 @@ class ViTBlock2PPRep(nn.Module):
         x = self.small_blk(x)
         y = self.net(x + raw_x)
 
-        return y + raw_x + x
+        return y
 
 
 class MyTransLayer(nn.Module):
