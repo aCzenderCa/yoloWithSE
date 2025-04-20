@@ -339,6 +339,27 @@ class ViTBlock1PPRep(nn.Module):
         return y + raw_x + x
 
 
+class MyTransLayer(nn.Module):
+    def __init__(self, in_ch, out_ch):
+        assert in_ch == out_ch
+        super().__init__()
+        self.trans = nn.Transformer(in_ch, 4, 2, 2)
+        self.linear0 = nn.Linear(in_ch, out_ch)
+        self.linear1 = nn.Linear(in_ch, out_ch)
+        self.linear2 = nn.Linear(in_ch, out_ch)
+        self.linear3 = nn.Linear(in_ch, out_ch)
+
+        self.act = nn.Sigmoid()
+
+    def forward(self, x):
+        _x = einops.reduce(x, "b c h w -> b 1 c", reduction="mean")
+        _xs = torch.cat([self.linear0(_x), self.linear1(_x), self.linear2(_x), self.linear3(_x)], dim=1)
+        _xs = self.trans(_xs)
+        _xs = einops.reduce(self.act(_xs), "b n c -> b c", reduction="mean")
+
+        return _xs * x
+
+
 class ViTBlock1PPEmb(nn.Module):
     def __init__(self, in_channel, out_channel, stride=1, emb_head=1):
         super().__init__()
