@@ -399,7 +399,9 @@ class MyTransStepDownsample(nn.Module):
         )
 
         self.decoder = nn.Sequential(
-            DWConv(hide_ch + in_ch, out_ch, k=3, s=2),
+            DWConv(hide_ch + in_ch, hide_ch, k=3, s=2),
+            *[ABlk(hide_ch, mlp_with_dw=mlp_layer) for _ in range(layer)],
+            DWConv(hide_ch, out_ch, k=3),
         )
 
     def forward(self, x):
