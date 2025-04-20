@@ -373,12 +373,12 @@ class MyTransLayer(nn.Module):
 
         self.encoder = nn.Sequential(
             DWConv(in_ch, hide_ch, k=3),
-            *[ABlk(hide_ch) for _ in range(layer_en)],
+            *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_en)],
         )
 
         self.decoder = nn.Sequential(
-            DWConv(hide_ch +  in_ch, hide_ch, k=3),
-            *[ABlk(hide_ch) for _ in range(layer_de)],
+            DWConv(hide_ch + in_ch, hide_ch, k=3),
+            *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_de)],
             DWConv(hide_ch, in_ch, k=3),
         )
 
@@ -454,12 +454,16 @@ class ChanSpatialAttention(nn.Module):
 
 
 class ABlk(nn.Module):
-    def __init__(self, ch, mlp_ratio=1.2):
+    def __init__(self, ch, mlp_ratio=1.2, mlp_with_dw=0):
         super().__init__()
 
         self.attn = CBAM(ch)
         mlp_hidden_dim = int(ch * mlp_ratio)
-        self.mlp = nn.Sequential(Conv(ch, mlp_hidden_dim, 1), Conv(mlp_hidden_dim, ch, 1, act=False))
+        self.mlp = nn.Sequential(
+            Conv(ch, mlp_hidden_dim, 1),
+            *[DWConv(mlp_hidden_dim, mlp_hidden_dim, k=3) for _ in range(mlp_with_dw)],
+            Conv(mlp_hidden_dim, ch, 1, act=False)
+        )
 
         self.apply(self._init_weights)
 
