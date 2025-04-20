@@ -340,10 +340,10 @@ class ViTBlock1PPRep(nn.Module):
 
 
 class MyTransLayer(nn.Module):
-    def __init__(self, in_ch, out_ch):
+    def __init__(self, in_ch, out_ch, head=4, layer=2):
         assert in_ch == out_ch
         super().__init__()
-        self.trans = nn.Transformer(in_ch, 4, 2, 2)
+        self.trans = nn.Transformer(in_ch, head, layer, layer)
 
         self.act = nn.Sigmoid()
 
