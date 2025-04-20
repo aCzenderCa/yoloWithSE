@@ -354,7 +354,7 @@ class MyTransLayer(nn.Module):
     def forward(self, x):
         _x = einops.reduce(x, "b c h w -> b 1 c", reduction="mean")
         _xs = torch.cat([self.linear0(_x), self.linear1(_x), self.linear2(_x), self.linear3(_x)], dim=1)
-        _xs = self.trans(_xs)
+        _xs = self.trans(_xs, _xs)
         _xs = einops.reduce(self.act(_xs), "b n c -> b c", reduction="mean")
 
         return _xs * x
