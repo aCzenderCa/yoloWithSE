@@ -70,6 +70,6 @@ if model.trainer.best:
 else:
     model.best = model.trainer.last
 
-# python train.py --model last.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.001 --multi_scale --batch 0.5 --data DOTAv1_split.yaml --epoch 150
+# python train.py --model last.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --multi_scale --batch 0.5 --data DOTAv1_split.yaml --epoch 150
 # python train.py --pretrained yolo11n-obb.pt --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb-withTransform_5.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --freeze "0|1|2|3|4|5" --epoch 50
 # python train.py --imgsz 1024 --no_val --optimizer AdamW --lr0 0.002 --model yolo11-obb.yaml --multi_scale --batch 0.5 --data DOTAv1_split.yaml --epoch 50
