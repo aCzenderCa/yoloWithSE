@@ -389,6 +389,32 @@ class MyTransLayer(nn.Module):
         return y
 
 
+class MyTransLayerFast(nn.Module):
+    def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
+        assert in_ch == out_ch
+        super().__init__()
+        hide_ch = int(in_ch * hide_ch)
+
+        self.encoder = nn.Sequential(
+            DWConv(in_ch, hide_ch, k=3),
+            *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_en)],
+        )
+
+        self.dw = DWConv(in_ch, hide_ch, k=3)
+
+        self.decoder = nn.Sequential(
+            *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_de)],
+            DWConv(hide_ch, out_ch, k=3),
+        )
+
+    def forward(self, x):
+        _x = self.encoder(x)
+        _x = self.dw(x) + _x
+        y = self.decoder(_x)
+
+        return y
+
+
 class MyTransStepDownsample(nn.Module):
     def __init__(self, in_ch, out_ch, hide_ch=1.5, layer=2):
         super().__init__()
