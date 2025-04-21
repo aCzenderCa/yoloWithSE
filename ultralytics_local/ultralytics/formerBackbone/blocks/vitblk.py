@@ -396,7 +396,7 @@ class MyTransStepDownsample(nn.Module):
         self.net = nn.Sequential(
             Conv(in_ch, hide_ch, k=1),
             *[DWConv(hide_ch, hide_ch, k=5) for _ in range(layer)],
-            Conv(hide_ch, out_ch, k=1, s=2),
+            Conv(hide_ch, out_ch, k=3, s=2),
         )
 
     def forward(self, x):
