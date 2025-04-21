@@ -393,7 +393,6 @@ class MyTransStepDownsample(nn.Module):
     def __init__(self, in_ch, out_ch, hide_ch=1.5, layer=2):
         super().__init__()
         hide_ch = int(out_ch * hide_ch)
-        self.att = CBAM(in_ch)
         self.net = nn.Sequential(
             Conv(in_ch * 2, hide_ch, k=1),
             *[DWConv(hide_ch, hide_ch, k=5) for _ in range(layer)],
@@ -401,8 +400,7 @@ class MyTransStepDownsample(nn.Module):
         )
 
     def forward(self, x):
-        _x = self.att(x)
-        y = self.net(torch.cat([_x, x], dim=1))
+        y = self.net(x)
 
         return y
 
