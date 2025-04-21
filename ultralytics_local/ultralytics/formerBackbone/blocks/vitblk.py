@@ -390,23 +390,19 @@ class MyTransLayer(nn.Module):
 
 
 class MyTransStepDownsample(nn.Module):
-    def __init__(self, in_ch, out_ch, hide_ch = 0.5, layer=2, mlp_layer=1):
+    def __init__(self, in_ch, out_ch, hide_ch=1.5, layer=2):
         super().__init__()
         hide_ch = int(out_ch * hide_ch)
-        self.encoder = nn.Sequential(
-            DWConv(in_ch, hide_ch, k=3),
-            *[ABlk(hide_ch, mlp_with_dw=mlp_layer) for _ in range(layer)],
-        )
-
-        self.decoder = nn.Sequential(
-            DWConv(hide_ch + in_ch, hide_ch, k=3, s=2),
-            *[ABlk(hide_ch, mlp_with_dw=mlp_layer) for _ in range(layer)],
-            DWConv(hide_ch, out_ch, k=3),
+        self.att = CBAM(in_ch)
+        self.net = nn.Sequential(
+            Conv(in_ch * 2, hide_ch, k=1),
+            *[DWConv(hide_ch, hide_ch, k=5) for _ in range(layer)],
+            Conv(hide_ch, out_ch),
         )
 
     def forward(self, x):
-        _x = self.encoder(x)
-        y = self.decoder(torch.cat([_x, x], dim=1))
+        _x = self.att(x)
+        y = self.net(torch.cat([_x, x], dim=1))
 
         return y
 
