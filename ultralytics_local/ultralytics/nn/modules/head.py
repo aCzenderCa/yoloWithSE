@@ -242,8 +242,11 @@ class MyTransLayerFast(nn.Module):
             DWConv(hide_ch, out_ch, k=3),
         )
 
+        self.act = nn.GELU()
+
     def forward(self, x):
         _x = self.encoder(x)
+        _x = self.act(_x)
         y = self.decoder(_x)
 
         return y
