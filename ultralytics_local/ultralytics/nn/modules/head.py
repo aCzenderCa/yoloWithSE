@@ -11,7 +11,7 @@ from torch.nn.init import constant_, xavier_uniform_
 from ultralytics.utils.tal import TORCH_1_10, dist2bbox, dist2rbox, make_anchors
 
 from .block import DFL, BNContrastiveHead, ContrastiveHead, Proto
-from .conv import Conv, DWConv, CBAM
+from .conv import Conv, DWConv
 from .transformer import MLP, DeformableTransformerDecoder, DeformableTransformerDecoderLayer
 from .utils import bias_init_with_prob, linear_init
 
@@ -206,7 +206,7 @@ class OBB(Detect):
         self.ne = ne  # number of extra parameters
 
         c4 = max(ch[0] // 4, self.ne)
-        self.cv4 = nn.ModuleList(nn.Sequential(MyTransLayerFast(x, ne, 0.5)) for x in ch)
+        self.cv4 = nn.ModuleList(nn.Sequential(Conv(x, c4, 3), Conv(c4, c4, 3), nn.Conv2d(c4, self.ne, 1)) for x in ch)
 
     def forward(self, x):
         """Concatenates and returns predicted bounding boxes and class probabilities."""
@@ -226,53 +226,6 @@ class OBB(Detect):
         """Decode rotated bounding boxes."""
         return dist2rbox(bboxes, self.angle, anchors, dim=1)
 
-class MyTransLayerFast(nn.Module):
-    def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
-        # assert in_ch == out_ch
-        super().__init__()
-        hide_ch = int(in_ch * hide_ch)
-
-        self.encoder = nn.Sequential(
-            DWConv(in_ch, hide_ch, k=3),
-            *[ABlk(hide_ch, mlp_with_dw=2) for _ in range(layer_en)],
-        )
-
-        self.decoder = nn.Sequential(
-            *[ABlk(hide_ch, mlp_with_dw=2) for _ in range(layer_de)],
-            DWConv(hide_ch, out_ch, k=3),
-        )
-
-        self.act = nn.GELU()
-
-    def forward(self, x):
-        _x = self.encoder(x)
-        _x = self.act(_x)
-        y = self.decoder(_x)
-
-        return y
-class ABlk(nn.Module):
-    def __init__(self, ch, mlp_ratio=1.2, mlp_with_dw=0):
-        super().__init__()
-
-        self.attn = CBAM(ch)
-        mlp_hidden_dim = int(ch * mlp_ratio)
-        self.mlp = nn.Sequential(
-            Conv(ch, mlp_hidden_dim, 1),
-            *[DWConv(mlp_hidden_dim, mlp_hidden_dim, k=3) for _ in range(mlp_with_dw)],
-            Conv(mlp_hidden_dim, ch, 1, act=False)
-        )
-
-        self.apply(self._init_weights)
-
-    def _init_weights(self, m):
-        if isinstance(m, nn.Conv2d):
-            nn.init.trunc_normal_(m.weight, std=0.02)
-            if m.bias is not None:
-                nn.init.constant_(m.bias, 0)
-
-    def forward(self, x):
-        x = x + self.attn(x)
-        return x + self.mlp(x)
 
 class Pose(Detect):
     """YOLO Pose head for keypoints models."""
