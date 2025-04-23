@@ -234,19 +234,16 @@ class MyTransLayerFast(nn.Module):
 
         self.encoder = nn.Sequential(
             DWConv(in_ch, hide_ch, k=3),
-            *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_en)],
+            *[ABlk(hide_ch, mlp_with_dw=2) for _ in range(layer_en)],
         )
 
-        self.dw = DWConv(in_ch, hide_ch, k=3)
-
         self.decoder = nn.Sequential(
-            *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_de)],
+            *[ABlk(hide_ch, mlp_with_dw=2) for _ in range(layer_de)],
             DWConv(hide_ch, out_ch, k=3),
         )
 
     def forward(self, x):
         _x = self.encoder(x)
-        _x = self.dw(x) + _x
         y = self.decoder(_x)
 
         return y
