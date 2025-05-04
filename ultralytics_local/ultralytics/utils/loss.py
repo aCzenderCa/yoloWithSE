@@ -124,8 +124,6 @@ class RotatedBboxLoss(BboxLoss):
         """IoU loss."""
         weight = target_scores.sum(-1)[fg_mask].unsqueeze(-1)
         iou = probiou(pred_bboxes[fg_mask], target_bboxes[fg_mask])
-        fac = torch.mean(pred_bboxes[:, :, 2] * pred_bboxes[:, :, 3], dim=0) / pred_bboxes.shape[1] * 32
-        iou = iou / fac
         loss_iou = ((1.0 - iou) * weight).sum() / target_scores_sum
 
         # DFL loss
@@ -700,6 +698,8 @@ class v8OBBLoss(v8DetectionLoss):
             loss[0], loss[2] = self.bbox_loss(
                 pred_distri, pred_bboxes, anchor_points, target_bboxes, target_scores, target_scores_sum, fg_mask
             )
+
+            loss[0] /= torch.mean(pred_bboxes[:,:,2] * pred_bboxes[:,:,3]) / pred_bboxes.shape[1] * 32
         else:
             loss[0] += (pred_angle * 0).sum()
 
