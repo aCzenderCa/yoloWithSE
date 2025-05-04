@@ -17,12 +17,12 @@ scales: # model compound scaling constants, i.e. 'model=yolo11n-obb.yaml' will c
 # YOLO11n backbone
 backbone:
   # [from, repeats, module, args]
-  - [-1, 1, Conv, [64, 3, 2]] # 0-P1/2
-  - [-1, 1, DWConv, [128, 3, 2]] # 1-P2/4
-  - [-1, 1, DWConv, [256, 3, 2]] # 2-P3/8
-  - [-1, 1, Conv, [512, 3, 2]] # 3-P4/16
+  - [-1, 1, LConv, [64, 3, 2]] # 0-P1/2
+  - [-1, 1, LConv, [128, 3, 2]] # 1-P2/4
+  - [-1, 1, LConv, [256, 3, 2]] # 2-P3/8
+  - [-1, 1, LConv, [512, 3, 2]] # 3-P4/16
   - [-1, 1, MyTransLayerFast, [512, 0.5, 2, 0]]
-  - [-1, 1, Conv, [1024, 3, 2]] # 5-P5/32
+  - [-1, 1, LConv, [1024, 3, 2]] # 5-P5/32
   - [-1, 1, MyTransLayerFast, [1024, 0.75, 3, 3]] # 6
 
 # YOLO11n head

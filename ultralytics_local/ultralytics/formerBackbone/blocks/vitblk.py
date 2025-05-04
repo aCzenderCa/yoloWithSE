@@ -521,27 +521,11 @@ class ABlk(nn.Module):
         return x + self.mlp(x)
 
 
-class OBB_P(Detect):
-    def __init__(self, nc=80, ne=1, ch=()):
-        super().__init__(nc, ch)
-        self.ne = ne  # number of extra parameters
-
-        c4 = max(ch[0] // 4, self.ne)
-        self.cv4 = nn.ModuleList(nn.Sequential(Conv(x, c4, 3), Conv(c4, c4, 3), nn.Conv2d(c4, self.ne, 1)) for x in ch)
+class LConv(nn.Module):
+    def __init__(self, c1, c2, k=1, s=1):
+        super().__init__()
+        self.conv1 = Conv(c1, c2, 1, act=False)
+        self.conv2 = DWConv(c2, c2, k, s=s)
 
     def forward(self, x):
-        """Concatenates and returns predicted bounding boxes and class probabilities."""
-        bs = x[0].shape[0]  # batch size
-        angle = torch.cat([self.cv4[i](x[i]).view(bs, self.ne, -1) for i in range(self.nl)], 2)  # OBB theta logits
-        # NOTE: set `angle` as an attribute so that `decode_bboxes` could use it.
-        angle = (angle.sin() - 0.25) * math.pi  # [-pi/4, 3pi/4]
-        if not self.training:
-            self.angle = angle
-        x = Detect.forward(self, x)
-        if self.training:
-            return x, angle
-        return torch.cat([x, angle], 1) if self.export else (torch.cat([x[0], angle], 1), (x[1], angle))
-
-    def decode_bboxes(self, bboxes, anchors):
-        """Decode rotated bounding boxes."""
-        return dist2rbox(bboxes, self.angle, anchors, dim=1)
+        return self.conv2(self.conv1(x))
