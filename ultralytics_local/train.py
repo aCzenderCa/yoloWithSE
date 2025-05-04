@@ -12,7 +12,7 @@ args = ArgumentParser()
 
 args.add_argument('--resume', type=str, default='')
 args.add_argument('--epoch', type=int, default=50)
-args.add_argument('--model', type=str, default='yolo11-obb_vit.yaml')
+args.add_argument('--model', type=str, default='yolo11-obb_vit.yaml') # vitl 80.9G   obbl 91.0G vitn5.9G  obbn6.9G
 args.add_argument('--scale', type=str, default='n')
 args.add_argument('--imgsz', type=int, default=1024)
 args.add_argument('--multi_scale', action='store_true', default=False)
@@ -23,7 +23,7 @@ args.add_argument('--optimizer', type=str, default='auto')
 args.add_argument('--freeze', type=str, default='')  # 2|4|6|8|9|10|13|16|19|22|23   0|1|2|3|4|5|6
 args.add_argument('--lr0', type=float, default=0.1)
 args.add_argument('--auto_augment', type=str, default='autoaugment')
-args.add_argument('--data', type=str, default='DOTAv1_split.yaml')
+args.add_argument('--data', type=str, default='DOTAv1.yaml')
 
 args = args.parse_args()
 

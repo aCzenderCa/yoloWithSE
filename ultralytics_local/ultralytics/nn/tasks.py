@@ -10,7 +10,8 @@ from pathlib import Path
 import torch
 
 from ultralytics.formerBackbone.blocks.vitblk import ViTBlock, ViTBlock2, ViTBlock3, ViTBlock4, ViTBlock5, ViTBlock6P, \
-     ViTBlock6PRep, ViTBlock1PPRep, ViTBlock1PP, ViTBlock1PPEmb, MyTransLayer, MyTransStepDownsample, MyTransLayerFast
+     ViTBlock6PRep, ViTBlock1PPRep, ViTBlock1PP, ViTBlock1PPEmb, MyTransLayer, MyTransStepDownsample, MyTransLayerFast, \
+     OBB_P
 
 from ultralytics.nn.modules import (
     AIFI,
@@ -333,7 +334,7 @@ class DetectionModel(BaseModel):
                 """Performs a forward pass through the model, handling different Detect subclass types accordingly."""
                 if self.end2end:
                     return self.forward(x)["one2many"]
-                return self.forward(x)[0] if isinstance(m, (Segment, Pose, OBB)) else self.forward(x)
+                return self.forward(x)[0] if isinstance(m, (Segment, Pose, OBB, OBB_P)) else self.forward(x)
 
             m.stride = torch.tensor([s / x.shape[-2] for x in _forward(torch.zeros(1, ch, s, s))])  # forward
             self.stride = m.stride
@@ -1071,11 +1072,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [ch[f]]
         elif m is Concat:
             c2 = sum(ch[x] for x in f)
-        elif m in frozenset({Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect}):
+        elif m in frozenset({Detect, WorldDetect, Segment, Pose, OBB, ImagePoolingAttn, v10Detect, OBB_P}):
             args.append([ch[x] for x in f])
             if m is Segment:
                 args[2] = make_divisible(min(args[2], max_channels) * width, 8)
-            if m in {Detect, Segment, Pose, OBB}:
+            if m in {Detect, Segment, Pose, OBB, OBB_P}:
                 m.legacy = legacy
         elif m is RTDETRDecoder:  # special case, channels arg must be passed in index 1
             args.insert(1, [ch[x] for x in f])
