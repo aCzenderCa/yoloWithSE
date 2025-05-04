@@ -125,6 +125,8 @@ class RotatedBboxLoss(BboxLoss):
         weight = target_scores.sum(-1)[fg_mask].unsqueeze(-1)
         loss_iou = 0
         for i in range(pred_bboxes.shape[0]):
+            print(fg_mask[i].shape)
+            print((pred_bboxes[i, :, 2] * pred_bboxes[i, :, 3]).shape)
             iou = probiou(pred_bboxes[i, ...][fg_mask[i]], target_bboxes[i, ...][fg_mask[i]])
             iou = 1 - iou
             iou /= (pred_bboxes[i, :, 2] * pred_bboxes[i, :, 3] / pred_bboxes.shape[1] * 36)[fg_mask[i]]
