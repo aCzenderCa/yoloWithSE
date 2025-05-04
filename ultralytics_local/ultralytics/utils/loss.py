@@ -699,7 +699,8 @@ class v8OBBLoss(v8DetectionLoss):
                 pred_distri, pred_bboxes, anchor_points, target_bboxes, target_scores, target_scores_sum, fg_mask
             )
 
-            loss[0] *= torch.mean(pred_bboxes[..., 2] * pred_bboxes[..., 3]) * 16
+            print(pred_bboxes)
+            print(pred_bboxes.shape)
         else:
             loss[0] += (pred_angle * 0).sum()
 
