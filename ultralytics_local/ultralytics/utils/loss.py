@@ -132,7 +132,6 @@ class RotatedBboxLoss(BboxLoss):
         if self.dfl_loss:
             target_ltrb = bbox2dist(anchor_points, xywh2xyxy(target_bboxes[..., :4]), self.dfl_loss.reg_max - 1)
             loss_dfl = self.dfl_loss(pred_dist[fg_mask].view(-1, self.dfl_loss.reg_max), target_ltrb[fg_mask]) * weight
-            loss_dfl = loss_dfl / fac
             loss_dfl = loss_dfl.sum() / target_scores_sum
         else:
             loss_dfl = torch.tensor(0.0).to(pred_dist.device)
