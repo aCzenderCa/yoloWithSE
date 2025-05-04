@@ -393,7 +393,6 @@ class MyTransLayer(nn.Module):
 
 class MyTransLayerFast(nn.Module):
     def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
-        assert in_ch == out_ch
         super().__init__()
         hide_ch = int(in_ch * hide_ch)
 
