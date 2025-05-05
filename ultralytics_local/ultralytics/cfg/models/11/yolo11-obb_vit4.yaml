@@ -42,8 +42,8 @@ head:
   - [-1, 2, C3k2, [512, False]] # 17 (P4/16-medium)
 
   - [[14,], 1, Concat, [1]]
-  - [-1, 1, MyTransLayerFast, [128, 0.5, 2, 0]]
+  - [-1, 1, MyTransLayerFast, [64, 0.5, 2, 0]]
   - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
-  - [-1, 2, C3k2, [256, False]] # 21(P2/4-s-small)
+  - [-1, 2, C3k2, [64, False]] # 21(P2/4-s-small)
 
   - [[21, 14, 17, 8], 1, OBB, [nc, 1]] # Detect(P3, P4, P5)
