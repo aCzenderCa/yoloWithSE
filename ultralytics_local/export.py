@@ -10,4 +10,4 @@ args = args.parse_args()
 
 if len(args.model) > 0:
     model = YOLO(args.model)
-    model.export(format=args.fmt, dynamic=True)
+    model.export(format=args.fmt, dynamic=True, batch=16)
