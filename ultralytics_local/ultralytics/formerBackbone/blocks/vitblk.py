@@ -392,7 +392,7 @@ class MyTransLayer(nn.Module):
 
 
 class MyTransLayerFast(nn.Module):
-    def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2):
+    def __init__(self, in_ch, out_ch, hide_ch, layer_en=2, layer_de=2, s=1):
         super().__init__()
         hide_ch = int(in_ch * hide_ch)
 
@@ -405,7 +405,7 @@ class MyTransLayerFast(nn.Module):
 
         self.decoder = nn.Sequential(
             *[ABlk(hide_ch, mlp_with_dw=1) for _ in range(layer_de)],
-            DWConv(hide_ch, out_ch, k=3),
+            DWConv(hide_ch, out_ch, k=3, s=s),
         )
 
     def forward(self, x):
