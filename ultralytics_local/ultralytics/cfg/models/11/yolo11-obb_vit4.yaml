@@ -17,7 +17,7 @@ scales: # model compound scaling constants, i.e. 'model=yolo11n-obb.yaml' will c
 # YOLO11n backbone
 backbone:
   # [from, repeats, module, args]
-  - [-1, 1, MyTransLayerFast, [64, 4, 2, 0, 2]]     #0/2
+  - [-1, 1, MyTransLayerFast, [64, 1, 2, 0, 2]]     #0/2
   - [-1, 1, MyTransLayerFast, [128, 0.5, 3, 0, 2]]  #1/4
   - [-1, 1, MyTransLayerFast, [256, 0.5, 3, 0, 2]]  #2/8
   - [-1, 1, MyTransLayerFast, [512, 0.5, 3, 3, 2]]  #3/16
