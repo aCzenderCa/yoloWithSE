@@ -529,3 +529,17 @@ class LConv(nn.Module):
 
     def forward(self, x):
         return self.conv2(self.conv1(x))
+
+
+class LPConv(nn.Module):
+    def __init__(self, c1, c2, keep=3, k=3, s=2):
+        super().__init__()
+        self.conv1 = Conv(c1, c2 - keep, k, s=s)
+        self.ds = nn.AvgPool2d(2)
+        self.c0 = keep
+
+    def forward(self, x):
+        y0 = self.ds(x[:, 0:self.c0, ...])
+        y1 = self.conv1(x)
+        y = torch.cat([y0, y1], 1)
+        return y
