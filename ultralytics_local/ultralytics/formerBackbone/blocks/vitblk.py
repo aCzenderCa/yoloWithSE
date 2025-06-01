@@ -520,6 +520,31 @@ class ABlk(nn.Module):
         x = x + self.attn(x)
         return x + self.mlp(x)
 
+class ABlkLayer(nn.Module):
+    def __init__(self, ch, out_ch, mlp_ratio=1.2, mlp_with_dw=0):
+        super().__init__()
+        assert ch == out_ch
+
+        self.attn = CBAM(ch)
+        mlp_hidden_dim = int(ch * mlp_ratio)
+        self.mlp = nn.Sequential(
+            Conv(ch, mlp_hidden_dim, 1),
+            *[DWConv(mlp_hidden_dim, mlp_hidden_dim, k=3) for _ in range(mlp_with_dw)],
+            Conv(mlp_hidden_dim, ch, 1, act=False)
+        )
+
+        self.apply(self._init_weights)
+
+    def _init_weights(self, m):
+        if isinstance(m, nn.Conv2d):
+            nn.init.trunc_normal_(m.weight, std=0.02)
+            if m.bias is not None:
+                nn.init.constant_(m.bias, 0)
+
+    def forward(self, x):
+        x = x + self.attn(x)
+        return x + self.mlp(x)
+
 
 class LConv(nn.Module):
     def __init__(self, c1, c2, k=1, s=1):
@@ -532,14 +557,30 @@ class LConv(nn.Module):
 
 
 class LPConv(nn.Module):
-    def __init__(self, c1, c2, keep=3, k=3, s=2):
+    def __init__(self, c1, c2, keep=1, k=3, s=2):
         super().__init__()
-        self.conv1 = Conv(c1, c2 - keep, k, s=s)
-        self.ds = nn.AvgPool2d(2)
+        self.conv1 = Conv(c1, c2 - keep * 4, k, s=s)
+        self.conv2 = CBAM(keep * 4)
         self.c0 = keep
 
     def forward(self, x):
-        y0 = self.ds(x[:, 0:self.c0, ...])
+        B, C, H, W = x.shape
+        y0 = (x[:, 0:self.c0, ...]).view(B, self.c0 * 4, H // 2, W // 2)
+        y0 = self.conv2(y0)
+        y1 = self.conv1(x)
+        y = torch.cat([y0, y1], 1)
+        return y
+
+class LPConvN(nn.Module):
+    def __init__(self, c1, c2, keep=1, k=3, s=1):
+        super().__init__()
+        self.conv1 = Conv(c1, c2 - keep, k, s=s)
+        self.conv2 = CBAM(keep)
+        self.c0 = keep
+
+    def forward(self, x):
+        B, C, H, W = x.shape
+        y0 = self.conv2(x[:, 0:self.c0, ...])
         y1 = self.conv1(x)
         y = torch.cat([y0, y1], 1)
         return y
